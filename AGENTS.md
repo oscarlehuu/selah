@@ -72,8 +72,9 @@ Do not repeat words across title, subtitle, and keywords field. Validate with As
 | RC public SDK key | `appl_AaSHElZdDxAyaZCEQHnBOSjMpfB` |
 | PostHog project | `573828` (Selah, US) |
 | PostHog project API key | `phc_obHdAy4NerRVKJf2Z5xyYMdkbEvpZZKmvZvEthkW56mq` |
-| Privacy Policy URL | `https://lilgroup.github.io/selah/site/privacy.html` (GitHub Pages — see below) |
-| Terms of Use URL | `https://lilgroup.github.io/selah/site/terms.html` |
+| Privacy Policy URL | `https://oscarlehuu.github.io/selah/site/privacy.html` |
+| Terms of Use URL | `https://oscarlehuu.github.io/selah/site/terms.html` |
+| GitHub repo | https://github.com/oscarlehuu/selah (public; Pages from `/docs`) |
 
 **ASC app + subscriptions pushed 2026-08-24.** Subscription group **`Selah Premium`** on ASC. All 3 tiers `READY_TO_SUBMIT` (175 territories equalized from US base). Sandbox purchase tests OK before App Review. First submit must attach IAPs to an app version in ASC UI (Apple rule).
 
@@ -248,14 +249,14 @@ After ASC app exists, re-run RevenueCat product store sync (`get-product-store-s
 
 Legal site lives in **`docs/site/`** inside this repo (not a separate repo).
 
-| Page | Path | Published URL (repo `selah`, org `lilgroup`) |
+| Page | Path | Published URL |
 |---|---|---|
-| Hub | `docs/site/index.html` | `https://lilgroup.github.io/selah/site/` |
-| Privacy | `docs/site/privacy.html` | `https://lilgroup.github.io/selah/site/privacy.html` |
-| Terms | `docs/site/terms.html` | `https://lilgroup.github.io/selah/site/terms.html` |
+| Hub | `docs/site/index.html` | `https://oscarlehuu.github.io/selah/site/` |
+| Privacy | `docs/site/privacy.html` | `https://oscarlehuu.github.io/selah/site/privacy.html` |
+| Terms | `docs/site/terms.html` | `https://oscarlehuu.github.io/selah/site/terms.html` |
 
-**Enable once:** GitHub repo → Settings → Pages → Source **Deploy from branch** → branch `main` → folder **`/docs`**.  
-If repo name differs from `selah`, update the URLs in this table and `.env.example`, then re-push `privacy_policy_url` to RevenueCat.
+**Live:** GitHub repo [oscarlehuu/selah](https://github.com/oscarlehuu/selah) — Pages enabled on branch `main`, folder `/docs`.  
+To move under `LilGroup` org later, transfer repo and update URLs + RevenueCat `privacy_policy_url`.
 
 Local preview: open `docs/site/privacy.html` in a browser.
 

@@ -172,7 +172,7 @@ No dark theme as identity. Optional system appearance later only if it stays sof
 - Exact hex palette + Figma tokens
 - Illustration vs photography mix
 
-**Locked:** App icon = `docs/brand/selah-icon-pause.svg` (gold pause, Sunday Light sky). Legal = GitHub Pages at `docs/site/`.
+**Locked:** App icon = `docs/brand/selah-icon-pause.svg` → **`docs/brand/selah-icon-pause-1024.png`** (App Store). Legal = GitHub Pages at `docs/site/` ([live](https://oscarlehuu.github.io/selah/site/privacy.html)).
 
 ---
 
