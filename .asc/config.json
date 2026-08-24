@@ -1,0 +1,39 @@
+{
+  "key_id": "77G324T46F",
+  "issuer_id": "4c17d337-1631-45c1-b951-f46eae44269b",
+  "private_key_path": "/Users/a1241968/Desktop/Oscar/AppStoreAPI/AuthKey_77G324T46F.p8",
+  "default_key_name": "Selah-ASC",
+  "keys": [
+    {
+      "name": "Selah-ASC",
+      "key_id": "77G324T46F",
+      "issuer_id": "4c17d337-1631-45c1-b951-f46eae44269b",
+      "private_key_path": "/Users/a1241968/Desktop/Oscar/AppStoreAPI/AuthKey_77G324T46F.p8"
+    }
+  ],
+  "app_id": "",
+  "vendor_number": "",
+  "analytics_vendor_number": "",
+  "timeout": "",
+  "timeout_seconds": "",
+  "upload_timeout": "",
+  "upload_timeout_seconds": "",
+  "max_retries": "",
+  "base_delay": "",
+  "max_delay": "",
+  "retry_log": "",
+  "debug": "",
+  "ads": {},
+  "storekit": {
+    "default_key_name": "Selah-IAP",
+    "keys": [
+      {
+        "name": "Selah-IAP",
+        "key_id": "CFP9CT7H6R",
+        "issuer_id": "4c17d337-1631-45c1-b951-f46eae44269b",
+        "private_key_path": "/Users/a1241968/Desktop/Oscar/AppStoreAPI/SubscriptionKey_CFP9CT7H6R.p8",
+        "bundle_id": "com.lilgroup.selah"
+      }
+    ]
+  }
+}

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Selah app icon, sunrise reflection">
+  <defs>
+    <linearGradient id="riseSky" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#b7daf0"/>
+      <stop offset="42%" stop-color="#d7eaf6"/>
+      <stop offset="62%" stop-color="#f3d9b4"/>
+      <stop offset="100%" stop-color="#8ec5e8"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#c5e0f0"/>
+      <stop offset="35%" stop-color="#9fcce8"/>
+      <stop offset="100%" stop-color="#7eb7d8"/>
+    </linearGradient>
+    <radialGradient id="sunFill" cx="50%" cy="42%" r="58%">
+      <stop offset="0%" stop-color="#ffe9b0"/>
+      <stop offset="55%" stop-color="#f0c56a"/>
+      <stop offset="100%" stop-color="#e0a84a"/>
+    </radialGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffe9b0" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ffe9b0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="reflect" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#f6d98a" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#f6d98a" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#riseSky)"/>
+
+  <!-- Soft clouds -->
+  <g fill="#ffffff" opacity="0.45">
+    <ellipse cx="220" cy="168" rx="140" ry="36"/>
+    <ellipse cx="820" cy="150" rx="120" ry="30"/>
+    <ellipse cx="700" cy="210" rx="90" ry="24"/>
+  </g>
+
+  <!-- Sun glow + disc -->
+  <circle cx="512" cy="430" r="280" fill="url(#sunGlow)"/>
+  <g transform="translate(512 430)" fill="#f6d98a" opacity="0.35">
+    <rect x="-4" y="-250" width="8" height="70" rx="4"/>
+    <rect x="-4" y="-250" width="8" height="70" rx="4" transform="rotate(30)"/>
+    <rect x="-4" y="-250" width="8" height="70" rx="4" transform="rotate(60)"/>
+    <rect x="-4" y="-250" width="8" height="70" rx="4" transform="rotate(90)"/>
+    <rect x="-4" y="-250" width="8" height="70" rx="4" transform="rotate(120)"/>
+    <rect x="-4" y="-250" width="8" height="70" rx="4" transform="rotate(150)"/>
+    <rect x="-4" y="-250" width="8" height="70" rx="4" transform="rotate(180)"/>
+    <rect x="-4" y="-250" width="8" height="70" rx="4" transform="rotate(210)"/>
+    <rect x="-4" y="-250" width="8" height="70" rx="4" transform="rotate(240)"/>
+    <rect x="-4" y="-250" width="8" height="70" rx="4" transform="rotate(270)"/>
+    <rect x="-4" y="-250" width="8" height="70" rx="4" transform="rotate(300)"/>
+    <rect x="-4" y="-250" width="8" height="70" rx="4" transform="rotate(330)"/>
+  </g>
+  <circle cx="512" cy="430" r="168" fill="url(#sunFill)"/>
+
+  <!-- Far bank -->
+  <path d="M0 575 C120 555 210 590 320 575 C410 562 470 590 512 585 C580 576 650 555 760 575 C860 592 940 560 1024 575 L1024 620 L0 620 Z" fill="#d7b889" opacity="0.55"/>
+
+  <!-- Water -->
+  <rect x="0" y="612" width="1024" height="412" fill="url(#water)"/>
+  <ellipse cx="512" cy="700" rx="70" ry="150" fill="url(#reflect)"/>
+  <rect x="430" y="612" width="164" height="18" rx="9" fill="#fff1c2" opacity="0.7"/>
+
+  <!-- Birds — kept off the sun disc so it does not read as a face -->
+  <g fill="none" stroke="#c4a06a" stroke-width="5" stroke-linecap="round">
+    <path d="M210 230 q18 -14 36 0"/>
+    <path d="M800 210 q16 -12 32 0"/>
+    <path d="M860 280 q14 -10 28 0"/>
+  </g>
+
+  <!-- Foreground plants, simplified -->
+  <g fill="#d4b56a" opacity="0.72">
+    <path d="M0 1024 C40 860 90 780 150 720 C90 800 70 900 80 1024 Z"/>
+    <path d="M40 1024 C110 880 170 800 250 740 C170 860 130 940 150 1024 Z"/>
+    <path d="M1024 1024 C980 860 920 780 860 720 C920 800 950 900 940 1024 Z"/>
+    <path d="M984 1024 C900 870 840 800 760 740 C850 860 890 940 880 1024 Z"/>
+  </g>
+  <g fill="none" stroke="#e8d09a" stroke-width="7" stroke-linecap="round">
+    <path d="M90 980 C120 900 80 840 130 780"/>
+    <path d="M160 1000 C190 910 230 860 210 790"/>
+    <path d="M930 980 C900 900 940 840 890 780"/>
+    <path d="M860 1000 C830 910 790 860 810 790"/>
+  </g>
+</svg>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Selah — App icon SVG preview</title>
+  <style>
+    :root {
+      --sky: #8ec5e8;
+      --gold: #d4a853;
+      --warm-white: #fdfbf7;
+      --charcoal: #3d3a36;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: linear-gradient(135deg, #e8f4fc 0%, #fdfbf7 50%, #f5ebe0 100%);
+      color: var(--charcoal);
+      padding: 32px 20px 64px;
+    }
+    h1 { font-weight: 600; font-size: 1.6rem; margin: 0 0 8px; }
+    .sub { color: #6b6560; margin: 0 0 28px; max-width: 720px; line-height: 1.5; }
+    .grid { display: grid; gap: 24px; max-width: 1100px; }
+    article {
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.9);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 8px 32px rgba(61,58,54,0.08);
+    }
+    article h2 { margin: 0 0 4px; font-size: 1.1rem; }
+    article p { margin: 0 0 16px; color: #6b6560; font-size: 0.9rem; }
+    .sizes { display: flex; flex-wrap: wrap; gap: 20px; align-items: end; }
+    .cell { text-align: center; }
+    .cell span { display: block; margin-top: 8px; font-size: 0.75rem; color: #6b6560; }
+    .icon {
+      display: block;
+      border-radius: 22.5%;
+      box-shadow: 0 10px 28px rgba(61,58,54,0.18);
+      background: #fff;
+    }
+    .s60 { width: 60px; height: 60px; }
+    .s120 { width: 120px; height: 120px; }
+    .s180 { width: 180px; height: 180px; }
+    .s320 { width: 320px; height: 320px; }
+    .homescreen {
+      margin-top: 18px;
+      background: #1c1c1e;
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+    .homescreen .icon { width: 60px; height: 60px; box-shadow: none; }
+    .homescreen small { color: #eee; font-size: 0.7rem; display: block; text-align: center; margin-top: 6px; }
+  </style>
+</head>
+<body>
+  <h1>Selah app icons — SVG, no watermark</h1>
+  <p><strong>Locked for ship:</strong> <code>selah-icon-pause.svg</code> (App Store + in-app). Other variants kept for reference.</p>
+  <p class="sub">Redrawn as vector from the three Imagine concepts. Square source (Apple applies the squircle). Preview uses iOS-like corner radius.</p>
+  <div class="grid">
+    <article style="border:2px solid #d4a853">
+      <h2>0. Sunrise v2 — recommended</h2>
+      <p>Vector redraw of the Grok “sunrise lake” concept: same composition and palette, no watermark, no raster.
+         Simplified so the sun + reflection still read at 60px. Source: <code>selah-icon-sunrise-v2.svg</code>
+         · export: <code>selah-icon-sunrise-v2-1024.png</code> (App Store, opaque, no alpha).</p>
+      <div class="sizes">
+        <div class="cell"><img class="icon s320" src="selah-icon-sunrise-v2.svg" alt="Sunrise v2 icon large"><span>320</span></div>
+        <div class="cell"><img class="icon s180" src="selah-icon-sunrise-v2.svg" alt="Sunrise v2 icon 180"><span>180</span></div>
+        <div class="cell"><img class="icon s120" src="selah-icon-sunrise-v2.svg" alt="Sunrise v2 icon 120"><span>120</span></div>
+        <div class="cell"><img class="icon s60" src="selah-icon-sunrise-v2.svg" alt="Sunrise v2 icon 60"><span>60 home</span></div>
+        <div class="cell"><img class="icon" style="width:40px;height:40px" src="selah-icon-sunrise-v2.svg" alt="Sunrise v2 icon 40"><span>40 spotlight</span></div>
+        <div class="cell"><img class="icon" style="width:29px;height:29px" src="selah-icon-sunrise-v2.svg" alt="Sunrise v2 icon 29"><span>29 settings</span></div>
+      </div>
+      <div class="homescreen">
+        <div><img class="icon" src="selah-icon-sunrise-v2.svg" alt=""><small>Selah</small></div>
+        <div><img class="icon" src="selah-icon-sunrise-v2-60.png" alt=""><small>PNG 60</small></div>
+        <div style="margin-left:auto"><img src="selah-icon-sunrise-imagine.jpg" style="width:60px;height:60px;border-radius:13px"><small>Grok source</small></div>
+      </div>
+    </article>
+    <article>
+      <h2>1. Pause</h2>
+      <p><strong>Locked.</strong> Selah = pause. Strongest at 60px. Source: <code>selah-icon-pause.svg</code></p>
+      <div class="sizes">
+        <div class="cell"><img class="icon s320" src="selah-icon-pause.svg" alt="Pause icon large"><span>320</span></div>
+        <div class="cell"><img class="icon s180" src="selah-icon-pause.svg" alt="Pause icon 180"><span>180</span></div>
+        <div class="cell"><img class="icon s120" src="selah-icon-pause.svg" alt="Pause icon 120"><span>120</span></div>
+        <div class="cell"><img class="icon s60" src="selah-icon-pause.svg" alt="Pause icon 60"><span>60 home</span></div>
+      </div>
+      <div class="homescreen">
+        <div><img class="icon" src="selah-icon-pause.svg" alt=""><small>Selah</small></div>
+      </div>
+    </article>
+    <article>
+      <h2>2. Sanctuary window</h2>
+      <p>Sunday morning light. Source: <code>selah-icon-window.svg</code></p>
+      <div class="sizes">
+        <div class="cell"><img class="icon s320" src="selah-icon-window.svg" alt="Window icon large"><span>320</span></div>
+        <div class="cell"><img class="icon s180" src="selah-icon-window.svg" alt="Window icon 180"><span>180</span></div>
+        <div class="cell"><img class="icon s120" src="selah-icon-window.svg" alt="Window icon 120"><span>120</span></div>
+        <div class="cell"><img class="icon s60" src="selah-icon-window.svg" alt="Window icon 60"><span>60 home</span></div>
+      </div>
+      <div class="homescreen">
+        <div><img class="icon" src="selah-icon-window.svg" alt=""><small>Selah</small></div>
+      </div>
+    </article>
+    <article>
+      <h2>3. Sunrise</h2>
+      <p>Retreat / reflect. Loses detail at 60px. Source: <code>selah-icon-sunrise.svg</code></p>
+      <div class="sizes">
+        <div class="cell"><img class="icon s320" src="selah-icon-sunrise.svg" alt="Sunrise icon large"><span>320</span></div>
+        <div class="cell"><img class="icon s180" src="selah-icon-sunrise.svg" alt="Sunrise icon 180"><span>180</span></div>
+        <div class="cell"><img class="icon s120" src="selah-icon-sunrise.svg" alt="Sunrise icon 120"><span>120</span></div>
+        <div class="cell"><img class="icon s60" src="selah-icon-sunrise.svg" alt="Sunrise icon 60"><span>60 home</span></div>
+      </div>
+      <div class="homescreen">
+        <div><img class="icon" src="selah-icon-sunrise.svg" alt=""><small>Selah</small></div>
+      </div>
+    </article>
+  </div>
+</body>
+</html>

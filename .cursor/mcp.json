@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "revenuecat-selah": {
+      "type": "http",
+      "url": "https://mcp.revenuecat.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer ${REVENUECAT_API_V2_KEY}"
+      }
+    },
+    "posthog-selah": {
+      "type": "http",
+      "url": "https://mcp.posthog.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${POSTHOG_PERSONAL_API_KEY}"
+      }
+    }
+  }
+}

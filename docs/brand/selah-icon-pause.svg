@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Selah app icon, pause">
+  <defs>
+    <linearGradient id="pauseSky" x1="0.12" y1="0" x2="0.88" y2="1">
+      <stop offset="0%" stop-color="#9fd0ee"/>
+      <stop offset="38%" stop-color="#c5e4f6"/>
+      <stop offset="68%" stop-color="#f3e6d2"/>
+      <stop offset="100%" stop-color="#f7edd8"/>
+    </linearGradient>
+    <radialGradient id="pauseBloomTL" cx="22%" cy="18%" r="58%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="pauseBloomBR" cx="78%" cy="82%" r="50%">
+      <stop offset="0%" stop-color="#f0c9a0" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#f0c9a0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="goldBar" x1="0.15" y1="0" x2="0.9" y2="1">
+      <stop offset="0%" stop-color="#f6e7b4"/>
+      <stop offset="32%" stop-color="#e8c86a"/>
+      <stop offset="68%" stop-color="#c9983a"/>
+      <stop offset="100%" stop-color="#e0c57a"/>
+    </linearGradient>
+    <linearGradient id="goldSheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.38"/>
+      <stop offset="40%" stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="barGlow" x="-40%" y="-30%" width="180%" height="160%">
+      <feGaussianBlur stdDeviation="22" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0.78  0 1 0 0 0.58  0 0 1 0 0.22  0 0 0 0.85 0" result="goldBlur"/>
+      <feMerge>
+        <feMergeNode in="goldBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#pauseSky)"/>
+  <rect width="1024" height="1024" fill="url(#pauseBloomTL)"/>
+  <rect width="1024" height="1024" fill="url(#pauseBloomBR)"/>
+
+  <g opacity="0.7">
+    <circle cx="210" cy="240" r="3.2" fill="#fff6d6"/>
+    <circle cx="780" cy="210" r="2.4" fill="#fff6d6"/>
+    <circle cx="840" cy="360" r="3" fill="#fff1c2"/>
+    <circle cx="190" cy="700" r="2.2" fill="#fff6d6"/>
+    <circle cx="820" cy="760" r="2.6" fill="#fff1c2"/>
+    <circle cx="512" cy="168" r="2" fill="#ffffff"/>
+  </g>
+
+  <g filter="url(#barGlow)">
+    <rect x="318" y="292" width="148" height="440" rx="74" fill="url(#goldBar)"/>
+    <rect x="558" y="292" width="148" height="440" rx="74" fill="url(#goldBar)"/>
+    <rect x="334" y="308" width="88" height="220" rx="44" fill="url(#goldSheen)"/>
+    <rect x="574" y="308" width="88" height="220" rx="44" fill="url(#goldSheen)"/>
+  </g>
+</svg>

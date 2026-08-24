@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selah — Interactive Mock v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SELAH — SUNDAY LIGHT DESIGN TOKENS (design-system/selah)
+   ============================================================ */
+:root{
+  --primary:#5B8DEF; --primary-deep:#3D6FD4; --primary-soft:#EAF1FD;
+  --accent:#C49A3C; --accent-deep:#A67C2E; --accent-soft:#FBF5E6;
+  --bg:#FAF7F2; --bg-warm:#F5EDE3; --surface:#FFFFFF;
+  --text:#2C2825; --text-muted:#6B6560; --text-soft:#9A938C;
+  --border:rgba(44,40,37,0.08);
+  --space-xs:4px; --space-sm:8px; --space-md:16px; --space-lg:24px; --space-xl:32px;
+  --radius:16px; --radius-lg:24px;
+  --shadow-sm:0 2px 8px rgba(44,40,37,0.06);
+  --shadow-md:0 8px 32px rgba(44,40,37,0.08);
+  --shadow-btn:0 4px 16px rgba(61,111,212,0.3);
+  --ease:cubic-bezier(0.22,1,0.36,1);
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+html{-webkit-font-smoothing:antialiased}
+body{
+  font-family:var(--font-body);color:var(--text);background:var(--bg);
+  background-image:
+    radial-gradient(ellipse 70% 45% at 18% -8%,rgba(91,141,239,.13),transparent),
+    radial-gradient(ellipse 55% 40% at 92% 8%,rgba(196,154,60,.12),transparent),
+    radial-gradient(ellipse 60% 50% at 50% 110%,rgba(196,154,60,.07),transparent);
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;
+  padding:28px 20px 56px;
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+button:focus-visible,a:focus-visible{outline:2px solid var(--primary-deep);outline-offset:2px}
+
+/* ---------- Page chrome ---------- */
+.page-header{text-align:center;max-width:720px;margin-bottom:26px}
+.page-header h1{font-family:var(--font-display);font-size:2.25rem;font-weight:600;letter-spacing:-.01em}
+.page-header p{color:var(--text-muted);margin-top:8px;font-size:.9375rem;line-height:1.55;text-wrap:pretty}
+.layout{display:flex;gap:36px;align-items:flex-start;flex-wrap:wrap;justify-content:center;width:100%;max-width:1120px}
+.sidebar{width:264px;background:var(--surface);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
+.sidebar h2{font-size:.6875rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-soft);margin:20px 0 10px;font-weight:600}
+.sidebar h2:first-child{margin-top:0}
+.mode-toggle{display:flex;gap:6px;background:var(--bg-warm);padding:4px;border-radius:12px}
+.mode-toggle button{flex:1;padding:10px 12px;border-radius:10px;font-weight:600;font-size:.8125rem;color:var(--text-muted);transition:all .2s var(--ease)}
+.mode-toggle button.on{background:var(--surface);color:var(--text);box-shadow:var(--shadow-sm)}
+.jump-list{display:flex;flex-direction:column;gap:2px;max-height:280px;overflow:auto;padding-right:4px}
+.jump-btn{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:7px 10px;border-radius:10px;font-size:.8125rem;color:var(--text-muted);transition:background .15s var(--ease)}
+.jump-btn:hover{background:var(--primary-soft);color:var(--primary-deep)}
+.jump-btn.cur{background:var(--primary-soft);color:var(--primary-deep);font-weight:600}
+.jump-btn .num{width:20px;height:20px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--bg-warm);font-size:.6875rem;font-weight:600;color:var(--text-soft)}
+.jump-btn.cur .num{background:var(--primary-deep);color:#fff}
+.hidden{display:none!important}
+.legend{font-size:.75rem;line-height:1.6;color:var(--text-muted);border-top:1px solid var(--border);margin-top:20px;padding-top:14px}
+.legend b{color:var(--text)}
+
+/* ---------- Phone frame ---------- */
+.phone-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
+.phone{
+  width:390px;height:844px;background:#111;border-radius:56px;padding:9px;
+  box-shadow:0 24px 64px rgba(44,40,37,.22),0 4px 16px rgba(44,40,37,.12),inset 0 0 0 2px #333;
+  position:relative;flex:none;
+}
+.phone-screen{
+  width:100%;height:100%;border-radius:47px;overflow:hidden;position:relative;
+  background:var(--bg);
+}
+.statusbar{
+  position:absolute;top:0;left:0;right:0;height:54px;z-index:60;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  padding:0 30px 6px;pointer-events:none;color:var(--text);font-weight:600;font-size:.9375rem;
+}
+.statusbar .sb-icons{display:flex;align-items:center;gap:6px}
+.island{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:118px;height:34px;background:#111;border-radius:20px;z-index:61}
+.home-indicator{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:rgba(44,40,37,.35);z-index:62;pointer-events:none}
+
+/* ---------- Generic in-app ---------- */
+.view{position:absolute;inset:0;display:none;flex-direction:column;background:var(--bg)}
+.view.active{display:flex}
+.scroll{flex:1;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none}
+.scroll::-webkit-scrollbar{display:none}
+.screen-title{font-family:var(--font-display);font-weight:600;font-size:1.5rem;line-height:1.25}
+.card-label{font-size:.6875rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-soft);font-weight:600;margin-bottom:6px}
+.card-soft{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:16px;margin-bottom:12px}
+.verse-serif{font-family:var(--font-display);font-style:italic;font-weight:500;line-height:1.4}
+.btn-primary{
+  display:block;width:100%;padding:16px 24px;border-radius:16px;text-align:center;
+  background:var(--primary-deep);color:#fff;font-weight:600;font-size:1rem;
+  box-shadow:var(--shadow-btn);transition:transform .15s var(--ease),box-shadow .2s var(--ease);
+}
+.btn-primary:active{transform:scale(.98)}
+.btn-gold{
+  background:linear-gradient(135deg,var(--accent) 0%,var(--accent-deep) 100%);
+  color:#fff;box-shadow:0 4px 16px rgba(166,124,46,.35);
+}
+.btn-secondary{
+  display:block;width:100%;padding:15px 24px;border-radius:16px;text-align:center;
+  background:transparent;color:var(--text-muted);font-weight:600;font-size:.9375rem;
+  border:1px solid var(--border);transition:transform .15s var(--ease);
+}
+.btn-secondary:active{transform:scale(.98)}
+.link-btn{color:var(--primary-deep);font-weight:600;font-size:.875rem;padding:6px 0;margin-top:8px}
+.footer-actions{padding:14px 20px calc(14px + 18px);display:flex;gap:10px;background:linear-gradient(to top,var(--bg) 70%,transparent)}
+.disclaimer{font-size:.6875rem;color:var(--text-soft);line-height:1.5;text-align:center}
+
+/* ---------- Onboarding ---------- */
+.ob-hero{
+  flex:none;height:340px;position:relative;overflow:hidden;
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 108%,rgba(255,214,140,.85),transparent 70%),
+    radial-gradient(ellipse 120% 90% at 80% -20%,#BFD5F7 0%,transparent 60%),
+    linear-gradient(178deg,#DCE9FC 0%,#EFE3CF 78%,#F6E7C8 100%);
+}
+.ob-hero::after{ /* sun glow, breathes 4.5s */
+  content:"";position:absolute;left:50%;bottom:-130px;width:320px;height:320px;transform:translateX(-50%);
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,232,180,.95) 0%,rgba(255,222,150,.55) 42%,transparent 70%);
+  animation:breathe 4.5s ease-in-out infinite;
+}
+@keyframes breathe{0%,100%{opacity:.75;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.07)}}
+.ob-body{flex:1;overflow-y:auto;padding:28px 26px calc(20px + 18px);display:flex;flex-direction:column}
+.ob-body h2{font-family:var(--font-display);font-weight:600;font-size:1.625rem;line-height:1.3;text-align:center;text-wrap:balance}
+.ob-body .sub{color:var(--text-muted);font-size:.9375rem;line-height:1.55;text-align:center;margin-top:10px}
+.ob-skip{position:absolute;top:64px;right:22px;z-index:65;font-size:.8125rem;font-weight:600;color:var(--text-soft);padding:8px 12px;border-radius:12px}
+.quiz-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.quiz-card{
+  background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);
+  padding:18px 14px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;
+  transition:border-color .18s var(--ease),background .18s var(--ease),transform .15s var(--ease);
+}
+.quiz-card:active{transform:scale(.97)}
+.quiz-card.sel{border-color:var(--primary);background:var(--primary-soft)}
+.quiz-card svg{color:var(--primary-deep)}
+.quiz-card span{font-size:.875rem;font-weight:600;line-height:1.3}
+.stat-num{font-family:var(--font-display);font-size:3.4rem;font-weight:600;color:var(--primary-deep);line-height:1}
+.mirror-quote{
+  margin-top:24px;padding:22px;border-radius:var(--radius-lg);
+  background:linear-gradient(160deg,#FFF 0%,var(--accent-soft) 100%);
+  border:1px solid rgba(196,154,60,.25);box-shadow:var(--shadow-sm);
+  font-family:var(--font-display);font-style:italic;font-size:1.125rem;line-height:1.55;text-align:center;
+}
+.privacy-card{
+  display:flex;gap:14px;align-items:flex-start;background:var(--primary-soft);
+  border:1px solid rgba(91,141,239,.25);border-radius:var(--radius);padding:16px;margin-top:22px;
+}
+.chat-preview{margin-top:20px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:82%;padding:12px 15px;border-radius:18px;font-size:.9375rem;line-height:1.5}
+.msg.user{align-self:flex-end;background:var(--primary-deep);color:#fff;border-bottom-right-radius:6px}
+.msg.ai{align-self:flex-start;background:var(--surface);border:1px solid var(--border);border-bottom-left-radius:6px;box-shadow:var(--shadow-sm)}
+.typing{display:inline-flex;gap:5px;padding:14px 16px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--text-soft);animation:blink 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,80%,100%{opacity:.3}40%{opacity:1}}
+.build-path{position:relative;height:190px;margin:26px 0 10px;display:flex;align-items:center;justify-content:center}
+.build-track{position:relative;width:230px;height:150px}
+.build-dot{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--border);transition:all .4s var(--ease)}
+.build-dot.done{background:var(--accent);box-shadow:0 0 0 6px rgba(196,154,60,.15)}
+.build-line{position:absolute;height:3px;border-radius:2px;background:var(--border);transform-origin:left center}
+.build-line.fill{background:var(--accent);transform:scaleX(1)!important;transition:transform .5s var(--ease)}
+.plan-week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:20px}
+.plan-day{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px 4px;text-align:center;font-size:.6875rem;font-weight:600;color:var(--text-muted)}
+.plan-day b{display:block;font-size:.8125rem;margin-top:2px;color:var(--text)}
+.lock-mock{
+  margin-top:22px;background:linear-gradient(175deg,#2E4E86 0%,#5B8DEF 55%,#F0DDB4 115%);
+  border-radius:var(--radius-lg);padding:26px 20px 30px;color:#fff;box-shadow:var(--shadow-md);text-align:center;
+}
+.lock-time{font-size:3rem;font-weight:300;letter-spacing:-.02em}
+.stars{color:var(--accent);font-size:1.25rem;letter-spacing:3px}
+.review-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:16px;margin-top:14px}
+.review-card p{font-size:.875rem;color:var(--text-muted);line-height:1.5;margin-top:8px}
+.review-card .who{font-size:.75rem;font-weight:600;color:var(--text-soft);margin-top:10px}
+
+/* ---------- Paywall ---------- */
+.plans{display:flex;flex-direction:column;gap:10px;margin:20px 0}
+.plan{
+  position:relative;display:flex;align-items:center;gap:14px;width:100%;text-align:left;
+  background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);
+  padding:16px;transition:border-color .18s var(--ease),background .18s var(--ease);
+}
+.plan .radio{width:22px;height:22px;flex:none;border-radius:50%;border:2px solid var(--border);display:grid;place-items:center}
+.plan .radio i{width:12px;height:12px;border-radius:50%;background:transparent;transition:background .15s}
+.plan.sel{border-color:var(--primary);background:var(--primary-soft)}
+.plan.sel .radio{border-color:var(--primary-deep)}
+.plan.sel .radio i{background:var(--primary-deep)}
+.plan .p-name{display:block;font-weight:700;font-size:.9375rem}
+.plan .p-sub{display:block;font-size:.75rem;color:var(--text-muted);margin-top:2px}
+.plan .p-price{margin-left:auto;text-align:right;font-weight:700;font-size:.9375rem}
+.plan .p-per{display:block;font-size:.6875rem;font-weight:500;color:var(--text-soft)}
+.badge-save{
+  position:absolute;top:-9px;right:14px;background:var(--accent);color:#fff;
+  font-size:.625rem;font-weight:700;letter-spacing:.04em;padding:3px 9px;border-radius:8px;text-transform:uppercase;
+}
+.pay-bullets{list-style:none;margin:14px 0 4px}
+.pay-bullets li{display:flex;gap:10px;align-items:flex-start;font-size:.875rem;color:var(--text-muted);line-height:1.5;padding:5px 0}
+.pay-bullets svg{flex:none;color:var(--accent-deep);margin-top:2px}
+
+/* ---------- Tab bar & headers ---------- */
+.tabbar{
+  flex:none;display:flex;height:calc(64px + 22px);padding:8px 8px 22px;
+  background:rgba(250,247,242,.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-top:1px solid var(--border);
+}
+.tab-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  font-size:.625rem;font-weight:600;color:var(--text-soft);border-radius:12px;transition:color .15s;
+}
+.tab-item.on{color:var(--primary-deep)}
+.nav-header{
+  flex:none;display:flex;align-items:center;justify-content:space-between;
+  padding:58px 20px 10px;background:transparent;
+}
+.nav-header .back-btn{display:flex;align-items:center;gap:4px;color:var(--primary-deep);font-weight:600;font-size:.9375rem;padding:8px 10px;border-radius:12px;margin-left:-10px}
+.nav-title{font-family:var(--font-display);font-weight:600;font-size:1.125rem}
+
+/* ---------- Today ---------- */
+.today-hero{
+  position:relative;overflow:hidden;margin:0 -20px;padding:72px 24px 34px;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 112%,rgba(255,216,146,.8),transparent 72%),
+    linear-gradient(176deg,#D8E6FA 0%,#F3EBDD 82%,var(--bg) 100%);
+}
+.today-glow{position:absolute;left:50%;top:66%;width:260px;height:260px;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(255,228,168,.9) 0%,rgba(255,220,150,.4) 45%,transparent 70%);
+  animation:breathe 4.5s ease-in-out infinite;}
+.today-hero .verse-serif{position:relative;font-size:1.25rem;margin-top:14px}
+.today-hero .verse-ref{position:relative;font-size:.75rem;color:var(--text-muted);margin-top:6px;letter-spacing:.04em}
+.today-content{padding:20px}
+.streak-chip{
+  display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;
+  background:rgba(255,255,255,.75);border:1px solid rgba(196,154,60,.35);
+  font-size:.75rem;font-weight:600;color:var(--accent-deep);backdrop-filter:blur(8px);
+}
+.cta-main{
+  width:100%;padding:18px 24px;border-radius:18px;text-align:center;font-size:1.0625rem;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,var(--accent) 0%,var(--accent-deep) 100%);
+  box-shadow:0 6px 20px rgba(166,124,46,.35);transition:transform .15s var(--ease);
+}
+.cta-main:active{transform:scale(.98)}
+.icon-btn{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;background:rgba(255,255,255,.75);border:1px solid var(--border);backdrop-filter:blur(8px)}
+.mood-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.mood-btn{padding:12px 4px;border-radius:14px;background:var(--bg-warm);font-size:.75rem;font-weight:600;color:var(--text-muted);border:1.5px solid transparent;transition:all .15s var(--ease)}
+.mood-btn:active{transform:scale(.96);border-color:var(--primary);background:var(--primary-soft);color:var(--primary-deep)}
+.widget-promo{display:flex;align-items:center;gap:12px;background:var(--primary-soft);border:1px solid rgba(91,141,239,.2);border-radius:var(--radius);padding:14px}
+.widget-promo p{font-size:.8125rem;color:var(--text-muted);line-height:1.4}
+.widget-promo .wp-txt{flex:1}
+
+/* ---------- Read ---------- */
+.progress-bar{height:6px;border-radius:3px;background:var(--bg-warm);overflow:hidden;margin-top:10px}
+.progress-bar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--accent-deep));width:14%;transition:width .4s var(--ease)}
+.reader-text{font-family:var(--font-display);font-size:1.1875rem;line-height:1.75;color:var(--text)}
+.reader-text p{margin-bottom:18px;text-wrap:pretty}
+.vsup{font-family:var(--font-body);font-size:.625rem;font-weight:700;color:var(--text-soft);vertical-align:super;margin-right:4px}
+.verse-tappable{cursor:pointer;border-radius:6px;padding:1px 2px;margin:-1px -2px;transition:background .2s var(--ease)}
+.verse-tappable.hl{background:rgba(196,154,60,.22);box-shadow:inset 0 -2px 0 rgba(196,154,60,.5)}
+.verse-sheet{
+  position:absolute;left:0;right:0;bottom:0;z-index:80;transform:translateY(105%);
+  background:var(--surface);border-radius:24px 24px 0 0;box-shadow:0 -8px 40px rgba(44,40,37,.16);
+  padding:14px 20px calc(20px + 18px);transition:transform .32s var(--ease);
+}
+.verse-sheet.up{transform:translateY(0)}
+.sheet-grab{width:38px;height:5px;border-radius:3px;background:var(--border);margin:0 auto 14px}
+.sheet-action{display:flex;align-items:center;gap:12px;width:100%;padding:13px 10px;border-radius:14px;font-weight:600;font-size:.9375rem;text-align:left}
+.sheet-action:hover{background:var(--primary-soft);color:var(--primary-deep)}
+.overlay-dim{position:absolute;inset:0;background:rgba(44,40,37,.28);z-index:70;opacity:0;pointer-events:none;transition:opacity .3s}
+.overlay-dim.show{opacity:1;pointer-events:auto}
+
+/* ---------- Talk ---------- */
+.talk-bg{
+  background:
+    radial-gradient(ellipse 90% 40% at 50% -10%,rgba(91,141,239,.14),transparent),
+    radial-gradient(ellipse 80% 40% at 50% 110%,rgba(196,154,60,.14),transparent),
+    linear-gradient(180deg,#FDFBF7 0%,#F7F0E6 100%);
+}
+.lock-pill{
+  align-self:center;display:inline-flex;align-items:center;gap:6px;margin-top:60px;padding:6px 14px;border-radius:999px;
+  background:rgba(255,255,255,.7);border:1px solid var(--border);font-size:.6875rem;font-weight:600;color:var(--text-soft);
+}
+.mode-tabs{display:flex;gap:6px;margin:14px 20px 0;background:var(--bg-warm);padding:4px;border-radius:14px}
+.mode-tab{flex:1;padding:9px 4px;border-radius:11px;font-size:.8125rem;font-weight:600;color:var(--text-muted);transition:all .2s var(--ease)}
+.mode-tab.active{background:var(--surface);color:var(--primary-deep);box-shadow:var(--shadow-sm)}
+.chat-area{flex:1;overflow-y:auto;padding:18px 20px;display:flex;flex-direction:column;gap:10px;scrollbar-width:none}
+.chat-area::-webkit-scrollbar{display:none}
+.msg.ai em.scripture{display:block;margin-top:8px;font-family:var(--font-display);font-size:.9375rem;color:var(--accent-deep)}
+.msg.ai .ref{display:block;margin-top:3px;font-size:.6875rem;color:var(--text-soft);font-style:normal}
+.chat-input-row{
+  flex:none;display:flex;gap:10px;align-items:center;padding:12px 16px calc(12px + 18px);
+  background:rgba(250,247,242,.92);backdrop-filter:blur(12px);border-top:1px solid var(--border);
+}
+.chat-input-row input{
+  flex:1;height:46px;border:1px solid var(--border);border-radius:16px;background:var(--surface);
+  padding:0 16px;font-family:inherit;font-size:.9375rem;color:var(--text);outline:none;
+}
+.chat-input-row input:focus{border-color:var(--primary)}
+.chat-input-row input::placeholder{color:var(--text-soft)}
+.send-btn{width:46px;height:46px;flex:none;border-radius:16px;background:var(--primary-deep);color:#fff;display:grid;place-items:center;box-shadow:var(--shadow-btn);transition:transform .15s var(--ease)}
+.send-btn:active{transform:scale(.94)}
+.send-btn:disabled{background:var(--text-soft);box-shadow:none}
+.crisis-link{background:none;border:none;color:var(--text-soft);font-size:.6875rem;text-decoration:underline;padding:6px}
+.auto-delete-chip{
+  display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:6px 12px;border-radius:999px;
+  background:rgba(196,154,60,.12);border:1px dashed rgba(196,154,60,.5);font-size:.6875rem;font-weight:600;color:var(--accent-deep);
+}
+
+/* ---------- Pray / Lectio ---------- */
+.lectio-steps{display:flex;gap:8px;padding:14px 20px 6px}
+.lectio-step{
+  flex:1;text-align:center;font-size:.6875rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--text-soft);padding:8px 0;border-radius:10px;position:relative;transition:all .25s var(--ease);
+}
+.lectio-step.active{color:var(--primary-deep);background:var(--primary-soft)}
+.lectio-step.done{color:var(--accent-deep)}
+.lectio-body{flex:1;overflow-y:auto;padding:18px 24px;display:flex;flex-direction:column}
+.breath-circle{
+  width:150px;height:150px;margin:26px auto;border-radius:50%;
+  background:radial-gradient(circle at 40% 35%,#FFF 0%,var(--accent-soft) 55%,rgba(196,154,60,.25) 100%);
+  border:1px solid rgba(196,154,60,.3);
+  animation:breathe2 8s ease-in-out infinite;
+}
+@keyframes breathe2{0%,100%{transform:scale(.92)}50%{transform:scale(1.06)}}
+.pray-text{font-family:var(--font-display);font-style:italic;font-size:1.125rem;line-height:1.65;text-align:center}
+
+/* ---------- Amen overlay ---------- */
+.amen-overlay{
+  position:absolute;inset:0;z-index:90;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  background:radial-gradient(ellipse 90% 60% at 50% 40%,#FFF7E6 0%,#F3E3C3 100%);
+  opacity:0;pointer-events:none;transition:opacity .6s ease;text-align:center;padding:40px;
+}
+.amen-overlay.show{opacity:1;pointer-events:auto}
+.amen-overlay h2{font-family:var(--font-display);font-size:2.25rem;font-weight:600;color:var(--accent-deep)}
+
+/* ---------- Journey ---------- */
+.journey-header{padding:64px 24px 0;text-align:center}
+.ring-wrap{position:relative;width:132px;height:132px;margin:18px auto 8px}
+.ring-wrap svg{transform:rotate(-90deg)}
+.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-center b{font-family:var(--font-display);font-size:2rem;font-weight:600}
+.ring-center span{font-size:.6875rem;color:var(--text-soft);font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:14px 8px;text-align:center}
+.stat-card b{display:block;font-family:var(--font-display);font-size:1.5rem;font-weight:600;color:var(--primary-deep)}
+.stat-card span{font-size:.625rem;color:var(--text-soft);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.grace-note{display:flex;gap:10px;align-items:center;background:var(--accent-soft);border:1px solid rgba(196,154,60,.3);border-radius:var(--radius);padding:12px 14px;font-size:.8125rem;color:var(--text-muted)}
+.plan-list-row{display:flex;align-items:center;gap:12px;padding:12px 2px;border-bottom:1px solid var(--border)}
+.plan-check{width:26px;height:26px;flex:none;border-radius:50%;border:2px solid var(--border);display:grid;place-items:center;color:#fff}
+.plan-check.done{background:var(--accent);border-color:var(--accent)}
+.plan-day-label{font-size:.8125rem;font-weight:600}
+.plan-day-topic{font-size:.75rem;color:var(--text-soft);margin-top:1px}
+.journal-entry{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:14px;margin-bottom:10px}
+.journal-entry .when{font-size:.6875rem;color:var(--text-soft);font-weight:600;margin-bottom:6px}
+.journal-entry p{font-family:var(--font-display);font-style:italic;font-size:.9375rem;line-height:1.5;color:var(--text-muted)}
+
+/* ---------- Settings ---------- */
+.settings-group{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:16px;overflow:hidden}
+.settings-row{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;padding:14px 16px;font-size:.9375rem;border-bottom:1px solid var(--border)}
+.settings-row:last-child{border-bottom:none}
+.settings-row .val{color:var(--text-soft);font-size:.875rem}
+.switch{width:51px;height:31px;flex:none;border-radius:999px;background:#E5DFD8;position:relative;transition:background .2s var(--ease)}
+.switch::after{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(44,40,37,.25);transition:transform .2s var(--ease)}
+.switch.on{background:#4CAF6D}
+.switch.on::after{transform:translateX(20px)}
+
+/* ---------- Hotline sheet & toast ---------- */
+.bottom-sheet{
+  position:absolute;left:0;right:0;bottom:0;z-index:85;transform:translateY(105%);
+  background:var(--surface);border-radius:24px 24px 0 0;box-shadow:0 -8px 40px rgba(44,40,37,.18);
+  padding:14px 22px calc(22px + 18px);transition:transform .32s var(--ease);
+}
+.bottom-sheet.up{transform:translateY(0)}
+.toast{
+  position:absolute;left:50%;bottom:110px;transform:translateX(-50%) translateY(16px);z-index:95;
+  background:rgba(44,40,37,.92);color:#fff;font-size:.8125rem;font-weight:600;padding:11px 18px;border-radius:14px;
+  opacity:0;pointer-events:none;transition:all .3s var(--ease);white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.notif-dialog{
+  position:absolute;top:54px;left:14px;right:14px;z-index:88;background:rgba(252,250,246,.97);
+  backdrop-filter:blur(20px);border-radius:22px;box-shadow:0 18px 60px rgba(44,40,37,.3);
+  padding:20px;text-align:center;opacity:0;pointer-events:none;transform:translateY(-8px);transition:all .35s var(--ease);
+}
+.notif-dialog.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+.notif-app-icon{width:52px;height:52px;border-radius:13px;margin:0 auto 10px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--primary) 0%,#F0DDB4 120%);}
+@media (max-width:760px){
+  body{padding:12px 8px 32px}
+  .phone{transform:scale(min(1,calc((100vw - 24px)/390)));transform-origin:top center}
+}
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <h1>Selah — Interactive Mock v2</h1>
+  <p>Faithful preview of the locked Sunday Light design system. Click through the full onboarding (Act 1 → paywall) and every app tab. Gold-highlighted verses open reflection; the Lectio flow, Talk chat, and Journal all work.</p>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <h2>Mode</h2>
+    <div class="mode-toggle">
+      <button type="button" id="m-ob" onclick="setMode('onboarding')">Onboarding</button>
+      <button type="button" id="m-app" onclick="enterApp()">App</button>
+    </div>
+
+    <section id="jumpOnboarding">
+      <h2>Onboarding screens</h2>
+      <div class="jump-list" id="obList"></div>
+    </section>
+
+    <section id="jumpApp" class="hidden">
+      <h2>App tabs</h2>
+      <div class="jump-list" id="appList"></div>
+      <div class="legend" style="border-top:none;margin-top:8px;padding-top:0">Settings opens from the ⚙︎ button on Today.</div>
+    </section>
+
+    <div class="legend">
+      <b>What works:</b> quizzes personalize the mirror + paywall headline · Talk replies with scripture · Lectio runs all 4 steps → Amen → saves to Journal · verse taps reflect into Talk · toggles persist in-session.
+    </div>
+  </aside>
+
+  <div class="phone-wrap">
+    <div class="phone">
+      <div class="phone-screen" id="stage">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons" id="sbIcons"></span></div>
+        <div class="island"></div>
+        <div id="viewHost" style="position:absolute;inset:0"></div>
+        <div class="overlay-dim" id="dim" onclick="closeSheets()"></div>
+        <div id="sheetHost"></div>
+        <div class="toast" id="toast"></div>
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+    <p style="font-size:.8125rem;color:var(--text-soft)">390 × 844 pt · iPhone 14 frame</p>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+/* ---------------- Icons (Lucide-style, 1.75 stroke) ---------------- */
+const IC = {
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  book:'<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+  chat:'<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/>',
+  flame:'<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',
+  path:'<circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="5" r="2.2"/><path d="M8 19h7a3.5 3.5 0 0 0 0-7H9a3.5 3.5 0 0 1 0-7h7"/>',
+  gear:'<path d="M4 6h8M18 6h2M4 12h2M12 12h8M4 18h10M20 18h0"/><circle cx="15" cy="6" r="2.4"/><circle cx="9" cy="12" r="2.4"/><circle cx="17" cy="18" r="2.4"/>',
+  lock:'<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+  heart:'<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/>',
+  sparkle:'<path d="M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2z"/>',
+  check:'<path d="M20 6L9 17l-5-5"/>',
+  x:'<path d="M18 6L6 18M6 6l12 12"/>',
+  chevL:'<path d="M15 18l-6-6 6-6"/>',
+  send:'<path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/>',
+  bell:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/>',
+  clock:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+  shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  phoneic:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.4 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.5 2.9.7a2 2 0 0 1 1.7 2z"/>',
+};
+function ic(name,size=24,sw=1.75){return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[name]}</svg>`;}
+
+const SB_ICONS = '<svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="5" y="4.5" width="3" height="7.5" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1" opacity=".35"/></svg>'
+ + '<svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><path d="M8 9.6a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2zM8 5.4c-1.7 0-3.2.7-4.3 1.8l1.5 1.5A4 4 0 0 1 8 7.4c1.1 0 2 .4 2.8 1.2l1.5-1.5A6 6 0 0 0 8 5.4zM8 1C5 1 2.3 2.2.4 4.1l1.4 1.5A8.5 8.5 0 0 1 8 3c2.4 0 4.6 1 6.2 2.6l1.4-1.5A10.5 10.5 0 0 0 8 1z"/></svg>'
+ + '<svg width="25" height="12" viewBox="0 0 25 12"><rect x=".5" y=".5" width="21" height="11" rx="3.5" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 0 0 0-4z" fill="currentColor" opacity=".4"/></svg>';
+document.getElementById('sbIcons').innerHTML = SB_ICONS;
+
+/* ---------------- State ---------------- */
+const state = {
+  mode:'onboarding', obStep:0,
+  quiz:{distance:null,desire:null,habit:null},
+  demoMood:null,
+  plan:'yearly',
+  tab:'today',
+  talk:{mode:'Heart',msgs:null,autoDelete:false,pending:null},
+  lectio:0,
+  read:{day:1,done:false},
+  stats:{days:3,minutes:24,chapters:2},
+  journal:[{when:'Today · 7:12 AM',text:'“Lord, help me rest in You today. Quiet my mind before the day begins.”'}],
+};
+
+/* ---------------- Shared helpers ---------------- */
+const $ = s => document.querySelector(s);
+let buildTimer=null;
+function toast(msg){
+  const t=$('#toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(t._tm); t._tm=setTimeout(()=>t.classList.remove('show'),2000);
+}
+function closeSheets(){
+  $('#dim').classList.remove('show');
+  document.querySelectorAll('.verse-sheet.up,.bottom-sheet.up').forEach(el=>el.classList.remove('up'));
+}
+function openSheet(html){
+  $('#sheetHost').innerHTML=html;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    const s=$('#sheetHost .bottom-sheet'); if(s) s.classList.add('up');
+  }));
+  $('#dim').classList.add('show');
+}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+
+function getPaywallHeadline(){
+  const d=state.quiz.distance;
+  if(d==='I feel distant') return 'Start talking to God every day';
+  if(d==='Inconsistency') return 'Read the Bible 5 minutes a day — without quitting';
+  if(d==='Guilt or heaviness') return 'A private space to talk to God';
+  return 'Your private space with God';
+}
+
+/* ---------------- Tab bar ---------------- */
+const TABS=[['today','Today','sun'],['read','Read','book'],['talk','Talk','chat'],['pray','Pray','flame'],['journey','Journey','path']];
+function tabBarHTML(){
+  return `<nav class="tabbar" role="tablist">${TABS.map(([id,label,icon])=>`
+    <button type="button" role="tab" aria-selected="${state.tab===id}" class="tab-item ${state.tab===id?'on':''}" onclick="goApp('${id}')">${ic(icon,24)}<span>${label}</span></button>`).join('')}
+  </nav>`;
+}
+
+/* ============================================================
+   APP SCREENS
+   ============================================================ */
+const appScreens={
+
+today(){return `
+  <div class="view active">
+    <div class="scroll" style="padding:0 20px 24px">
+      <div class="today-hero">
+        <div style="position:relative;display:flex;justify-content:space-between;align-items:center">
+          <span class="streak-chip">${ic('flame',15)} 3 days · Grace ready</span>
+          <button type="button" class="icon-btn" onclick="goApp('settings')" aria-label="Settings">${ic('gear',22)}</button>
+        </div>
+        <p class="verse-serif">“Be still, and know that I am God.”</p>
+        <p class="verse-ref">PSALM 46:10 · VERSE OF THE DAY</p>
+        <div class="today-glow"></div>
+      </div>
+      <button type="button" class="cta-main" style="margin-top:20px" onclick="goApp('pray')">5 minutes with God</button>
+      <div class="card-soft" style="margin-top:16px">
+        <div class="card-label">Today’s reading</div>
+        <p style="font-size:.9375rem;color:var(--text-muted)">Psalm 46 — God is our refuge</p>
+        <button type="button" class="link-btn" onclick="goApp('read')">Continue reading →</button>
+      </div>
+      <div class="card-soft">
+        <div class="card-label">How are you feeling?</div>
+        <div class="mood-row">
+          ${['Heavy','Anxious','Grateful','Empty'].map(m=>
+            `<button type="button" class="mood-btn" onclick="openTalkWithMood('${m}')">${m}</button>`).join('')}
+        </div>
+      </div>
+      <div class="widget-promo">
+        ${ic('sparkle',26)}
+        <div class="wp-txt"><b style="font-size:.8125rem">Morning verse widget</b><p>Add the Lock Screen widget so every morning starts with light.</p></div>
+        <button type="button" class="link-btn" style="margin:0;flex:none" onclick="toast('Widget setup — coming soon')">Add</button>
+      </div>
+    </div>
+    ${tabBarHTML()}
+  </div>`;},
+
+read(){
+  const V=(n,t,hl)=>`<p><span class="vsup">${n}</span><span class="verse-tappable ${hl?'hl':''}" onclick="tapVerse(this,${n})" data-text="${esc(t)}">${t}</span></p>`;
+  return `
+  <div class="view active">
+    <header class="nav-header">
+      <span></span><span class="nav-title">Read</span>
+      <span style="font-size:.75rem;font-weight:600;color:var(--text-soft)">KJV</span>
+    </header>
+    <div class="scroll" style="padding:8px 24px calc(24px + 90px)">
+      <div class="card-label">Day ${state.read.day} of 7 · Psalms</div>
+      <p class="screen-title" style="font-size:1.375rem;margin:4px 0 0">Psalm 46 — God is our refuge</p>
+      <div class="progress-bar"><i style="width:${Math.round((state.read.day-1)/7*100)}%"></i></div>
+      <div class="reader-text" style="margin-top:22px">
+        ${V(1,'God is our refuge and strength, a very present help in trouble.')}
+        ${V(2,'Therefore will not we fear, though the earth be removed, and though the mountains be carried into the midst of the sea;')}
+        ${V(3,'Though the waters thereof roar and be troubled, though the mountains shake with the swelling thereof. Selah.')}
+        ${V(4,'There is a river, the streams whereof shall make glad the city of God, the holy place of the tabernacles of the most High.')}
+        ${V(5,'God is in the midst of her; she shall not be moved: God shall help her, and that right early.')}
+        ${V(10,true?'Be still, and know that I am God: I will be exalted among the heathen, I will be exalted in the earth.':null,true)}
+      </div>
+      <button type="button" class="btn-primary ${state.read.done?'btn-gold':''}" onclick="markRead()">
+        ${state.read.done?'✓ Day '+state.read.day+' complete':'Mark as read'}
+      </button>
+    </div>
+    ${tabBarHTML()}
+  </div>`;},
+
+talk(){
+  const msgs = state.talk.msgs || seedTalk();
+  const greet={Heart:'This space is yours. What’s on your heart?',
+               Reflect:'Let’s slow down together. What happened today?',
+               Release:'Bring it here. What do you want to lay before God?'}[state.talk.mode];
+  return `
+  <div class="view active talk-bg">
+    <div style="display:flex;flex-direction:column;flex:1;min-height:0">
+      <span class="lock-pill">${ic('lock',12)} Only on this device${state.talk.autoDelete?' · auto-delete on':''}</span>
+      <div class="mode-tabs" role="tablist">
+        ${['Heart','Reflect','Release'].map(m=>`<button type="button" role="tab" aria-selected="${state.talk.mode===m}" class="mode-tab ${state.talk.mode===m?'active':''}" onclick="setTalkMode('${m}')">${m}</button>`).join('')}
+      </div>
+      <div class="chat-area" id="chatArea">
+        <div class="msg ai">${greet}</div>
+        ${msgs.map(m=>`<div class="msg ${m.who}">${m.html}</div>`).join('')}
+        <div class="msg ai typing hidden" id="typingDots"><i></i><i></i><i></i></div>
+      </div>
+      ${state.talk.pending?`<div style="padding:0 20px"><button type="button" class="auto-delete-chip" onclick="clearSession()">${ic('x',11)} End session & delete</button></div>`:''}
+      <footer class="chat-input-row">
+        <input id="chatInput" placeholder="Share what’s on your heart…" aria-label="Message"
+               onkeydown="if(event.key==='Enter')sendMsg()">
+        <button type="button" class="send-btn" aria-label="Send" onclick="sendMsg()">${ic('send',19)}</button>
+      </footer>
+      <button type="button" class="crisis-link" onclick="openCrisis()">In crisis? Get immediate help</button>
+    </div>
+    ${tabBarHTML()}
+  </div>`;},
+
+pray(){
+  const step=state.lectio;
+  const steps=['Read','Reflect','Pray','Rest'];
+  let body='';
+  if(step===0) body=`
+    <p class="screen-title" style="text-align:center">Read</p>
+    <div class="card-soft" style="margin-top:18px;text-align:center;padding:24px 20px">
+      <div class="verse-serif" style="font-size:1.1875rem">“Be still, and know that I am God.”</div>
+      <div style="font-size:.75rem;color:var(--text-soft);margin-top:8px;letter-spacing:.04em">PSALM 46:10</div>
+    </div>
+    <p style="text-align:center;color:var(--text-muted);font-size:.875rem;margin-top:14px">Read the verse slowly, twice. Let it settle.</p>`;
+  else if(step===1) body=`
+    <p class="screen-title" style="text-align:center">Reflect</p>
+    <div class="mirror-quote" style="margin-top:18px">What word or phrase feels like it was written for you today?</div>
+    <div class="quiz-grid" style="grid-template-columns:1fr 1fr">
+      ${['Be still','Know','I am God','Exalted'].map(w=>`<button type="button" class="quiz-card" onclick="this.classList.toggle('sel')"><span>${w}</span></button>`).join('')}
+    </div>`;
+  else if(step===2) body=`
+    <p class="screen-title" style="text-align:center">Pray</p>
+    <p style="text-align:center;color:var(--text-muted);font-size:.8125rem;margin:10px 0 18px">A prayer for you today:</p>
+    <div class="pray-text">“Lord, quiet my racing thoughts. You are my refuge when the world roars. Teach me to be still and trust that You are God — not me. Amen.”</div>`;
+  else body=`
+    <p class="screen-title" style="text-align:center">Rest</p>
+    <p style="text-align:center;color:var(--text-muted);font-size:.875rem;margin-top:8px">Breathe with the circle. Nothing to do. Just be with God.</p>
+    <div class="breath-circle"></div>
+    <p style="text-align:center;font-size:.75rem;color:var(--text-soft)">~ 30 seconds</p>`;
+  const last=step===3;
+  return `
+  <div class="view active">
+    <header class="nav-header">
+      <button type="button" class="back-btn" onclick="goApp('today')">${ic('chevL',18)} Today</button>
+      <span class="nav-title">Pray</span><span style="width:74px"></span>
+    </header>
+    <div class="lectio-steps">${steps.map((s,i)=>
+      `<div class="lectio-step ${i===step?'active':i<step?'done':''}">${i<step?'✓ ':''}${s}</div>`).join('')}</div>
+    <div class="lectio-body">${body}</div>
+    <div class="footer-actions">
+      ${step>0?`<button type="button" class="btn-secondary" style="flex:none;width:auto;padding:15px 20px" onclick="lectioBack()">Back</button>`:''}
+      <button type="button" class="btn-primary ${last?'btn-gold':''}" onclick="${last?'amen()':'lectioNext()'}">${last?'Amen':'Next'}</button>
+    </div>
+    <div class="amen-overlay" id="amenOverlay">
+      <h2>Amen.</h2>
+      <p style="color:var(--text-muted);font-size:.9375rem">Your time with God matters.</p>
+      <div style="display:flex;flex-direction:column;gap:10px;width:100%;max-width:280px;margin-top:26px">
+        <button type="button" class="btn-primary btn-gold" onclick="saveJournalFromPray()">Save to journal</button>
+        <button type="button" class="btn-secondary" onclick="finishPray()">Done</button>
+      </div>
+    </div>
+  </div>`;},
+
+journey(){
+  const pct=Math.min(state.stats.days/7,1);
+  const circ=2*Math.PI*56;
+  const topics=['Peace','Presence','Trust','Rest','Freedom','Gratitude','Joy'];
+  return `
+  <div class="view active">
+    <div class="scroll" style="padding:0 24px calc(24px + 90px)">
+      <div class="journey-header">
+        <p class="screen-title">Your journey</p>
+        <div class="ring-wrap">
+          <svg width="132" height="132" viewBox="0 0 132 132">
+            <circle cx="66" cy="66" r="56" fill="none" stroke="var(--bg-warm)" stroke-width="10"/>
+            <circle cx="66" cy="66" r="56" fill="none" stroke="url(#gold)" stroke-width="10" stroke-linecap="round"
+              stroke-dasharray="${circ}" stroke-dashoffset="${circ*(1-pct)}"/>
+            <defs><linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#C49A3C"/><stop offset="1" stop-color="#A67C2E"/></linearGradient></defs>
+          </svg>
+          <div class="ring-center"><b>${state.stats.days}</b><span>days</span></div>
+        </div>
+        <p style="font-size:.8125rem;color:var(--text-muted)">with God this week</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><b>${state.stats.days}</b><span>Days</span></div>
+        <div class="stat-card"><b>${state.stats.minutes}</b><span>Minutes</span></div>
+        <div class="stat-card"><b>${state.stats.chapters}</b><span>Chapters</span></div>
+      </div>
+      <div class="grace-note">${ic('heart',18)}<span><b>Grace day available.</b> Miss a day and it’s covered — no shame, no broken streak.</span></div>
+      <div class="card-soft" style="margin-top:16px">
+        <div class="card-label">7-day plan · ${state.quiz.desire||'Peace'}</div>
+        ${topics.map((t,i)=>`
+          <div class="plan-list-row">
+            <div class="plan-check ${i < (state.read.done?state.read.day:(state.read.day-1)) ? 'done':''}">${i < (state.read.done?state.read.day:(state.read.day-1))?ic('check',13):''}</div>
+            <div><div class="plan-day-label">Day ${i+1}</div><div class="plan-day-topic">${t} · Psalm ${46+i}</div></div>
+          </div>`).join('')}
+      </div>
+      <div class="card-label" style="margin-top:18px">Journal · encrypted on device</div>
+      ${state.journal.map(j=>`<div class="journal-entry"><div class="when">${j.when}</div><p>${j.text}</p></div>`).join('')}
+    </div>
+    ${tabBarHTML()}
+  </div>`;},
+
+settings(){
+  return `
+  <div class="view active">
+    <header class="nav-header">
+      <button type="button" class="back-btn" onclick="goApp('today')">${ic('chevL',18)} Back</button>
+      <span class="nav-title">Settings</span><span style="width:74px"></span>
+    </header>
+    <div class="scroll" style="padding:8px 20px calc(24px + 40px)">
+      <div class="settings-group">
+        <div class="settings-row"><span>Subscription</span><span class="val" style="color:var(--primary-deep);font-weight:600">Yearly · Active</span></div>
+        <button type="button" class="settings-row" onclick="toast('Opens App Store subscription management')"><span>Manage subscription</span><span class="val">→</span></button>
+        <button type="button" class="settings-row" onclick="toast('Purchases restored')">Restore purchases</button>
+      </div>
+      <div class="card-label">Privacy</div>
+      <div class="settings-group">
+        <div class="settings-row"><span>AI companion runs on-device<span style="display:block;font-size:.75rem;color:var(--text-soft);margin-top:2px">Your words never leave this iPhone</span></span>${ic('shield',20)}</div>
+        <div class="settings-row"><span>Auto-delete Talk sessions</span><button type="button" role="switch" aria-checked="${state.talk.autoDelete}" class="switch ${state.talk.autoDelete?'on':''}" onclick="toggleAutoDelete(this)" aria-label="Auto-delete sessions"></button></div>
+      </div>
+      <div class="card-label">Notifications</div>
+      <div class="settings-group">
+        <button type="button" class="settings-row" onclick="toast('Time picker in the real app')"><span>Morning verse reminder</span><span class="val">7:00 AM</span></button>
+      </div>
+      <div class="card-label">Bible</div>
+      <div class="settings-group">
+        <div class="settings-row"><span>Translation</span><span class="val">King James Version ▾</span></div>
+      </div>
+      <div class="card-label">Legal & support</div>
+      <div class="settings-group">
+        <button type="button" class="settings-row" onclick="toast('Opens disclaimer')"><span>AI disclaimer</span><span class="val">→</span></button>
+        <button type="button" class="settings-row" onclick="toast('Opens privacy policy')"><span>Privacy policy</span><span class="val">→</span></button>
+        <button type="button" class="settings-row" onclick="toast('support@selah.app')"><span>Contact support</span><span class="val">→</span></button>
+      </div>
+      <p class="disclaimer" style="margin-top:18px">Selah is a devotional tool, not a substitute for pastoral care or professional counseling.<br>Selah v1.0 · Made with grace</p>
+    </div>
+  </div>`;},
+};
+
+/* ============================================================
+   ONBOARDING SCREENS (17)
+   ============================================================ */
+function heroHTML(){return `<div class="ob-hero"></div>`;}
+
+const ob=[
+/* 1 Welcome */ {name:'Welcome',render:()=>`
+  <div class="view active">
+    ${heroHTML()}
+    <div class="ob-body">
+      <h2>Selah — pause. Reflect.<br>Listen to God.</h2>
+      <p class="sub">A private space for prayer and Scripture,<br>right on your phone.</p>
+      <div style="flex:1"></div>
+      <button type="button" class="btn-primary btn-gold" onclick="nextOb()">Continue</button>
+    </div>
+    <button type="button" class="ob-skip" onclick="skipToPaywall()">Skip</button>
+  </div>`},
+/* 2 Hook */ {name:'Emotional hook',render:()=>`
+  <div class="view active">
+    ${heroHTML()}
+    <div class="ob-body">
+      <h2>You have time to scroll for hours.<br>Five minutes with God feels hard.</h2>
+      <p class="sub">It’s not because you don’t love Him.<br>Life is loud — and the noise wins.</p>
+      <div style="flex:1"></div>
+      <button type="button" class="btn-primary" onclick="nextOb()">Continue</button>
+    </div>
+    <button type="button" class="ob-skip" onclick="prevOb()">${ic('chevL',16)}</button>
+  </div>`},
+/* 3 Stat */ {name:'Stat + proof',render:()=>`
+  <div class="view active">
+    ${heroHTML()}
+    <div class="ob-body">
+      <div style="text-align:center">
+        <div class="stat-num">Most</div>
+        <p class="sub" style="margin-top:14px">Christians want to read the Bible daily.<br><b style="color:var(--text)">Few build a habit that lasts.</b></p>
+        <p style="font-size:.6875rem;color:var(--text-soft);margin-top:10px">Draft research statement · source before release</p>
+      </div>
+      <div style="flex:1"></div>
+      <button type="button" class="btn-primary" onclick="nextOb()">Continue</button>
+    </div>
+    <button type="button" class="ob-skip" onclick="prevOb()">${ic('chevL',16)}</button>
+  </div>`},
+/* 4 Quiz distance */ {name:'Quiz · distance',render:()=>`
+  <div class="view active" style="padding-top:84px">
+    <div class="ob-body" style="padding-top:8px">
+      <h2>What keeps you furthest from God right now?</h2>
+      <div class="quiz-grid">
+        ${[['clock','Busy life'],['shield','Guilt or heaviness'],['path','Inconsistency'],['heart','I feel distant']].map(([icn,label])=>`
+          <button type="button" class="quiz-card ${state.quiz.distance===label?'sel':''}"
+                  onclick="answerQuiz('distance','${label}',this)">${ic(icn,26)}<span>${label}</span></button>`).join('')}
+      </div>
+      <div style="flex:1"></div>
+      <p class="disclaimer">Your answers shape your personal journey.</p>
+    </div>
+  </div>`},
+/* 5 Quiz desire */ {name:'Quiz · desire',render:()=>`
+  <div class="view active" style="padding-top:84px">
+    <div class="ob-body" style="padding-top:8px">
+      <h2>What do you want most?</h2>
+      <div class="quiz-grid">
+        ${[['sparkle','Peace'],['sun','Daily consistency'],['heart','Freedom from guilt'],['book','Know Scripture better']].map(([icn,label])=>`
+          <button type="button" class="quiz-card ${state.quiz.desire===label?'sel':''}"
+                  onclick="answerQuiz('desire','${label}',this)">${ic(icn,26)}<span>${label}</span></button>`).join('')}
+      </div>
+      <div style="flex:1"></div>
+    </div>
+  </div>`},
+/* 6 Quiz habit */ {name:'Quiz · habit',render:()=>`
+  <div class="view active" style="padding-top:84px">
+    <div class="ob-body" style="padding-top:8px">
+      <h2>How often do you read the Bible now?</h2>
+      <div class="quiz-grid">
+        ${['Never','Sometimes','Often','Daily — aspiring'].map(label=>`
+          <button type="button" class="quiz-card ${state.quiz.habit===label?'sel':''}"
+                  onclick="answerQuiz('habit','${label}',this)"><span>${label}</span></button>`).join('')}
+      </div>
+      <div style="flex:1"></div>
+      <p class="disclaimer">Honesty here makes your plan realistic.</p>
+    </div>
+  </div>`},
+/* 7 Mirror */ {name:'Mirror',render:()=>{
+  const d=state.quiz.distance||'life’s noise', de=(state.quiz.desire||'peace').replace('Daily consistency','consistency');
+  return `
+  <div class="view active">
+    ${heroHTML()}
+    <div class="ob-body">
+      <h2>Built around you</h2>
+      <div class="mirror-quote">You want ${de.toLowerCase()}.<br>${d.charAt(0).toUpperCase()+d.slice(1)} has made it hard.<br>That honesty matters —<br>and it’s exactly where God meets you.</div>
+      <div style="flex:1"></div>
+      <button type="button" class="btn-primary" onclick="nextOb()">Continue</button>
+    </div>
+  </div>`;}},
+/* 8 Commitment */ {name:'Commitment',render:()=>`
+  <div class="view active">
+    ${heroHTML()}
+    <div class="ob-body">
+      <h2>Will you make space for God this week?</h2>
+      <p class="sub">Not perfection. Just five honest minutes a day.</p>
+      <div style="flex:1"></div>
+      <button type="button" class="btn-primary btn-gold" onclick="nextOb()">Yes, I’m ready</button>
+      <button type="button" class="btn-secondary" onclick="nextOb()">I want to try</button>
+    </div>
+  </div>`},
+/* 9 Privacy */ {name:'Privacy',render:()=>`
+  <div class="view active">
+    ${heroHTML()}
+    <div class="ob-body">
+      <h2>Your words stay yours</h2>
+      <div class="privacy-card">
+        ${ic('lock',30)}
+        <p style="font-size:.9375rem;line-height:1.55;color:var(--text-muted)">Your prayers and reflections stay <b style="color:var(--text)">on this phone</b>. Not the cloud. Not us. The AI companion runs entirely on-device.</p>
+      </div>
+      <div style="flex:1"></div>
+      <button type="button" class="btn-primary" onclick="nextOb()">Continue</button>
+    </div>
+  </div>`},
+/* 10 Demo */ {name:'Live demo',render:()=>`
+  <div class="view active" style="padding-top:84px">
+    <div class="ob-body" style="padding-top:8px">
+      <h2>Try it right now</h2>
+      <p class="sub">How are you coming to God today?</p>
+      <div class="quiz-grid">
+        ${[['shield','Heavy'],['sparkle','Anxious'],['heart','Grateful'],['clock','Empty']].map(([icn,m])=>`
+          <button type="button" class="quiz-card ${state.demoMood===m?'sel':''}"
+                  onclick="pickDemoMood('${m}')">${ic(icn,26)}<span>${m}</span></button>`).join('')}
+      </div>
+      <div style="flex:1"></div>
+      <button type="button" class="btn-primary" id="demoGo" onclick="generateDemo()" ${state.demoMood?'':'disabled style="opacity:.5"'}>Generate my prayer</button>
+      <p class="disclaimer" style="margin-top:10px">Runs on-device · nothing is sent anywhere</p>
+    </div>
+  </div>`},
+/* 10b Demo generating/result */ {name:'Demo result',render:()=>{
+  const m=state.demoMood||'Anxious';
+  const prayer={
+    Heavy:'Father, I come to You carrying more than I can hold. Be my refuge tonight. Remind me I don’t carry this alone.',
+    Anxious:'Lord, my mind won’t slow down. Still my heart like still water. You are God — I can rest.',
+    Grateful:'Thank You, Father, for gifts I didn’t earn and grace I didn’t ask for. Teach me to notice You in ordinary moments.',
+    Empty:'God, I feel empty — but You are near even here. Fill what I cannot fill myself. Draw me close.'
+  }[m];
+  return `
+  <div class="view active">
+    ${heroHTML()}
+    <div class="ob-body">
+      <h2>This is Selah —<br>space to talk to God</h2>
+      <div class="chat-preview">
+        <div class="msg user">I’ve been feeling ${m.toLowerCase()} lately.</div>
+        <div class="msg ai">That’s okay. You brought it to Him — that matters.<br><em class="scripture" style="font-family:var(--font-display);font-size:.9375rem;color:var(--accent-deep)">“Come to me, all who are weary, and I will give you rest.”</em><span class="ref" style="font-size:.6875rem;color:var(--text-soft)">— Matthew 11:28</span></div>
+        <div class="msg ai" style="font-family:var(--font-display);font-style:italic">${prayer}</div>
+      </div>
+      <div style="flex:1"></div>
+      <button type="button" class="btn-primary" onclick="nextOb()">Continue</button>
+    </div>
+  </div>`;}},
+/* 12 Building */ {name:'Building plan',render:()=>`
+  <div class="view active">
+    ${heroHTML()}
+    <div class="ob-body">
+      <h2>Creating your 7-day journey…</h2>
+      <div class="build-path"><div class="build-track" id="buildTrack">
+        <div class="build-line" style="left:7px;top:71px;width:104px;transform:scaleX(0)"></div>
+        <div class="build-line" style="left:119px;top:71px;width:104px;transform:scaleX(0)"></div>
+        <div class="build-dot" style="left:0;top:64px"></div>
+        <div class="build-dot" style="left:112px;top:64px"></div>
+        <div class="build-dot" style="left:224px;top:64px"></div>
+        <div class="build-dot" style="left:112px;top:0"></div>
+        <div class="build-dot" style="left:112px;top:136px"></div>
+      </div></div>
+      <p class="sub" id="buildLabel" style="min-height:20px">Shaping your pace…</p>
+      <div style="flex:1"></div>
+      <button type="button" class="btn-primary hidden" id="buildDoneBtn" onclick="nextOb()">See my week</button>
+    </div>
+  </div>`},
+/* 13 Plan reveal */ {name:'Plan reveal',render:()=>`
+  <div class="view active">
+    ${heroHTML()}
+    <div class="ob-body">
+      <h2>Your week: ${state.quiz.desire?state.quiz.desire.replace('Daily consistency','Consistency').replace('Freedom from guilt','Freedom'):'Peace'}</h2>
+      <div class="plan-week">
+        ${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map((d,i)=>`<div class="plan-day">${d}<b>${['Ps','Ps','Jn','Mt','Ps','Pr','Ps'][i]}${[46,47,1,6,62,3,23][i]}</b></div>`).join('')}
+      </div>
+      <ul class="pay-bullets" style="margin-top:18px">
+        <li>${ic('check',17)} 5 minutes a day — short enough to keep</li>
+        <li>${ic('check',17)} A private place to bring what’s heavy</li>
+        <li>${ic('check',17)} Gentle grace days — never shame</li>
+      </ul>
+      <div style="flex:1"></div>
+      <button type="button" class="btn-primary" onclick="nextOb()">Continue</button>
+    </div>
+  </div>`},
+/* 14 Widget */ {name:'Widget hook',render:()=>`
+  <div class="view active">
+    ${heroHTML()}
+    <div class="ob-body">
+      <h2>Wake up in the Word</h2>
+      <div class="lock-mock">
+        <div style="font-size:.75rem;letter-spacing:.1em;opacity:.85">MONDAY, AUGUST 24</div>
+        <div class="lock-time">7:00</div>
+        <div style="margin-top:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:16px;padding:14px">
+          <div style="font-size:.6875rem;font-weight:700;letter-spacing:.06em">SELAH · VERSE OF THE DAY</div>
+          <div class="verse-serif" style="font-size:1rem;margin-top:6px">“Be still, and know that I am God.”</div>
+          <div style="font-size:.6875rem;opacity:.8;margin-top:4px">Psalm 46:10</div>
+        </div>
+      </div>
+      <div style="flex:1"></div>
+      <button type="button" class="btn-primary" onclick="nextOb()">Continue</button>
+    </div>
+  </div>`},
+/* 15 Social proof */ {name:'Social proof',render:()=>`
+  <div class="view active">
+    ${heroHTML()}
+    <div class="ob-body">
+      <h2>Finally, a place<br>that doesn’t shame me</h2>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>“I’ve tried Bible apps for years. This is the first one that feels like a quiet room with God instead of a to-do list.”</p>
+        <div class="who">DRAFT TESTIMONIAL · REPLACE WITH VERIFIED BETA QUOTE</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>“I can confess and process things I’d never post anywhere. Knowing it stays on my phone changed everything.”</p>
+        <div class="who">DRAFT TESTIMONIAL · REPLACE WITH VERIFIED BETA QUOTE</div>
+      </div>
+      <div style="flex:1"></div>
+      <button type="button" class="btn-primary" onclick="nextOb()">Continue</button>
+    </div>
+  </div>`},
+/* 16 Paywall */ {name:'Paywall',render:()=>{
+  const plans=[
+    ['weekly','$7.99','per week','Billed weekly'],
+    ['monthly','$14.99','per month','Billed monthly'],
+    ['yearly','$49.99','per year','$4.16/mo · save 65%'],
+  ];
+  return `
+  <div class="view active" style="padding-top:70px">
+    <div class="ob-body" style="padding-top:6px">
+      <h2 style="font-size:1.75rem">${getPaywallHeadline()}</h2>
+      <ul class="pay-bullets">
+        <li>${ic('lock',17)} <span><b style="color:var(--text)">Private</b> — on-device AI, nothing leaves your phone</span></li>
+        <li>${ic('sun',17)} <span><b style="color:var(--text)">Daily</b> — 5-minute plans built around your season</span></li>
+        <li>${ic('heart',17)} <span><b style="color:var(--text)">Companion</b> — talk, reflect, release — anytime</span></li>
+      </ul>
+      <div class="plans">
+        ${plans.map(([id,price,per,sub])=>`
+        <button type="button" class="plan ${state.plan===id?'sel':''}" onclick="pickPlan('${id}')">
+          ${id==='yearly'?'<span class="badge-save">Best value</span>':''}
+          <span class="radio"><i></i></span>
+          <span><span class="p-name">${per.charAt(0).toUpperCase()+per.slice(1)}</span><span class="p-sub">${sub}</span></span>
+          <span class="p-price">${price}<span class="p-per">&nbsp;</span></span>
+        </button>`).join('')}
+      </div>
+      <button type="button" class="btn-primary btn-gold" onclick="subscribe()">
+        Start your ${state.plan==='weekly'?'week':state.plan==='monthly'?'month':'year'} with God
+      </button>
+      <p class="disclaimer" style="margin-top:10px">Auto-renews. Cancel anytime in App Store settings.<br>Selah is a devotional tool, not pastoral care or therapy.</p>
+      <button type="button" class="link-btn" style="align-self:center" onclick="restoreTap()">Restore purchase</button>
+    </div>
+    <button type="button" class="ob-skip" onclick="subscribe(true)">Skip</button>
+  </div>`;}},
+/* 17 Notifications */ {name:'Notifications',render:()=>`
+  <div class="view active" style="background:linear-gradient(180deg,#DCE9FC,var(--bg))">
+    <div class="notif-dialog show" style="top:120px">
+      <div class="notif-app-icon">${ic('sun',28)}</div>
+      <p style="font-weight:700;font-size:.9375rem">“Selah” Would Like to Send You Notifications</p>
+      <p style="font-size:.8125rem;color:var(--text-muted);margin-top:6px">A gentle verse each morning.</p>
+    </div>
+    <div class="ob-body" style="justify-content:flex-end;padding-bottom:60px">
+      <p class="disclaimer" style="margin-bottom:14px">You can change this anytime in Settings</p>
+      <button type="button" class="btn-primary" onclick="allowNotif()">Allow</button>
+      <button type="button" class="btn-secondary" onclick="enterApp()">Not now</button>
+    </div>
+  </div>`},
+];
+
+/* ============================================================
+   RENDER + NAV
+   ============================================================ */
+function render(){
+  clearTimeout(buildTimer);
+  const host=$('#viewHost');
+  if(state.mode==='onboarding'){
+    host.innerHTML=ob[state.obStep].render();
+    renderJump();
+    if(ob[state.obStep].name==='Building plan') runBuildAnimation();
+  }else{
+    host.innerHTML=appScreens[state.tab]();
+    renderJump();
+    if(state.tab==='talk'){const a=$('#chatArea'); if(a) a.scrollTop=a.scrollHeight;}
+  }
+  $('#m-ob').classList.toggle('on',state.mode==='onboarding');
+  $('#m-app').classList.toggle('on',state.mode==='app');
+  $('#jumpOnboarding').classList.toggle('hidden',state.mode!=='onboarding');
+  $('#jumpApp').classList.toggle('hidden',state.mode!=='app');
+}
+function renderJump(){
+  $('#obList').innerHTML=ob.map((s,i)=>`<button type="button" class="jump-btn ${state.mode==='onboarding'&&state.obStep===i?'cur':''}" onclick="goOnboarding(${i})"><span class="num">${i<16?i+1:ic('bell',12)}</span>${s.name}</button>`).join('');
+  $('#appList').innerHTML=TABS.map(([id,label])=>`<button type="button" class="jump-btn ${state.mode==='app'&&state.tab===id?'cur':''}" onclick="goApp('${id}')"><span class="num">${ic(TABS.find(t=>t[0]===id)[2],12)}</span>${label}</button>`).join('')
+   + `<button type="button" class="jump-btn ${state.mode==='app'&&state.tab==='settings'?'cur':''}" onclick="goApp('settings')"><span class="num">${ic('gear',12)}</span>Settings</button>`;
+}
+function setMode(m){state.mode=m;render();}
+function goOnboarding(i){state.mode='onboarding';state.obStep=i;render();}
+function nextOb(){if(state.obStep<ob.length-1){state.obStep++;render();}}
+function prevOb(){if(state.obStep>0){state.obStep--;render();}}
+function skipToPaywall(){state.obStep=15;render();}
+function goApp(tab){state.mode='app';state.tab=tab;render();}
+function enterApp(){state.mode='app';state.tab='today';render();}
+
+/* ---------------- Onboarding actions ---------------- */
+function answerQuiz(key,val,el){
+  state.quiz[key]=val;
+  document.querySelectorAll('.quiz-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  setTimeout(()=>nextOb(),420);
+}
+function pickDemoMood(m){state.demoMood=m;render();}
+function generateDemo(){
+  if(!state.demoMood)return;
+  const btn=$('#demoGo'); if(btn){btn.disabled=true;btn.textContent='Listening…';}
+  setTimeout(()=>{state.obStep=10;render();},650);
+}
+function runBuildAnimation(){
+  const track=$('#buildTrack'); if(!track)return;
+  const dots=track.querySelectorAll('.build-dot'), lines=track.querySelectorAll('.build-line');
+  const labels=['Shaping your pace…','Choosing Scriptures…','Preparing grace days…'];
+  labels.forEach((l,i)=>setTimeout(()=>{const el=$('#buildLabel'); if(el)el.textContent=l;},600+i*1100));
+  dots.forEach((d,i)=>setTimeout(()=>d.classList.add('done'),500+i*800));
+  lines.forEach((l,i)=>setTimeout(()=>l.classList.add('fill'),900+i*800));
+  buildTimer=setTimeout(()=>{const b=$('#buildDoneBtn'); if(b)b.classList.remove('hidden');},3600);
+}
+function pickPlan(p){state.plan=p;render();}
+function subscribe(skipped){
+  state.obStep=16;render();
+  if(!skipped)toast('Subscribed — welcome to Selah 🕊️'.replace('🕊️',''));
+}
+function restoreTap(){toast('No previous purchase found');}
+function allowNotif(){toast('Notifications allowed');setTimeout(enterApp,350);}
+
+/* ---------------- App actions ---------------- */
+function markRead(){
+  if(!state.read.done){state.read.done=true;state.read.day=Math.min(state.read.day+1,7);state.stats.chapters++;toast('Day complete — well done');}
+  else toast('Already completed ✓');
+  render();
+}
+function seedTalk(){
+  return [
+    {who:'user',html:'I have been feeling distant lately.'},
+    {who:'ai',html:'Thank you for sharing that — naming it takes honesty.<em class="scripture">“Draw near to God, and he will draw near to you.”</em><span class="ref">— James 4:8</span>'},
+  ];
+}
+function setTalkMode(m){
+  state.talk.mode=m;state.talk.msgs=null;state.talk.pending=null;render();
+}
+function openTalkWithMood(mood){
+  state.talk.mode='Heart';
+  state.talk.msgs=null;
+  state.talk.pending=`I'm feeling ${mood.toLowerCase()} today.`;
+  goApp('talk');
+}
+function aiReply(text){
+  const t=text.toLowerCase(), mode=state.talk.mode;
+  if(/anxi|afraid|scared|worry/.test(t))
+    return 'Fear shrinks in His presence. Breathe — He is already in tomorrow.<em class="scripture">“When I am afraid, I put my trust in you.”</em><span class="ref">— Psalm 56:3</span>';
+  if(/heavy|tired|weary|exhaust|empty/.test(t))
+    return 'You don’t have to carry it alone tonight. Set it down here.<em class="scripture">“Come to me… and I will give you rest.”</em><span class="ref">— Matthew 11:28</span>';
+  if(/gratef|thank|good/.test(t))
+    return 'Gratitude opens our eyes. What you noticed was His gift first.<em class="scripture">“Give thanks in all circumstances.”</em><span class="ref">— 1 Thessalonians 5:18</span>';
+  if(mode==='Release')
+    return 'Naming it before God is the release. He holds what you loosen.<em class="scripture">“Cast your cares on the Lord and he will sustain you.”</em><span class="ref">— Psalm 55:22</span>';
+  if(mode==='Reflect')
+    return 'Let’s stay with that a moment. Where did you sense God in it — even faintly?<em class="scripture">“Be still, and know that I am God.”</em><span class="ref">— Psalm 46:10</span>';
+  return 'You’re not distant as far as you feel. He’s nearer than the thought of Him.<em class="scripture">“The Lord is close to the brokenhearted.”</em><span class="ref">— Psalm 34:18</span>';
+}
+function sendMsg(){
+  const inp=$('#chatInput'), val=(inp.value||'').trim();
+  if(!val)return;
+  if(!state.talk.msgs)state.talk.msgs=seedTalk();
+  if(state.talk.pending){state.talk.msgs.push({who:'user',html:esc(state.talk.pending)});state.talk.pending=null;}
+  state.talk.msgs.push({who:'user',html:esc(val)});
+  render();
+  const dots=$('#typingDots'); if(dots)setTimeout(()=>dots.classList.remove('hidden'),50);
+  setTimeout(()=>{
+    state.talk.msgs.push({who:'ai',html:aiReply(val)});
+    render();
+    const a=$('#chatArea'); if(a)a.scrollTop=a.scrollHeight;
+  },1100);
+}
+function clearSession(){
+  state.talk.msgs=null;state.talk.pending=null;render();toast('Session deleted from this device');
+}
+function toggleAutoDelete(el){
+  state.talk.autoDelete=!state.talk.autoDelete;
+  el.classList.toggle('on',state.talk.autoDelete);
+  el.setAttribute('aria-checked',state.talk.autoDelete);
+  toast(state.talk.autoDelete?'Sessions auto-delete when you end them':'Auto-delete off');
+}
+function openCrisis(){
+  openSheet(`<div class="bottom-sheet" role="dialog" aria-label="Crisis support">
+    <div class="sheet-grab"></div>
+    <p style="font-weight:700;font-size:1.0625rem">You matter.</p>
+    <p style="font-size:.875rem;color:var(--text-muted);line-height:1.5;margin-top:8px">If you’re thinking about harming yourself, please reach out now — a real person is ready to listen.</p>
+    <div style="margin-top:14px">
+      <button type="button" class="sheet-action" onclick="toast('Calling 988…')">${ic('phoneic',20)}<span><b>988 Suicide & Crisis Lifeline</b> (US) — call or text</span></button>
+      <button type="button" class="sheet-action" onclick="toast('Opening findahelpline.com…')">${ic('shield',20)}<span>Find a helpline in your country</span></button>
+      <button type="button" class="sheet-action" onclick="toast('Talking to a pastor or friend…')">${ic('heart',20)}<span>Tell a pastor, friend, or family member</span></button>
+    </div>
+    <button type="button" class="btn-secondary" style="margin-top:8px" onclick="closeSheets()">Close</button>
+  </div>`);
+}
+function tapVerse(el,n){
+  el.classList.toggle('hl');
+  if(!el.classList.contains('hl'))return;
+  openSheet(`<div class="bottom-sheet" role="dialog">
+    <div class="sheet-grab"></div>
+    <p class="card-label">Psalm 46 : ${n}</p>
+    <button type="button" class="sheet-action" onclick="reflectVerse('${esc(el.dataset.text).replace(/'/g,"\\'")}')">${ic('chat',20)}<span>Reflect on this — take it to Talk</span></button>
+    <button type="button" class="sheet-action" onclick="closeSheets()">${ic('book',20)}<span>Keep highlighted</span></button>
+  </div>`);
+}
+function reflectVerse(text){
+  closeSheets();
+  state.talk.mode='Reflect';state.talk.msgs=null;
+  state.talk.pending=`I want to sit with: “${text}”`;
+  goApp('talk');
+}
+function lectioNext(){state.lectio=Math.min(state.lectio+1,3);render();}
+function lectioBack(){state.lectio=Math.max(state.lectio-1,0);render();}
+function amen(){
+  const ov=$('#amenOverlay'); if(ov)ov.classList.add('show');
+}
+function saveJournalFromPray(){
+  state.journal.unshift({when:'Just now · Pray',text:'“Lord, quiet my racing thoughts. You are my refuge when the world roars.”'});
+  finishPray();toast('Saved to journal');
+}
+function finishPray(){
+  const ov=$('#amenOverlay'); if(ov)ov.classList.remove('show');
+  state.lectio=0;state.stats.minutes+=5;
+  setTimeout(()=>goApp('journey'),250);
+}
+
+/* boot */
+render();
+</script>
+</body>
+</html>

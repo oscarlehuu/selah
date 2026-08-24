@@ -1,0 +1,5 @@
+.env
+.env.local
+.asc/web/
+*.xcuserstate
+DerivedData/
