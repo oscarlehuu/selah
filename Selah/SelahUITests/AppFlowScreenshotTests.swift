@@ -1,10 +1,15 @@
 import XCTest
 
 final class AppFlowScreenshotTests: XCTestCase {
+    /// Visible labels from OnboardingFlowView, including curly apostrophes.
     private let primaryCTAs = [
-        "Yes, I'm ready",
-        "Generate reflection",
-        "Continue to Selah",
+        "Begin",
+        "That’s true for me",
+        "Yes, I’m ready",
+        "I understand",
+        "Pray with me",
+        "This is what I needed",
+        "I want that",
         "Continue"
     ]
 
@@ -25,22 +30,27 @@ final class AppFlowScreenshotTests: XCTestCase {
             if step == 2 || step == 8 || step == 13 {
                 attachScreenshot(app, name: "flow-onboarding-\(String(format: "%02d", step))")
             }
-            if !waitForPrimaryCTA(app, timeout: 4) {
+            if !waitForPrimaryCTA(app, timeout: 6) {
                 break
             }
         }
 
         tapPrimaryCTA(app)
 
-        let paywall = app.buttons.matching(
+        let continueButton = app.buttons["onboarding.continue"]
+        let paywall = app.buttons["paywall.subscribe"]
+        let startSelah = app.buttons.matching(
             NSPredicate(format: "label BEGINSWITH 'Start Selah'")
         ).firstMatch
         let notifications = app.buttons["Allow notifications"]
 
-        if paywall.waitForExistence(timeout: 8) {
+        if paywall.waitForExistence(timeout: 8) || startSelah.waitForExistence(timeout: 2) {
             attachScreenshot(app, name: "flow-paywall")
         } else if notifications.waitForExistence(timeout: 3) {
             attachScreenshot(app, name: "flow-notifications")
+        } else if continueButton.exists {
+            attachScreenshot(app, name: "flow-still-onboarding")
+            XCTFail("Onboarding did not reach paywall")
         } else {
             attachScreenshot(app, name: "flow-post-onboarding")
             XCTFail("Expected paywall or notification prompt after onboarding")
@@ -50,9 +60,11 @@ final class AppFlowScreenshotTests: XCTestCase {
     private func waitForPrimaryCTA(_ app: XCUIApplication, timeout: TimeInterval) -> Bool {
         let deadline = Date().addingTimeInterval(timeout)
         while Date() < deadline {
+            if app.buttons["onboarding.continue"].exists { return true }
             for label in primaryCTAs {
                 if app.buttons[label].exists { return true }
             }
+            if app.buttons["paywall.subscribe"].exists { return false }
             if app.buttons.matching(NSPredicate(format: "label BEGINSWITH 'Start Selah'")).firstMatch.exists {
                 return false
             }
@@ -62,9 +74,14 @@ final class AppFlowScreenshotTests: XCTestCase {
     }
 
     private func tapPrimaryCTA(_ app: XCUIApplication) {
+        let identified = app.buttons["onboarding.continue"]
+        if identified.waitForExistence(timeout: 2) {
+            identified.tap()
+            return
+        }
         for label in primaryCTAs {
             let button = app.buttons[label]
-            if button.waitForExistence(timeout: 2) {
+            if button.waitForExistence(timeout: 1) {
                 button.tap()
                 return
             }

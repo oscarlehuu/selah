@@ -11,7 +11,7 @@ final class CompanionAvailabilityTests: XCTestCase {
                       || message.localizedCaseInsensitiveContains("not available"))
     }
 
-    func testTalkReplyDoesNotInventCloudFallbackWhenUnavailable() async {
+    func testTalkReplyDoesNotInventCloudFallbackWhenUnavailable() async throws {
         guard !CompanionAvailability.isOnDeviceCompanionAvailable else {
             throw XCTSkip("On-device model is available on this simulator")
         }
