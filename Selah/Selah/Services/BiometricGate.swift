@@ -1,0 +1,17 @@
+import Foundation
+import LocalAuthentication
+
+enum BiometricGate {
+    static func authenticate(reason: String) async -> Bool {
+        let context = LAContext()
+        var error: NSError?
+        guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
+            return true
+        }
+        return await withCheckedContinuation { continuation in
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, _ in
+                continuation.resume(returning: success)
+            }
+        }
+    }
+}

@@ -1,0 +1,126 @@
+name: Selah
+options:
+  bundleIdPrefix: com.lilgroup
+  deploymentTarget:
+    iOS: "18.0"
+  xcodeVersion: "16.0"
+  generateEmptyDirectories: true
+  groupSortPosition: top
+
+packages:
+  RevenueCat:
+    url: https://github.com/RevenueCat/purchases-ios
+    from: "5.14.0"
+  PostHog:
+    url: https://github.com/PostHog/posthog-ios
+    from: "3.0.0"
+  GRDB:
+    url: https://github.com/groue/GRDB.swift
+    from: "7.4.0"
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+
+targets:
+  Selah:
+    type: application
+    platform: iOS
+    sources:
+      - path: Selah
+        excludes:
+          - Resources/Info.plist
+          - Resources/Data/**
+          - Resources/*.jpg
+    resources:
+      - path: Selah/Resources/Assets.xcassets
+      - path: Selah/Resources/Fonts
+      - path: Selah/Resources/Data/kjv.sqlite
+      - path: Selah/Resources/Data/verse-of-the-day.json
+      - path: Selah/Resources/Data/crisis-keywords-en.txt
+      - path: Selah/Resources/Data/reading-plans
+      - path: Selah/Resources/selah-hero-window.jpg
+      - path: Selah/Resources/selah-hero-morning.jpg
+    dependencies:
+      - package: RevenueCat
+        product: RevenueCat
+      - package: PostHog
+        product: PostHog
+      - package: GRDB
+        product: GRDB
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.lilgroup.selah
+        PRODUCT_NAME: Selah
+        DEVELOPMENT_TEAM: R8GJL3N9WX
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_ENTITLEMENTS: Selah/Resources/Selah.entitlements
+        INFOPLIST_FILE: Selah/Resources/Info.plist
+        INFOPLIST_KEY_CFBundleDisplayName: Selah
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+    preBuildScripts:
+      - name: Copy bundle data
+        script: "${SRCROOT}/../scripts/ios/copy-bundle-resources.sh"
+        basedOnDependencyAnalysis: false
+    scheme:
+      testTargets:
+        - SelahTests
+
+  SelahTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: SelahTests
+    dependencies:
+      - target: Selah
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Selah.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Selah"
+        BUNDLE_LOADER: "$(TEST_HOST)"
+
+  SelahUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: SelahUITests
+    dependencies:
+      - target: Selah
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: Selah
+
+schemes:
+  Selah:
+    build:
+      targets:
+        Selah: all
+        SelahUITests: [test]
+    run:
+      config: Debug
+      storeKitConfiguration: Configuration/Selah.storekit
+    test:
+      targets:
+        - SelahTests
+        - SelahUITests
+  Selah Demo:
+    build:
+      targets:
+        Selah: all
+    run:
+      config: Debug
+      commandLineArguments:
+        "-DemoMode": true
+      storeKitConfiguration: Configuration/Selah.storekit
+    test:
+      targets:
+        - SelahUITests

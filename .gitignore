@@ -3,3 +3,6 @@
 .asc/web/
 *.xcuserstate
 DerivedData/
+xcuserdata/
+*.xcworkspace/xcuserdata/
+Build/

@@ -1,0 +1,3976 @@
+{
+  "theme": "scripture",
+  "themeLabel": "Scripture",
+  "desireKey": "know",
+  "daysPerYear": 365,
+  "weeks": [
+    {
+      "week": 1,
+      "weekTitle": "Be still",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 1,
+          "label": "Mon",
+          "book": "John",
+          "chapter": 1,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 2,
+          "label": "Tue",
+          "book": "John",
+          "chapter": 3,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 3,
+          "label": "Wed",
+          "book": "John",
+          "chapter": 14,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 4,
+          "label": "Thu",
+          "book": "John",
+          "chapter": 15,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 5,
+          "label": "Fri",
+          "book": "John",
+          "chapter": 17,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 6,
+          "label": "Sat",
+          "book": "John",
+          "chapter": 20,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 7,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 8,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "weekTitle": "Quiet the noise",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 8,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 19,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 9,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 22,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 10,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 23,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 11,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 46,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 12,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 100,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 13,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 110,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 14,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 119,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "weekTitle": "Surrender",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 15,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 139,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 16,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 145,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 17,
+          "label": "Wed",
+          "book": "Genesis",
+          "chapter": 1,
+          "focus": "In the beginning",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through in the beginning?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 18,
+          "label": "Thu",
+          "book": "Isaiah",
+          "chapter": 53,
+          "focus": "Suffering servant",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through suffering servant?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 19,
+          "label": "Fri",
+          "book": "Acts",
+          "chapter": 2,
+          "focus": "Spirit poured out",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through spirit poured out?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 20,
+          "label": "Sat",
+          "book": "Hebrews",
+          "chapter": 11,
+          "focus": "Faith of ancients",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through faith of ancients?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 21,
+          "label": "Sun",
+          "book": "Deuteronomy",
+          "chapter": 6,
+          "focus": "Teach diligently",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through teach diligently?"
+        }
+      ]
+    },
+    {
+      "week": 4,
+      "weekTitle": "Deep rest",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 22,
+          "label": "Mon",
+          "book": "Romans",
+          "chapter": 1,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 23,
+          "label": "Tue",
+          "book": "Romans",
+          "chapter": 8,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 24,
+          "label": "Wed",
+          "book": "Romans",
+          "chapter": 12,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 25,
+          "label": "Thu",
+          "book": "1 Corinthians",
+          "chapter": 13,
+          "focus": "Love chapter",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through love chapter?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 26,
+          "label": "Fri",
+          "book": "Matthew",
+          "chapter": 5,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 27,
+          "label": "Sat",
+          "book": "Matthew",
+          "chapter": 28,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 28,
+          "label": "Sun",
+          "book": "Ephesians",
+          "chapter": 2,
+          "focus": "Saved by grace",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through saved by grace?"
+        }
+      ]
+    },
+    {
+      "week": 5,
+      "weekTitle": "Morning anchor",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 29,
+          "label": "Mon",
+          "book": "Revelation",
+          "chapter": 21,
+          "focus": "New creation",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through new creation?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 30,
+          "label": "Tue",
+          "book": "Luke",
+          "chapter": 24,
+          "focus": "He is risen",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through he is risen?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 31,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 33,
+          "focus": "Glory of God",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 32,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 90,
+          "focus": "Glory of God",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 33,
+          "label": "Fri",
+          "book": "John",
+          "chapter": 1,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 34,
+          "label": "Sat",
+          "book": "John",
+          "chapter": 3,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 35,
+          "label": "Sun",
+          "book": "John",
+          "chapter": 14,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        }
+      ]
+    },
+    {
+      "week": 6,
+      "weekTitle": "Trust His path",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 36,
+          "label": "Mon",
+          "book": "John",
+          "chapter": 15,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 37,
+          "label": "Tue",
+          "book": "John",
+          "chapter": 17,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 38,
+          "label": "Wed",
+          "book": "John",
+          "chapter": 20,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 39,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 8,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 40,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 19,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 41,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 22,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 42,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 23,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        }
+      ]
+    },
+    {
+      "week": 7,
+      "weekTitle": "Cast your care",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 43,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 46,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 44,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 100,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 45,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 110,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 46,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 119,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 47,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 139,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 48,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 145,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 49,
+          "label": "Sun",
+          "book": "Genesis",
+          "chapter": 1,
+          "focus": "In the beginning",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through in the beginning?"
+        }
+      ]
+    },
+    {
+      "week": 8,
+      "weekTitle": "Gentle strength",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 50,
+          "label": "Mon",
+          "book": "Isaiah",
+          "chapter": 53,
+          "focus": "Suffering servant",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through suffering servant?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 51,
+          "label": "Tue",
+          "book": "Acts",
+          "chapter": 2,
+          "focus": "Spirit poured out",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through spirit poured out?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 52,
+          "label": "Wed",
+          "book": "Hebrews",
+          "chapter": 11,
+          "focus": "Faith of ancients",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through faith of ancients?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 53,
+          "label": "Thu",
+          "book": "Deuteronomy",
+          "chapter": 6,
+          "focus": "Teach diligently",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through teach diligently?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 54,
+          "label": "Fri",
+          "book": "Romans",
+          "chapter": 1,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 55,
+          "label": "Sat",
+          "book": "Romans",
+          "chapter": 8,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 56,
+          "label": "Sun",
+          "book": "Romans",
+          "chapter": 12,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        }
+      ]
+    },
+    {
+      "week": 9,
+      "weekTitle": "Refuge",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 57,
+          "label": "Mon",
+          "book": "1 Corinthians",
+          "chapter": 13,
+          "focus": "Love chapter",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through love chapter?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 58,
+          "label": "Tue",
+          "book": "Matthew",
+          "chapter": 5,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 59,
+          "label": "Wed",
+          "book": "Matthew",
+          "chapter": 28,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 60,
+          "label": "Thu",
+          "book": "Ephesians",
+          "chapter": 2,
+          "focus": "Saved by grace",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through saved by grace?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 61,
+          "label": "Fri",
+          "book": "Revelation",
+          "chapter": 21,
+          "focus": "New creation",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through new creation?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 62,
+          "label": "Sat",
+          "book": "Luke",
+          "chapter": 24,
+          "focus": "He is risen",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through he is risen?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 63,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 33,
+          "focus": "Glory of God",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        }
+      ]
+    },
+    {
+      "week": 10,
+      "weekTitle": "Still waters",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 64,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 90,
+          "focus": "Glory of God",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 65,
+          "label": "Tue",
+          "book": "John",
+          "chapter": 1,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 66,
+          "label": "Wed",
+          "book": "John",
+          "chapter": 3,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 67,
+          "label": "Thu",
+          "book": "John",
+          "chapter": 14,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 68,
+          "label": "Fri",
+          "book": "John",
+          "chapter": 15,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 69,
+          "label": "Sat",
+          "book": "John",
+          "chapter": 17,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 70,
+          "label": "Sun",
+          "book": "John",
+          "chapter": 20,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        }
+      ]
+    },
+    {
+      "week": 11,
+      "weekTitle": "Held by God",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 71,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 8,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 72,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 19,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 73,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 22,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 74,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 23,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 75,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 46,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 76,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 100,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 77,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 110,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        }
+      ]
+    },
+    {
+      "week": 12,
+      "weekTitle": "Breath and pause",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 78,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 119,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 79,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 139,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 80,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 145,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 81,
+          "label": "Thu",
+          "book": "Genesis",
+          "chapter": 1,
+          "focus": "In the beginning",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through in the beginning?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 82,
+          "label": "Fri",
+          "book": "Isaiah",
+          "chapter": 53,
+          "focus": "Suffering servant",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through suffering servant?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 83,
+          "label": "Sat",
+          "book": "Acts",
+          "chapter": 2,
+          "focus": "Spirit poured out",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through spirit poured out?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 84,
+          "label": "Sun",
+          "book": "Hebrews",
+          "chapter": 11,
+          "focus": "Faith of ancients",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through faith of ancients?"
+        }
+      ]
+    },
+    {
+      "week": 13,
+      "weekTitle": "Selah",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 85,
+          "label": "Mon",
+          "book": "Deuteronomy",
+          "chapter": 6,
+          "focus": "Teach diligently",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through teach diligently?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 86,
+          "label": "Tue",
+          "book": "Romans",
+          "chapter": 1,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 87,
+          "label": "Wed",
+          "book": "Romans",
+          "chapter": 8,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 88,
+          "label": "Thu",
+          "book": "Romans",
+          "chapter": 12,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 89,
+          "label": "Fri",
+          "book": "1 Corinthians",
+          "chapter": 13,
+          "focus": "Love chapter",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through love chapter?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 90,
+          "label": "Sat",
+          "book": "Matthew",
+          "chapter": 5,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 91,
+          "label": "Sun",
+          "book": "Matthew",
+          "chapter": 28,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        }
+      ]
+    },
+    {
+      "week": 14,
+      "weekTitle": "Be still",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 92,
+          "label": "Mon",
+          "book": "Ephesians",
+          "chapter": 2,
+          "focus": "Saved by grace",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through saved by grace?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 93,
+          "label": "Tue",
+          "book": "Revelation",
+          "chapter": 21,
+          "focus": "New creation",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through new creation?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 94,
+          "label": "Wed",
+          "book": "Luke",
+          "chapter": 24,
+          "focus": "He is risen",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through he is risen?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 95,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 33,
+          "focus": "Glory of God",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 96,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 90,
+          "focus": "Glory of God",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 97,
+          "label": "Sat",
+          "book": "John",
+          "chapter": 1,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 98,
+          "label": "Sun",
+          "book": "John",
+          "chapter": 3,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        }
+      ]
+    },
+    {
+      "week": 15,
+      "weekTitle": "Quiet the noise",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 99,
+          "label": "Mon",
+          "book": "John",
+          "chapter": 14,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 100,
+          "label": "Tue",
+          "book": "John",
+          "chapter": 15,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 101,
+          "label": "Wed",
+          "book": "John",
+          "chapter": 17,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 102,
+          "label": "Thu",
+          "book": "John",
+          "chapter": 20,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 103,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 8,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 104,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 19,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 105,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 22,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        }
+      ]
+    },
+    {
+      "week": 16,
+      "weekTitle": "Surrender",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 106,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 23,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 107,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 46,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 108,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 100,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 109,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 110,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 110,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 119,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 111,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 139,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 112,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 145,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        }
+      ]
+    },
+    {
+      "week": 17,
+      "weekTitle": "Deep rest",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 113,
+          "label": "Mon",
+          "book": "Genesis",
+          "chapter": 1,
+          "focus": "In the beginning",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through in the beginning?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 114,
+          "label": "Tue",
+          "book": "Isaiah",
+          "chapter": 53,
+          "focus": "Suffering servant",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through suffering servant?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 115,
+          "label": "Wed",
+          "book": "Acts",
+          "chapter": 2,
+          "focus": "Spirit poured out",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through spirit poured out?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 116,
+          "label": "Thu",
+          "book": "Hebrews",
+          "chapter": 11,
+          "focus": "Faith of ancients",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through faith of ancients?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 117,
+          "label": "Fri",
+          "book": "Deuteronomy",
+          "chapter": 6,
+          "focus": "Teach diligently",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through teach diligently?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 118,
+          "label": "Sat",
+          "book": "Romans",
+          "chapter": 1,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 119,
+          "label": "Sun",
+          "book": "Romans",
+          "chapter": 8,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        }
+      ]
+    },
+    {
+      "week": 18,
+      "weekTitle": "Morning anchor",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 120,
+          "label": "Mon",
+          "book": "Romans",
+          "chapter": 12,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 121,
+          "label": "Tue",
+          "book": "1 Corinthians",
+          "chapter": 13,
+          "focus": "Love chapter",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through love chapter?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 122,
+          "label": "Wed",
+          "book": "Matthew",
+          "chapter": 5,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 123,
+          "label": "Thu",
+          "book": "Matthew",
+          "chapter": 28,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 124,
+          "label": "Fri",
+          "book": "Ephesians",
+          "chapter": 2,
+          "focus": "Saved by grace",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through saved by grace?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 125,
+          "label": "Sat",
+          "book": "Revelation",
+          "chapter": 21,
+          "focus": "New creation",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through new creation?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 126,
+          "label": "Sun",
+          "book": "Luke",
+          "chapter": 24,
+          "focus": "He is risen",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through he is risen?"
+        }
+      ]
+    },
+    {
+      "week": 19,
+      "weekTitle": "Trust His path",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 127,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 33,
+          "focus": "Glory of God",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 128,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 90,
+          "focus": "Glory of God",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 129,
+          "label": "Wed",
+          "book": "John",
+          "chapter": 1,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 130,
+          "label": "Thu",
+          "book": "John",
+          "chapter": 3,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 131,
+          "label": "Fri",
+          "book": "John",
+          "chapter": 14,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 132,
+          "label": "Sat",
+          "book": "John",
+          "chapter": 15,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 133,
+          "label": "Sun",
+          "book": "John",
+          "chapter": 17,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        }
+      ]
+    },
+    {
+      "week": 20,
+      "weekTitle": "Cast your care",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 134,
+          "label": "Mon",
+          "book": "John",
+          "chapter": 20,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 135,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 8,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 136,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 19,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 137,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 22,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 138,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 23,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 139,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 46,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 140,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 100,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        }
+      ]
+    },
+    {
+      "week": 21,
+      "weekTitle": "Gentle strength",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 141,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 110,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 142,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 119,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 143,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 139,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 144,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 145,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 145,
+          "label": "Fri",
+          "book": "Genesis",
+          "chapter": 1,
+          "focus": "In the beginning",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through in the beginning?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 146,
+          "label": "Sat",
+          "book": "Isaiah",
+          "chapter": 53,
+          "focus": "Suffering servant",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through suffering servant?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 147,
+          "label": "Sun",
+          "book": "Acts",
+          "chapter": 2,
+          "focus": "Spirit poured out",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through spirit poured out?"
+        }
+      ]
+    },
+    {
+      "week": 22,
+      "weekTitle": "Refuge",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 148,
+          "label": "Mon",
+          "book": "Hebrews",
+          "chapter": 11,
+          "focus": "Faith of ancients",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through faith of ancients?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 149,
+          "label": "Tue",
+          "book": "Deuteronomy",
+          "chapter": 6,
+          "focus": "Teach diligently",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through teach diligently?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 150,
+          "label": "Wed",
+          "book": "Romans",
+          "chapter": 1,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 151,
+          "label": "Thu",
+          "book": "Romans",
+          "chapter": 8,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 152,
+          "label": "Fri",
+          "book": "Romans",
+          "chapter": 12,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 153,
+          "label": "Sat",
+          "book": "1 Corinthians",
+          "chapter": 13,
+          "focus": "Love chapter",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through love chapter?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 154,
+          "label": "Sun",
+          "book": "Matthew",
+          "chapter": 5,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        }
+      ]
+    },
+    {
+      "week": 23,
+      "weekTitle": "Still waters",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 155,
+          "label": "Mon",
+          "book": "Matthew",
+          "chapter": 28,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 156,
+          "label": "Tue",
+          "book": "Ephesians",
+          "chapter": 2,
+          "focus": "Saved by grace",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through saved by grace?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 157,
+          "label": "Wed",
+          "book": "Revelation",
+          "chapter": 21,
+          "focus": "New creation",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through new creation?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 158,
+          "label": "Thu",
+          "book": "Luke",
+          "chapter": 24,
+          "focus": "He is risen",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through he is risen?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 159,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 33,
+          "focus": "Glory of God",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 160,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 90,
+          "focus": "Glory of God",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 161,
+          "label": "Sun",
+          "book": "John",
+          "chapter": 1,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        }
+      ]
+    },
+    {
+      "week": 24,
+      "weekTitle": "Held by God",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 162,
+          "label": "Mon",
+          "book": "John",
+          "chapter": 3,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 163,
+          "label": "Tue",
+          "book": "John",
+          "chapter": 14,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 164,
+          "label": "Wed",
+          "book": "John",
+          "chapter": 15,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 165,
+          "label": "Thu",
+          "book": "John",
+          "chapter": 17,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 166,
+          "label": "Fri",
+          "book": "John",
+          "chapter": 20,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 167,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 8,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 168,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 19,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        }
+      ]
+    },
+    {
+      "week": 25,
+      "weekTitle": "Breath and pause",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 169,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 22,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 170,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 23,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 171,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 46,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 172,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 100,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 173,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 110,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 174,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 119,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 175,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 139,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        }
+      ]
+    },
+    {
+      "week": 26,
+      "weekTitle": "Selah",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 176,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 145,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 177,
+          "label": "Tue",
+          "book": "Genesis",
+          "chapter": 1,
+          "focus": "In the beginning",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through in the beginning?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 178,
+          "label": "Wed",
+          "book": "Isaiah",
+          "chapter": 53,
+          "focus": "Suffering servant",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through suffering servant?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 179,
+          "label": "Thu",
+          "book": "Acts",
+          "chapter": 2,
+          "focus": "Spirit poured out",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through spirit poured out?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 180,
+          "label": "Fri",
+          "book": "Hebrews",
+          "chapter": 11,
+          "focus": "Faith of ancients",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through faith of ancients?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 181,
+          "label": "Sat",
+          "book": "Deuteronomy",
+          "chapter": 6,
+          "focus": "Teach diligently",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through teach diligently?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 182,
+          "label": "Sun",
+          "book": "Romans",
+          "chapter": 1,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        }
+      ]
+    },
+    {
+      "week": 27,
+      "weekTitle": "Be still",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 183,
+          "label": "Mon",
+          "book": "Romans",
+          "chapter": 8,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 184,
+          "label": "Tue",
+          "book": "Romans",
+          "chapter": 12,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 185,
+          "label": "Wed",
+          "book": "1 Corinthians",
+          "chapter": 13,
+          "focus": "Love chapter",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through love chapter?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 186,
+          "label": "Thu",
+          "book": "Matthew",
+          "chapter": 5,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 187,
+          "label": "Fri",
+          "book": "Matthew",
+          "chapter": 28,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 188,
+          "label": "Sat",
+          "book": "Ephesians",
+          "chapter": 2,
+          "focus": "Saved by grace",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through saved by grace?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 189,
+          "label": "Sun",
+          "book": "Revelation",
+          "chapter": 21,
+          "focus": "New creation",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through new creation?"
+        }
+      ]
+    },
+    {
+      "week": 28,
+      "weekTitle": "Quiet the noise",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 190,
+          "label": "Mon",
+          "book": "Luke",
+          "chapter": 24,
+          "focus": "He is risen",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through he is risen?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 191,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 33,
+          "focus": "Glory of God",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 192,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 90,
+          "focus": "Glory of God",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 193,
+          "label": "Thu",
+          "book": "John",
+          "chapter": 1,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 194,
+          "label": "Fri",
+          "book": "John",
+          "chapter": 3,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 195,
+          "label": "Sat",
+          "book": "John",
+          "chapter": 14,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 196,
+          "label": "Sun",
+          "book": "John",
+          "chapter": 15,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        }
+      ]
+    },
+    {
+      "week": 29,
+      "weekTitle": "Surrender",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 197,
+          "label": "Mon",
+          "book": "John",
+          "chapter": 17,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 198,
+          "label": "Tue",
+          "book": "John",
+          "chapter": 20,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 199,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 8,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 200,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 19,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 201,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 22,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 202,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 23,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 203,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 46,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        }
+      ]
+    },
+    {
+      "week": 30,
+      "weekTitle": "Deep rest",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 204,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 100,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 205,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 110,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 206,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 119,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 207,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 139,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 208,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 145,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 209,
+          "label": "Sat",
+          "book": "Genesis",
+          "chapter": 1,
+          "focus": "In the beginning",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through in the beginning?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 210,
+          "label": "Sun",
+          "book": "Isaiah",
+          "chapter": 53,
+          "focus": "Suffering servant",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through suffering servant?"
+        }
+      ]
+    },
+    {
+      "week": 31,
+      "weekTitle": "Morning anchor",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 211,
+          "label": "Mon",
+          "book": "Acts",
+          "chapter": 2,
+          "focus": "Spirit poured out",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through spirit poured out?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 212,
+          "label": "Tue",
+          "book": "Hebrews",
+          "chapter": 11,
+          "focus": "Faith of ancients",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through faith of ancients?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 213,
+          "label": "Wed",
+          "book": "Deuteronomy",
+          "chapter": 6,
+          "focus": "Teach diligently",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through teach diligently?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 214,
+          "label": "Thu",
+          "book": "Romans",
+          "chapter": 1,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 215,
+          "label": "Fri",
+          "book": "Romans",
+          "chapter": 8,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 216,
+          "label": "Sat",
+          "book": "Romans",
+          "chapter": 12,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 217,
+          "label": "Sun",
+          "book": "1 Corinthians",
+          "chapter": 13,
+          "focus": "Love chapter",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through love chapter?"
+        }
+      ]
+    },
+    {
+      "week": 32,
+      "weekTitle": "Trust His path",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 218,
+          "label": "Mon",
+          "book": "Matthew",
+          "chapter": 5,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 219,
+          "label": "Tue",
+          "book": "Matthew",
+          "chapter": 28,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 220,
+          "label": "Wed",
+          "book": "Ephesians",
+          "chapter": 2,
+          "focus": "Saved by grace",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through saved by grace?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 221,
+          "label": "Thu",
+          "book": "Revelation",
+          "chapter": 21,
+          "focus": "New creation",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through new creation?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 222,
+          "label": "Fri",
+          "book": "Luke",
+          "chapter": 24,
+          "focus": "He is risen",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through he is risen?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 223,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 33,
+          "focus": "Glory of God",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 224,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 90,
+          "focus": "Glory of God",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        }
+      ]
+    },
+    {
+      "week": 33,
+      "weekTitle": "Cast your care",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 225,
+          "label": "Mon",
+          "book": "John",
+          "chapter": 1,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 226,
+          "label": "Tue",
+          "book": "John",
+          "chapter": 3,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 227,
+          "label": "Wed",
+          "book": "John",
+          "chapter": 14,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 228,
+          "label": "Thu",
+          "book": "John",
+          "chapter": 15,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 229,
+          "label": "Fri",
+          "book": "John",
+          "chapter": 17,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 230,
+          "label": "Sat",
+          "book": "John",
+          "chapter": 20,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 231,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 8,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        }
+      ]
+    },
+    {
+      "week": 34,
+      "weekTitle": "Gentle strength",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 232,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 19,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 233,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 22,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 234,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 23,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 235,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 46,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 236,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 100,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 237,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 110,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 238,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 119,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        }
+      ]
+    },
+    {
+      "week": 35,
+      "weekTitle": "Refuge",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 239,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 139,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 240,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 145,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 241,
+          "label": "Wed",
+          "book": "Genesis",
+          "chapter": 1,
+          "focus": "In the beginning",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through in the beginning?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 242,
+          "label": "Thu",
+          "book": "Isaiah",
+          "chapter": 53,
+          "focus": "Suffering servant",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through suffering servant?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 243,
+          "label": "Fri",
+          "book": "Acts",
+          "chapter": 2,
+          "focus": "Spirit poured out",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through spirit poured out?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 244,
+          "label": "Sat",
+          "book": "Hebrews",
+          "chapter": 11,
+          "focus": "Faith of ancients",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through faith of ancients?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 245,
+          "label": "Sun",
+          "book": "Deuteronomy",
+          "chapter": 6,
+          "focus": "Teach diligently",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through teach diligently?"
+        }
+      ]
+    },
+    {
+      "week": 36,
+      "weekTitle": "Still waters",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 246,
+          "label": "Mon",
+          "book": "Romans",
+          "chapter": 1,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 247,
+          "label": "Tue",
+          "book": "Romans",
+          "chapter": 8,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 248,
+          "label": "Wed",
+          "book": "Romans",
+          "chapter": 12,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 249,
+          "label": "Thu",
+          "book": "1 Corinthians",
+          "chapter": 13,
+          "focus": "Love chapter",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through love chapter?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 250,
+          "label": "Fri",
+          "book": "Matthew",
+          "chapter": 5,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 251,
+          "label": "Sat",
+          "book": "Matthew",
+          "chapter": 28,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 252,
+          "label": "Sun",
+          "book": "Ephesians",
+          "chapter": 2,
+          "focus": "Saved by grace",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through saved by grace?"
+        }
+      ]
+    },
+    {
+      "week": 37,
+      "weekTitle": "Held by God",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 253,
+          "label": "Mon",
+          "book": "Revelation",
+          "chapter": 21,
+          "focus": "New creation",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through new creation?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 254,
+          "label": "Tue",
+          "book": "Luke",
+          "chapter": 24,
+          "focus": "He is risen",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through he is risen?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 255,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 33,
+          "focus": "Glory of God",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 256,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 90,
+          "focus": "Glory of God",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 257,
+          "label": "Fri",
+          "book": "John",
+          "chapter": 1,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 258,
+          "label": "Sat",
+          "book": "John",
+          "chapter": 3,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 259,
+          "label": "Sun",
+          "book": "John",
+          "chapter": 14,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        }
+      ]
+    },
+    {
+      "week": 38,
+      "weekTitle": "Breath and pause",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 260,
+          "label": "Mon",
+          "book": "John",
+          "chapter": 15,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 261,
+          "label": "Tue",
+          "book": "John",
+          "chapter": 17,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 262,
+          "label": "Wed",
+          "book": "John",
+          "chapter": 20,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 263,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 8,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 264,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 19,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 265,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 22,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 266,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 23,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        }
+      ]
+    },
+    {
+      "week": 39,
+      "weekTitle": "Selah",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 267,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 46,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 268,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 100,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 269,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 110,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 270,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 119,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 271,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 139,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 272,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 145,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 273,
+          "label": "Sun",
+          "book": "Genesis",
+          "chapter": 1,
+          "focus": "In the beginning",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through in the beginning?"
+        }
+      ]
+    },
+    {
+      "week": 40,
+      "weekTitle": "Be still",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 274,
+          "label": "Mon",
+          "book": "Isaiah",
+          "chapter": 53,
+          "focus": "Suffering servant",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through suffering servant?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 275,
+          "label": "Tue",
+          "book": "Acts",
+          "chapter": 2,
+          "focus": "Spirit poured out",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through spirit poured out?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 276,
+          "label": "Wed",
+          "book": "Hebrews",
+          "chapter": 11,
+          "focus": "Faith of ancients",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through faith of ancients?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 277,
+          "label": "Thu",
+          "book": "Deuteronomy",
+          "chapter": 6,
+          "focus": "Teach diligently",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through teach diligently?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 278,
+          "label": "Fri",
+          "book": "Romans",
+          "chapter": 1,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 279,
+          "label": "Sat",
+          "book": "Romans",
+          "chapter": 8,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 280,
+          "label": "Sun",
+          "book": "Romans",
+          "chapter": 12,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        }
+      ]
+    },
+    {
+      "week": 41,
+      "weekTitle": "Quiet the noise",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 281,
+          "label": "Mon",
+          "book": "1 Corinthians",
+          "chapter": 13,
+          "focus": "Love chapter",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through love chapter?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 282,
+          "label": "Tue",
+          "book": "Matthew",
+          "chapter": 5,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 283,
+          "label": "Wed",
+          "book": "Matthew",
+          "chapter": 28,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 284,
+          "label": "Thu",
+          "book": "Ephesians",
+          "chapter": 2,
+          "focus": "Saved by grace",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through saved by grace?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 285,
+          "label": "Fri",
+          "book": "Revelation",
+          "chapter": 21,
+          "focus": "New creation",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through new creation?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 286,
+          "label": "Sat",
+          "book": "Luke",
+          "chapter": 24,
+          "focus": "He is risen",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through he is risen?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 287,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 33,
+          "focus": "Glory of God",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        }
+      ]
+    },
+    {
+      "week": 42,
+      "weekTitle": "Surrender",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 288,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 90,
+          "focus": "Glory of God",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 289,
+          "label": "Tue",
+          "book": "John",
+          "chapter": 1,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 290,
+          "label": "Wed",
+          "book": "John",
+          "chapter": 3,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 291,
+          "label": "Thu",
+          "book": "John",
+          "chapter": 14,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 292,
+          "label": "Fri",
+          "book": "John",
+          "chapter": 15,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 293,
+          "label": "Sat",
+          "book": "John",
+          "chapter": 17,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 294,
+          "label": "Sun",
+          "book": "John",
+          "chapter": 20,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        }
+      ]
+    },
+    {
+      "week": 43,
+      "weekTitle": "Deep rest",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 295,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 8,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 296,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 19,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 297,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 22,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 298,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 23,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 299,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 46,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 300,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 100,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 301,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 110,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        }
+      ]
+    },
+    {
+      "week": 44,
+      "weekTitle": "Morning anchor",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 302,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 119,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 303,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 139,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 304,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 145,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 305,
+          "label": "Thu",
+          "book": "Genesis",
+          "chapter": 1,
+          "focus": "In the beginning",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through in the beginning?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 306,
+          "label": "Fri",
+          "book": "Isaiah",
+          "chapter": 53,
+          "focus": "Suffering servant",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through suffering servant?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 307,
+          "label": "Sat",
+          "book": "Acts",
+          "chapter": 2,
+          "focus": "Spirit poured out",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through spirit poured out?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 308,
+          "label": "Sun",
+          "book": "Hebrews",
+          "chapter": 11,
+          "focus": "Faith of ancients",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through faith of ancients?"
+        }
+      ]
+    },
+    {
+      "week": 45,
+      "weekTitle": "Trust His path",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 309,
+          "label": "Mon",
+          "book": "Deuteronomy",
+          "chapter": 6,
+          "focus": "Teach diligently",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through teach diligently?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 310,
+          "label": "Tue",
+          "book": "Romans",
+          "chapter": 1,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 311,
+          "label": "Wed",
+          "book": "Romans",
+          "chapter": 8,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 312,
+          "label": "Thu",
+          "book": "Romans",
+          "chapter": 12,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 313,
+          "label": "Fri",
+          "book": "1 Corinthians",
+          "chapter": 13,
+          "focus": "Love chapter",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through love chapter?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 314,
+          "label": "Sat",
+          "book": "Matthew",
+          "chapter": 5,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 315,
+          "label": "Sun",
+          "book": "Matthew",
+          "chapter": 28,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        }
+      ]
+    },
+    {
+      "week": 46,
+      "weekTitle": "Cast your care",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 316,
+          "label": "Mon",
+          "book": "Ephesians",
+          "chapter": 2,
+          "focus": "Saved by grace",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through saved by grace?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 317,
+          "label": "Tue",
+          "book": "Revelation",
+          "chapter": 21,
+          "focus": "New creation",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through new creation?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 318,
+          "label": "Wed",
+          "book": "Luke",
+          "chapter": 24,
+          "focus": "He is risen",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through he is risen?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 319,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 33,
+          "focus": "Glory of God",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 320,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 90,
+          "focus": "Glory of God",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 321,
+          "label": "Sat",
+          "book": "John",
+          "chapter": 1,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 322,
+          "label": "Sun",
+          "book": "John",
+          "chapter": 3,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        }
+      ]
+    },
+    {
+      "week": 47,
+      "weekTitle": "Gentle strength",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 323,
+          "label": "Mon",
+          "book": "John",
+          "chapter": 14,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 324,
+          "label": "Tue",
+          "book": "John",
+          "chapter": 15,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 325,
+          "label": "Wed",
+          "book": "John",
+          "chapter": 17,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 326,
+          "label": "Thu",
+          "book": "John",
+          "chapter": 20,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 327,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 8,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 328,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 19,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 329,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 22,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        }
+      ]
+    },
+    {
+      "week": 48,
+      "weekTitle": "Refuge",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 330,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 23,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 331,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 46,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 332,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 100,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 333,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 110,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 334,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 119,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 335,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 139,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 336,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 145,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        }
+      ]
+    },
+    {
+      "week": 49,
+      "weekTitle": "Still waters",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 337,
+          "label": "Mon",
+          "book": "Genesis",
+          "chapter": 1,
+          "focus": "In the beginning",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through in the beginning?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 338,
+          "label": "Tue",
+          "book": "Isaiah",
+          "chapter": 53,
+          "focus": "Suffering servant",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through suffering servant?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 339,
+          "label": "Wed",
+          "book": "Acts",
+          "chapter": 2,
+          "focus": "Spirit poured out",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through spirit poured out?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 340,
+          "label": "Thu",
+          "book": "Hebrews",
+          "chapter": 11,
+          "focus": "Faith of ancients",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through faith of ancients?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 341,
+          "label": "Fri",
+          "book": "Deuteronomy",
+          "chapter": 6,
+          "focus": "Teach diligently",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through teach diligently?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 342,
+          "label": "Sat",
+          "book": "Romans",
+          "chapter": 1,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 343,
+          "label": "Sun",
+          "book": "Romans",
+          "chapter": 8,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        }
+      ]
+    },
+    {
+      "week": 50,
+      "weekTitle": "Held by God",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 344,
+          "label": "Mon",
+          "book": "Romans",
+          "chapter": 12,
+          "focus": "Power of the gospel",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through power of the gospel?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 345,
+          "label": "Tue",
+          "book": "1 Corinthians",
+          "chapter": 13,
+          "focus": "Love chapter",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through love chapter?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 346,
+          "label": "Wed",
+          "book": "Matthew",
+          "chapter": 5,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 347,
+          "label": "Thu",
+          "book": "Matthew",
+          "chapter": 28,
+          "focus": "King's teaching",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through king's teaching?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 348,
+          "label": "Fri",
+          "book": "Ephesians",
+          "chapter": 2,
+          "focus": "Saved by grace",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through saved by grace?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 349,
+          "label": "Sat",
+          "book": "Revelation",
+          "chapter": 21,
+          "focus": "New creation",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through new creation?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 350,
+          "label": "Sun",
+          "book": "Luke",
+          "chapter": 24,
+          "focus": "He is risen",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through he is risen?"
+        }
+      ]
+    },
+    {
+      "week": 51,
+      "weekTitle": "Breath and pause",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 351,
+          "label": "Mon",
+          "book": "Psalms",
+          "chapter": 33,
+          "focus": "Glory of God",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 352,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 90,
+          "focus": "Glory of God",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through glory of god?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 353,
+          "label": "Wed",
+          "book": "John",
+          "chapter": 1,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 354,
+          "label": "Thu",
+          "book": "John",
+          "chapter": 3,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 355,
+          "label": "Fri",
+          "book": "John",
+          "chapter": 14,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 356,
+          "label": "Sat",
+          "book": "John",
+          "chapter": 15,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 357,
+          "label": "Sun",
+          "book": "John",
+          "chapter": 17,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        }
+      ]
+    },
+    {
+      "week": 52,
+      "weekTitle": "Selah",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 358,
+          "label": "Mon",
+          "book": "John",
+          "chapter": 20,
+          "focus": "Know His story",
+          "minutes": 6,
+          "reflectionPrompt": "What is God showing you through know his story?"
+        },
+        {
+          "dayIndex": 2,
+          "globalDay": 359,
+          "label": "Tue",
+          "book": "Psalms",
+          "chapter": 8,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 3,
+          "globalDay": 360,
+          "label": "Wed",
+          "book": "Psalms",
+          "chapter": 19,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 4,
+          "globalDay": 361,
+          "label": "Thu",
+          "book": "Psalms",
+          "chapter": 22,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 5,
+          "globalDay": 362,
+          "label": "Fri",
+          "book": "Psalms",
+          "chapter": 23,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 6,
+          "globalDay": 363,
+          "label": "Sat",
+          "book": "Psalms",
+          "chapter": 46,
+          "focus": "Know God in Scripture",
+          "minutes": 4,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        },
+        {
+          "dayIndex": 7,
+          "globalDay": 364,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 100,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        }
+      ]
+    },
+    {
+      "week": 53,
+      "weekTitle": "Year closing",
+      "days": [
+        {
+          "dayIndex": 1,
+          "globalDay": 365,
+          "label": "Sun",
+          "book": "Psalms",
+          "chapter": 110,
+          "focus": "Know God in Scripture",
+          "minutes": 5,
+          "reflectionPrompt": "What is God showing you through know god in scripture?"
+        }
+      ]
+    }
+  ]
+}
