@@ -110,8 +110,10 @@ schemes:
       storeKitConfiguration: Configuration/Selah.storekit
     test:
       targets:
-        - SelahTests
-        - SelahUITests
+        SelahTests:
+          parallelizable: false
+        SelahUITests:
+          parallelizable: false
   Selah Demo:
     build:
       targets:
