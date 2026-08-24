@@ -1,0 +1,90 @@
+{
+  "identifier" : "SelahStoreKit",
+  "nonRenewingSubscriptions" : [],
+  "products" : [],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : []
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "SelahPremium",
+      "localizations" : [],
+      "name" : "Selah Premium",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "7.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "selah-weekly",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Weekly Selah Premium",
+              "displayName" : "Selah Weekly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.lilgroup.selah.weekly",
+          "recurringSubscriptionPeriod" : "P1W",
+          "referenceName" : "Weekly",
+          "subscriptionGroupID" : "SelahPremium",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : []
+        },
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "14.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "selah-monthly",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Monthly Selah Premium",
+              "displayName" : "Selah Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.lilgroup.selah.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Monthly",
+          "subscriptionGroupID" : "SelahPremium",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : []
+        },
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "49.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "selah-yearly",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Yearly Selah Premium",
+              "displayName" : "Selah Yearly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.lilgroup.selah.yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Yearly",
+          "subscriptionGroupID" : "SelahPremium",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : []
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

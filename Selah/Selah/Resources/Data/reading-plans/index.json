@@ -1,0 +1,38 @@
+{
+  "themes": [
+    {
+      "theme": "peace",
+      "desireKey": "peace",
+      "themeLabel": "Peace",
+      "file": "peace.json",
+      "weeks": 53,
+      "days": 365
+    },
+    {
+      "theme": "consistency",
+      "desireKey": "daily",
+      "themeLabel": "Consistency",
+      "file": "consistency.json",
+      "weeks": 53,
+      "days": 365
+    },
+    {
+      "theme": "freedom",
+      "desireKey": "free",
+      "themeLabel": "Freedom",
+      "file": "freedom.json",
+      "weeks": 53,
+      "days": 365
+    },
+    {
+      "theme": "scripture",
+      "desireKey": "know",
+      "themeLabel": "Scripture",
+      "file": "scripture.json",
+      "weeks": 53,
+      "days": 365
+    }
+  ],
+  "daysPerTheme": 365,
+  "totalDaysAllThemes": 1460
+}
