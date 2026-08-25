@@ -70,9 +70,6 @@ targets:
       - name: Copy bundle data
         script: "${SRCROOT}/../scripts/ios/copy-bundle-resources.sh"
         basedOnDependencyAnalysis: false
-    scheme:
-      testTargets:
-        - SelahTests
 
   SelahTests:
     type: bundle.unit-test

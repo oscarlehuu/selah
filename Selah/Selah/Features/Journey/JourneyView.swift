@@ -52,6 +52,8 @@ struct JourneyView: View {
 
                 Section {
                     if journalEntries.isEmpty {
+                        Text("Come sit a while")
+                            .font(SelahFont.display(.title3))
                         Text("Anything you save from Talk or Pray will rest here, encrypted, only on this phone.")
                             .foregroundStyle(.secondary)
                     } else {

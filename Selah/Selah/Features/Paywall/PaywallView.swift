@@ -26,9 +26,36 @@ struct PaywallView: View {
                     }
                 }
                 Section("Included") {
-                    Label("Private by design", systemImage: "lock.fill")
-                    Label("5 minutes a day", systemImage: "book.fill")
-                    Label("Guided prayer", systemImage: "hands.sparkles.fill")
+                    Label {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Private by design")
+                            Text("Talk, reflect, confess. On-device only.")
+                                .font(SelahFont.ui(.footnote))
+                                .foregroundStyle(.secondary)
+                        }
+                    } icon: {
+                        Image(systemName: "lock.fill")
+                    }
+                    Label {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("5 minutes a day")
+                            Text("Your \(planThemeLabel) plan, offline Bible, gentle streak.")
+                                .font(SelahFont.ui(.footnote))
+                                .foregroundStyle(.secondary)
+                        }
+                    } icon: {
+                        Image(systemName: "book.fill")
+                    }
+                    Label {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Guided prayer")
+                            Text("Lectio Divina and prayers for the mood you’re actually in.")
+                                .font(SelahFont.ui(.footnote))
+                                .foregroundStyle(.secondary)
+                        }
+                    } icon: {
+                        Image(systemName: "hands.sparkles.fill")
+                    }
                 }
                 Section {
                     ForEach(orderedTiers(emphasizeWeekly: emphasizeWeekly), id: \.self) { tier in
@@ -81,7 +108,7 @@ struct PaywallView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Restore", action: onRestore)
+                    Button("Restore purchase", action: onRestore)
                         .accessibilityIdentifier("paywall.restore")
                 }
             }
@@ -120,6 +147,10 @@ struct PaywallView: View {
             ) ? .yearly : .weekly
         }
         .accessibilityIdentifier("gate.paywall")
+    }
+
+    private var planThemeLabel: String {
+        env.quizDesire?.planLabel.lowercased() ?? env.currentPlanTheme?.label.lowercased() ?? "peace"
     }
 
     private func orderedTiers(emphasizeWeekly: Bool) -> [SubscriptionTier] {

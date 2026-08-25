@@ -150,4 +150,14 @@ enum OnboardingMood: String, CaseIterable, Identifiable {
         case .empty: "circle.dotted"
         }
     }
+
+    /// KJV line shown on the demo-result screen (mock v4). Not an FM fallback.
+    var scripture: (text: String, reference: String) {
+        switch self {
+        case .heavy: ("Cast your burden on the Lord, and he shall sustain you.", "Psalm 55:22")
+        case .anxious: ("Be careful for nothing; but in every thing by prayer let your requests be made known unto God.", "Philippians 4:6")
+        case .grateful: ("O give thanks unto the Lord; for he is good.", "Psalm 107:1")
+        case .empty: ("He restoreth my soul.", "Psalm 23:3")
+        }
+    }
 }

@@ -159,9 +159,9 @@ struct OnboardingStepContent: View {
                     .foregroundStyle(.secondary)
             }
             Section("On this iPhone") {
-                Label("Nothing is uploaded. The companion runs on your device.", systemImage: "icloud.slash")
-                Label("Journal is encrypted on this iPhone, locked with Face ID.", systemImage: "faceid")
-                Label("Auto-delete a session when you close it, if you prefer.", systemImage: "trash")
+                Label("Nothing is uploaded. The companion runs on your device’s own AI.", systemImage: "icloud.slash")
+                Label("Journal is encrypted in the iOS keychain, locked with Face ID.", systemImage: "faceid")
+                Label("Auto-delete a session the moment you close it, if you prefer.", systemImage: "trash")
             }
         }
         .listStyle(.insetGrouped)
@@ -172,7 +172,7 @@ struct OnboardingStepContent: View {
             Section {
                 Text("How is your heart right now?")
                     .font(SelahFont.display(.title3))
-                Text("Pick one. Selah will pray with you — not at you.")
+                Text("Pick one. Selah will pray with you, not at you.")
                     .foregroundStyle(.secondary)
             }
             Section {
@@ -193,11 +193,21 @@ struct OnboardingStepContent: View {
     }
 
     private var demo: some View {
-        List {
+        let scripture = (mood ?? .heavy).scripture
+        return List {
             Section {
                 Text("Feeling \(mood?.title.lowercased() ?? "heavy") · generated on your iPhone")
                     .font(SelahFont.ui(.caption, weight: .semibold))
                     .foregroundStyle(.secondary)
+            }
+            Section("Scripture for you") {
+                Text("“\(scripture.text)”")
+                    .font(SelahFont.verse(.body))
+                Text(scripture.reference)
+                    .font(SelahFont.ui(.caption, weight: .semibold))
+                    .foregroundStyle(.secondary)
+            }
+            Section("A prayer you can say") {
                 if isGenerating {
                     ProgressView("Preparing a prayer")
                 } else {
@@ -220,7 +230,10 @@ struct OnboardingStepContent: View {
             }
             Section("Preparing") {
                 Label("Reading your answers", systemImage: buildProgress >= 0.25 ? "checkmark.circle.fill" : "circle")
-                Label("Choosing passages", systemImage: buildProgress >= 0.5 ? "checkmark.circle.fill" : "circle")
+                Label(
+                    "Choosing passages for \((desire ?? .peace).planLabel.lowercased())",
+                    systemImage: buildProgress >= 0.5 ? "checkmark.circle.fill" : "circle"
+                )
                 Label("Setting a 5-minute rhythm", systemImage: buildProgress >= 0.75 ? "checkmark.circle.fill" : "circle")
                 Label("Preparing your private space", systemImage: buildProgress >= 1 ? "checkmark.circle.fill" : "circle")
             }

@@ -26,9 +26,9 @@ enum OnboardingCopy {
     static let notificationAllowCTA = "Yes, remind me"
     static let notificationSkipCTA = "Not now"
     static let paywallBullets = [
-        "Private by design — talk, reflect, confess. On-device only.",
-        "5 minutes a day — your plan, offline Bible, gentle streak.",
-        "Guided prayer — Lectio Divina for the mood you’re actually in."
+        "Private by design — Talk, reflect, confess. On-device only.",
+        "5 minutes a day — Your plan, offline Bible, gentle streak.",
+        "Guided prayer — Lectio Divina and prayers for the mood you’re actually in."
     ]
     static let companionDisclaimer = "Selah is a companion for prayer — not a pastor, priest, or therapist."
 

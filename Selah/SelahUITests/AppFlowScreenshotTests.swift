@@ -36,20 +36,17 @@ final class AppFlowScreenshotTests: XCTestCase {
 
         XCTAssertTrue(app.buttons["onboarding.continue"].waitForExistence(timeout: 15))
         app.buttons["onboarding.continue"].tap()
-        if app.buttons["That’s true for me"].waitForExistence(timeout: 3)
-            || app.buttons["onboarding.continue"].waitForExistence(timeout: 3) {
-            tapContinue(app)
-        }
+        tapContinue(app)
         tapContinue(app)
 
-        let distance = app.buttons["onboarding.quiz.distance.busy"]
-        XCTAssertTrue(distance.waitForExistence(timeout: 8), "Distance quiz did not appear")
-        distance.tap()
+        let busy = app.staticTexts["A busy life"]
+        XCTAssertTrue(busy.waitForExistence(timeout: 8), "Distance quiz did not appear")
+        busy.tap()
         tapContinue(app)
 
-        let desire = app.buttons["onboarding.quiz.desire.peace"]
-        XCTAssertTrue(desire.waitForExistence(timeout: 8))
-        desire.tap()
+        let peace = app.staticTexts["Peace"]
+        XCTAssertTrue(peace.waitForExistence(timeout: 8), "Desire quiz did not appear")
+        peace.tap()
         tapContinue(app)
         attachScreenshot(app, name: "flow-onboarding-quiz")
     }

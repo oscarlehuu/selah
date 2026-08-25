@@ -54,6 +54,9 @@ final class OnboardingCopyTests: XCTestCase {
 
     func testDemoMoodsMatchMockV4() {
         XCTAssertEqual(OnboardingMood.allCases.map(\.title), ["Heavy", "Anxious", "Grateful", "Empty"])
+        XCTAssertEqual(OnboardingMood.heavy.scripture.reference, "Psalm 55:22")
+        XCTAssertEqual(OnboardingMood.empty.scripture.reference, "Psalm 23:3")
+        XCTAssertEqual(OnboardingMood.grateful.scripture.text, "O give thanks unto the Lord; for he is good.")
     }
 
     func testPrePaywallScreenCountSkipsWidget() {

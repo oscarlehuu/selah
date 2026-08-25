@@ -11,8 +11,8 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 Section("Subscription") {
-                    Text(env.isSubscribed ? "Selah · Premium" : "Not subscribed")
-                    Button("Restore purchases", action: restore)
+                    Text(env.isSubscribed ? "Selah · Yearly" : "Not subscribed")
+                    Button("Restore", action: restore)
                         .accessibilityIdentifier("settings.restore")
                     Link("Manage subscription", destination: URL(string: "https://apps.apple.com/account/subscriptions")!)
                     if let restoreMessage { Text(restoreMessage).font(.caption) }
