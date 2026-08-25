@@ -5,70 +5,102 @@ struct JourneyView: View {
     @Environment(AppEnvironment.self) private var env
     @Query(sort: \JournalEntryModel.createdAt, order: .reverse) private var journalEntries: [JournalEntryModel]
     @State private var selectedEntry: JournalEntryModel?
+    @State private var showSettings = false
 
     var body: some View {
         SelahTabScreen("Journey") {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    Text("Week \(env.planWeek) of \(env.currentPlanTheme?.label ?? "Peace")")
-                        .font(SelahFont.newsreader(22, weight: .semibold))
-                    weekList
-                    Text("Journal")
-                        .font(SelahFont.figtree(12, weight: .semibold))
-                        .foregroundStyle(SelahColors.textSoft)
-                    if journalEntries.isEmpty {
-                        Text("Prayer reflections you save will appear here — encrypted on your phone.")
-                            .font(SelahFont.figtree(15))
-                            .foregroundStyle(SelahColors.textMuted)
-                    } else {
-                        ForEach(journalEntries.prefix(8)) { entry in
-                            Button { selectedEntry = entry } label: {
-                                SelahCard {
-                                    Text(entry.previewHint)
-                                        .font(SelahFont.figtree(15))
-                                        .foregroundStyle(SelahColors.text)
-                                    Text(entry.createdAt.formatted(date: .abbreviated, time: .omitted))
-                                        .font(SelahFont.figtree(12))
-                                        .foregroundStyle(SelahColors.textMuted)
-                                }
-                            }
-                            .buttonStyle(.plain)
+            List {
+                Section("Days with God") {
+                    Text("\(env.streakModel?.streakDays ?? 0)")
+                        .font(SelahFont.display(.largeTitle))
+                    Text(streakCaption)
+                        .foregroundStyle(.secondary)
+                    if env.streakModel?.graceUsedThisWeek == false {
+                        Button("Use a grace day") {
+                            env.applyGraceDayFromUser()
                         }
+                    } else {
+                        Label("Grace day used · welcome back", systemImage: "checkmark.circle")
+                            .foregroundStyle(.secondary)
                     }
                 }
-                .padding(.horizontal, 20)
-                .padding(.top, 8)
-                .padding(.bottom, 28)
+                Section("This week") {
+                    LabeledContent("Longest streak", value: "\(env.streakModel?.longestStreak ?? 0)")
+                    LabeledContent("Theme", value: env.currentPlanTheme?.label ?? "Peace")
+                    LabeledContent("Week", value: "\(env.planWeek)")
+                }
+                Section {
+                    ForEach(env.currentPlanTheme?.weekDays(week: env.planWeek) ?? []) { day in
+                        HStack {
+                            Image(systemName: day.globalDay < env.planGlobalDay ? "checkmark.circle.fill" : "book")
+                                .foregroundStyle(day.globalDay < env.planGlobalDay ? SelahColors.accent : .secondary)
+                            VStack(alignment: .leading) {
+                                Text("\(day.book) \(day.chapter)")
+                                Text(day.focus)
+                                    .font(SelahFont.ui(.footnote))
+                                    .foregroundStyle(.secondary)
+                            }
+                            Spacer()
+                            if day.globalDay == env.planGlobalDay {
+                                Button("Open") { env.openMainTab(.read) }
+                            }
+                        }
+                    }
+                } header: {
+                    Text("Your 7-day plan")
+                }
+
+                Section {
+                    if journalEntries.isEmpty {
+                        Text("Come sit a while")
+                            .font(SelahFont.display(.title3))
+                        Text("Anything you save from Talk or Pray will rest here, encrypted, only on this phone.")
+                            .foregroundStyle(.secondary)
+                    } else {
+                        ForEach(journalEntries.prefix(12)) { entry in
+                            Button {
+                                selectedEntry = entry
+                            } label: {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(entry.previewHint.isEmpty ? "Journal entry" : entry.previewHint)
+                                        .foregroundStyle(.primary)
+                                    Text(entry.createdAt.formatted(date: .abbreviated, time: .omitted))
+                                        .font(SelahFont.ui(.caption))
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
+                        }
+                    }
+                } header: {
+                    Text("Journal")
+                } footer: {
+                    Label("Encrypted on this iPhone", systemImage: "lock.fill")
+                }
             }
-            .selahTabScrollContent()
-            .onAppear { AnalyticsService.track("journey_open") }
+            .listStyle(.insetGrouped)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showSettings = true
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
+                    .accessibilityLabel("Settings")
+                }
+            }
+            .sheet(isPresented: $showSettings) { SettingsView() }
             .sheet(item: $selectedEntry) { entry in
                 JournalEntryDetailView(entry: entry)
             }
+            .onAppear { AnalyticsService.track("journey_open") }
         }
     }
 
-    private var weekList: some View {
-        let days = env.currentPlanTheme?.weekDays(week: env.planWeek) ?? []
-        return VStack(alignment: .leading, spacing: 10) {
-            ForEach(days) { day in
-                HStack {
-                    Text("\(day.label) · \(day.book) \(day.chapter)")
-                        .font(SelahFont.figtree(15))
-                    Spacer()
-                    if day.globalDay < env.planGlobalDay {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundStyle(SelahColors.primaryDeep)
-                    } else if day.globalDay == env.planGlobalDay {
-                        Button("Complete") {
-                            env.markPlanDayComplete(globalDay: day.globalDay)
-                            AnalyticsService.track("plan_day_complete")
-                        }
-                        .font(SelahFont.figtree(13, weight: .semibold))
-                    }
-                }
-                .padding(.vertical, 4)
-            }
+    private var streakCaption: String {
+        let days = env.streakModel?.streakDays ?? 0
+        if env.streakModel?.graceUsedThisWeek == false {
+            return "You’ve shown up \(days) days. A grace day is waiting if you need it."
         }
+        return "You’ve shown up \(days) days. Grace day used this week. No shame, keep going."
     }
 }

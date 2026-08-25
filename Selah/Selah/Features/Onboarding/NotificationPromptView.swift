@@ -5,33 +5,34 @@ struct NotificationPromptView: View {
     @Environment(AppEnvironment.self) private var env
 
     var body: some View {
-        SelahFlowScreen {
-            ScrollView {
-                VStack(spacing: 24) {
-                    Spacer(minLength: 48)
-                    Text("A gentle reminder each morning?")
-                        .font(SelahFont.newsreader(26, weight: .semibold))
-                        .multilineTextAlignment(.center)
-                    Text("Default 6:30 AM — you can change in Settings.")
-                        .font(SelahFont.figtree(16))
-                        .foregroundStyle(SelahColors.textMuted)
-                        .multilineTextAlignment(.center)
-                    Spacer(minLength: 48)
+        NavigationStack {
+            List {
+                Section {
+                    Label(OnboardingCopy.notificationTitle, systemImage: "bell.fill")
+                        .font(SelahFont.display(.title3))
+                    Text(OnboardingCopy.notificationBody)
+                        .foregroundStyle(.secondary)
                 }
-                .padding(.horizontal, 32)
-                .frame(maxWidth: .infinity)
+                Section("Preview") {
+                    LabeledContent("Selah") {
+                        Text("“Be still, and know that I am God.” · 4 min today")
+                            .font(SelahFont.ui(.footnote))
+                            .foregroundStyle(.secondary)
+                    }
+                }
             }
-            .selahFlowScrollContent()
-        } bottom: {
-            SelahPinnedBottomBar {
-                VStack(spacing: 12) {
-                    SelahPrimaryButton(title: "Allow notifications", action: allow)
-                    Button("Not now") { finish() }
-                        .font(SelahFont.figtree(15))
-                        .foregroundStyle(SelahColors.textMuted)
+            .listStyle(.insetGrouped)
+            .selahCanvas()
+            .navigationTitle("Reminders")
+            .safeAreaInset(edge: .bottom) {
+                SelahFooterBar {
+                    SelahPrimaryButton(title: OnboardingCopy.notificationAllowCTA, action: allow)
+                    Button(OnboardingCopy.notificationSkipCTA, action: finish)
+                        .font(SelahFont.ui(.subheadline, weight: .semibold))
                 }
             }
         }
+        .tint(SelahColors.primaryDeep)
         .onAppear { AnalyticsService.track("onboarding_17_notifications") }
     }
 
@@ -57,7 +58,6 @@ enum NotificationScheduler {
         content.title = "Selah"
         content.body = "Pause. A quiet moment with God is waiting."
         content.sound = .default
-
         var date = DateComponents()
         date.hour = hour
         date.minute = minute

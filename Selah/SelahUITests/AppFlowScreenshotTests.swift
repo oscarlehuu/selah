@@ -1,18 +1,6 @@
 import XCTest
 
 final class AppFlowScreenshotTests: XCTestCase {
-    /// Visible labels from OnboardingFlowView, including curly apostrophes.
-    private let primaryCTAs = [
-        "Begin",
-        "That’s true for me",
-        "Yes, I’m ready",
-        "I understand",
-        "Pray with me",
-        "This is what I needed",
-        "I want that",
-        "Continue"
-    ]
-
     override func setUpWithError() throws {
         continueAfterFailure = false
     }
@@ -22,66 +10,56 @@ final class AppFlowScreenshotTests: XCTestCase {
         app.launchArguments = ["-UITestFreshStart"]
         app.launch()
 
-        XCTAssertTrue(waitForPrimaryCTA(app, timeout: 20), "Onboarding did not appear")
+        XCTAssertTrue(app.navigationBars.firstMatch.waitForExistence(timeout: 20), "Onboarding navigation bar missing")
         attachScreenshot(app, name: "flow-onboarding-01")
 
-        for step in 2...15 {
-            tapPrimaryCTA(app)
-            if step == 2 || step == 8 || step == 13 {
-                attachScreenshot(app, name: "flow-onboarding-\(String(format: "%02d", step))")
-            }
-            if !waitForPrimaryCTA(app, timeout: 6) {
-                break
-            }
-        }
+        let skip = app.buttons["onboarding.skip"]
+        XCTAssertTrue(skip.waitForExistence(timeout: 5))
+        skip.tap()
 
-        tapPrimaryCTA(app)
-
-        let continueButton = app.buttons["onboarding.continue"]
         let paywall = app.buttons["paywall.subscribe"]
         let startSelah = app.buttons.matching(
             NSPredicate(format: "label BEGINSWITH 'Start Selah'")
         ).firstMatch
-        let notifications = app.buttons["Allow notifications"]
-
-        if paywall.waitForExistence(timeout: 8) || startSelah.waitForExistence(timeout: 2) {
-            attachScreenshot(app, name: "flow-paywall")
-        } else if notifications.waitForExistence(timeout: 3) {
-            attachScreenshot(app, name: "flow-notifications")
-        } else if continueButton.exists {
-            attachScreenshot(app, name: "flow-still-onboarding")
-            XCTFail("Onboarding did not reach paywall")
-        } else {
-            attachScreenshot(app, name: "flow-post-onboarding")
-            XCTFail("Expected paywall or notification prompt after onboarding")
-        }
+        XCTAssertTrue(
+            paywall.waitForExistence(timeout: 8) || startSelah.waitForExistence(timeout: 2),
+            "Skip should reach native paywall"
+        )
+        XCTAssertTrue(app.navigationBars.firstMatch.exists, "Paywall needs a navigation bar")
+        attachScreenshot(app, name: "flow-paywall")
     }
 
-    private func waitForPrimaryCTA(_ app: XCUIApplication, timeout: TimeInterval) -> Bool {
-        let deadline = Date().addingTimeInterval(timeout)
-        while Date() < deadline {
-            if app.buttons["onboarding.continue"].exists { return true }
-            for label in primaryCTAs {
-                if app.buttons[label].exists { return true }
-            }
-            if app.buttons["paywall.subscribe"].exists { return false }
-            if app.buttons.matching(NSPredicate(format: "label BEGINSWITH 'Start Selah'")).firstMatch.exists {
-                return false
-            }
-            RunLoop.current.run(until: Date().addingTimeInterval(0.2))
-        }
-        return false
+    func testOnboardingQuizRequiresSelectionThenContinues() throws {
+        let app = XCUIApplication(bundleIdentifier: "com.lilgroup.selah")
+        app.launchArguments = ["-UITestFreshStart"]
+        app.launch()
+
+        XCTAssertTrue(app.buttons["onboarding.continue"].waitForExistence(timeout: 15))
+        app.buttons["onboarding.continue"].tap()
+        tapContinue(app)
+        tapContinue(app)
+
+        let busy = app.staticTexts["A busy life"]
+        XCTAssertTrue(busy.waitForExistence(timeout: 8), "Distance quiz did not appear")
+        busy.tap()
+        tapContinue(app)
+
+        let peace = app.staticTexts["Peace"]
+        XCTAssertTrue(peace.waitForExistence(timeout: 8), "Desire quiz did not appear")
+        peace.tap()
+        tapContinue(app)
+        attachScreenshot(app, name: "flow-onboarding-quiz")
     }
 
-    private func tapPrimaryCTA(_ app: XCUIApplication) {
+    private func tapContinue(_ app: XCUIApplication) {
         let identified = app.buttons["onboarding.continue"]
-        if identified.waitForExistence(timeout: 2) {
+        if identified.waitForExistence(timeout: 4), identified.isEnabled {
             identified.tap()
             return
         }
-        for label in primaryCTAs {
+        for label in ["Begin", "That’s true for me", "Continue", "I understand", "Yes, I’m ready"] {
             let button = app.buttons[label]
-            if button.waitForExistence(timeout: 1) {
+            if button.exists, button.isEnabled {
                 button.tap()
                 return
             }

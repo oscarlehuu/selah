@@ -1,6 +1,6 @@
 import Foundation
 
-enum MainTab: Hashable, CaseIterable {
+enum MainTab: String, Hashable, CaseIterable {
     case today, read, talk, pray, journey
 
     var title: String {

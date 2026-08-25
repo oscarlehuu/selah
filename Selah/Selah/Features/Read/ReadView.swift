@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct ReadView: View {
     @Environment(AppEnvironment.self) private var env
@@ -7,39 +8,101 @@ struct ReadView: View {
     @State private var verses: [BibleVerse] = []
     @State private var errorMessage: String?
     @State private var syncedToPlan = false
+    @State private var highlighted: Set<Int> = []
+    @State private var selectedVerse: BibleVerse?
+    @State private var showBookPicker = false
+    @State private var markedRead = false
 
     var body: some View {
         SelahTabScreen("Read") {
-            VStack(spacing: 0) {
-                planBanner
-                pickerRow
-                if let errorMessage {
-                    Text(errorMessage)
-                        .font(SelahFont.figtree(14))
-                        .foregroundStyle(.red)
-                        .padding(.horizontal, 20)
-                }
-                ScrollView {
-                    LazyVStack(alignment: .leading, spacing: 12) {
-                        ForEach(verses) { verse in
-                            Text("\(verse.number). \(verse.text)")
-                                .font(SelahFont.figtree(17))
-                                .foregroundStyle(SelahColors.text)
+            List {
+                if let day = env.currentPlanTheme?.day(globalDay: env.planGlobalDay) {
+                    Section {
+                        LabeledContent("Plan day \(env.planGlobalDay)", value: "\(day.book) \(day.chapter)")
+                        Button("Jump to plan") {
+                            syncedToPlan = false
+                            syncToPlanDayIfNeeded()
+                            loadVerses()
                         }
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 8)
-                    .padding(.bottom, 16)
                 }
-                .selahTabScrollContent()
+                if let errorMessage {
+                    Section { Text(errorMessage).foregroundStyle(.red) }
+                }
+                Section {
+                    ForEach(verses) { verse in
+                        Button {
+                            selectedVerse = verse
+                        } label: {
+                            Text(attributedVerse(verse))
+                                .font(SelahFont.ui(.body))
+                                .foregroundStyle(.primary)
+                                .strikethrough(false)
+                        }
+                    }
+                } header: {
+                    Text(bookTitle)
+                } footer: {
+                    Text(markedRead ? "Marked as read. Journey updated." : "Finish the chapter to complete today.")
+                }
             }
-            .safeAreaInset(edge: .bottom, spacing: 0) {
-                SelahPinnedBottomBar {
-                    SelahPrimaryButton(title: "Mark today complete") {
+            .listStyle(.plain)
+            .navigationTitle(bookTitle)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Book") { showBookPicker = true }
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        env.openTalkReflect(reference: bookTitle)
+                    } label: {
+                        Image(systemName: "bubble.left")
+                    }
+                    .accessibilityLabel("Reflect on this chapter")
+                }
+            }
+            .safeAreaInset(edge: .bottom) {
+                SelahFooterBar {
+                    SelahPrimaryButton(
+                        title: markedRead ? "Read today" : "Mark as read",
+                        style: markedRead ? .secondary : .primary
+                    ) {
                         env.markPlanDayComplete(globalDay: env.planGlobalDay)
+                        markedRead = true
                         AnalyticsService.track("plan_day_complete")
                     }
+                    .disabled(markedRead)
                 }
+            }
+            .sheet(isPresented: $showBookPicker) {
+                NavigationStack {
+                    bookPicker
+                        .navigationTitle("Choose chapter")
+                        .toolbar {
+                            ToolbarItem(placement: .cancellationAction) {
+                                Button("Done") { showBookPicker = false }
+                            }
+                        }
+                }
+                .presentationDetents([.medium, .large])
+            }
+            .sheet(item: $selectedVerse) { verse in
+                VerseActionSheet(
+                    verse: verse,
+                    bookTitle: bookTitle,
+                    isHighlighted: highlighted.contains(verse.number),
+                    onHighlight: {
+                        if highlighted.contains(verse.number) { highlighted.remove(verse.number) }
+                        else { highlighted.insert(verse.number) }
+                    },
+                    onReflect: {
+                        env.openTalkReflect(reference: "\(bookTitle):\(verse.number)")
+                    },
+                    onSave: {
+                        try? env.saveJournalEntry(plaintext: "\(bookTitle):\(verse.number) \(verse.text)")
+                    }
+                )
             }
             .onAppear {
                 syncToPlanDayIfNeeded()
@@ -51,41 +114,24 @@ struct ReadView: View {
         }
     }
 
-    private var planBanner: some View {
-        let day = env.currentPlanTheme?.day(globalDay: env.planGlobalDay)
-        return Group {
-            if let day {
-                HStack {
-                    Text("Plan day \(env.planGlobalDay): \(day.book) \(day.chapter)")
-                        .font(SelahFont.figtree(14))
-                        .foregroundStyle(SelahColors.textMuted)
-                    Spacer()
-                    Button("Jump to plan") {
-                        syncedToPlan = false
-                        syncToPlanDayIfNeeded()
-                        loadVerses()
-                    }
-                    .font(SelahFont.figtree(13, weight: .semibold))
-                }
-                .padding(.horizontal, 20)
-                .padding(.top, 4)
-            }
-        }
+    private var bookTitle: String {
+        "\(BibleBookCatalog.name(for: selectedBookId)) \(chapter)"
     }
 
-    private var pickerRow: some View {
-        HStack {
+    private var bookPicker: some View {
+        Form {
             Picker("Book", selection: $selectedBookId) {
                 ForEach(BibleBookCatalog.allBooks, id: \.id) { book in
                     Text(book.name).tag(book.id)
                 }
             }
-            .labelsHidden()
-            Stepper("Ch \(chapter)", value: $chapter, in: 1...150)
-                .font(SelahFont.figtree(14))
+            Stepper("Chapter \(chapter)", value: $chapter, in: 1...150)
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 8)
+    }
+
+    private func attributedVerse(_ verse: BibleVerse) -> String {
+        let mark = highlighted.contains(verse.number) ? " ★" : ""
+        return "\(verse.number)  \(verse.text)\(mark)"
     }
 
     private func syncToPlanDayIfNeeded() {
@@ -104,5 +150,43 @@ struct ReadView: View {
         } catch {
             errorMessage = error.localizedDescription
         }
+    }
+}
+
+private struct VerseActionSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    let verse: BibleVerse
+    let bookTitle: String
+    let isHighlighted: Bool
+    let onHighlight: () -> Void
+    let onReflect: () -> Void
+    let onSave: () -> Void
+
+    var body: some View {
+        NavigationStack {
+            List {
+                Section {
+                    Text("“\(verse.text)”")
+                        .font(SelahFont.verse(.body))
+                }
+                Section {
+                    Button(isHighlighted ? "Remove highlight" : "Highlight", action: { onHighlight(); dismiss() })
+                    Button("Reflect on this") { onReflect(); dismiss() }
+                    Button("Copy verse") {
+                        UIPasteboard.general.string = "\(bookTitle):\(verse.number) \(verse.text)"
+                        dismiss()
+                    }
+                    Button("Save to journal") { onSave(); dismiss() }
+                }
+            }
+            .navigationTitle("\(bookTitle):\(verse.number)")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Close") { dismiss() }
+                }
+            }
+        }
+        .presentationDetents([.medium])
     }
 }

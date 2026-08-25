@@ -1,66 +1,68 @@
 import SwiftUI
+import UIKit
 
-enum SelahLayout {
-    static let tabBarScrollMargin: CGFloat = 56
-    static let flowScrollMargin: CGFloat = 24
-}
+enum SelahAppearance {
+    static let canvasUIColor = UIColor(red: 250 / 255, green: 247 / 255, blue: 242 / 255, alpha: 1)
 
-struct SelahPinnedBottomBar<Content: View>: View {
-    @ViewBuilder let content: Content
+    @MainActor
+    static func apply() {
+        UIWindow.appearance().backgroundColor = canvasUIColor
+        UITableView.appearance().backgroundColor = canvasUIColor
+        UICollectionView.appearance().backgroundColor = canvasUIColor
 
-    var body: some View {
-        content
-            .padding(.horizontal, 16)
-            .padding(.top, 10)
-            .padding(.bottom, 8)
-            .background {
-                SelahColors.background.opacity(0.96)
-                    .ignoresSafeArea(edges: .bottom)
-            }
-    }
-}
+        let nav = UINavigationBarAppearance()
+        nav.configureWithOpaqueBackground()
+        nav.backgroundColor = canvasUIColor
+        UINavigationBar.appearance().standardAppearance = nav
+        UINavigationBar.appearance().scrollEdgeAppearance = nav
+        UINavigationBar.appearance().compactAppearance = nav
 
-struct SelahFlowScreen<Content: View>: View {
-    private let content: Content
-    private let bottom: AnyView?
-
-    init(@ViewBuilder content: () -> Content) {
-        self.content = content()
-        self.bottom = nil
-    }
-
-    init<B: View>(
-        @ViewBuilder content: () -> Content,
-        @ViewBuilder bottom: () -> B
-    ) {
-        self.content = content()
-        self.bottom = AnyView(bottom())
-    }
-
-    var body: some View {
-        ZStack {
-            SundayLightBackground()
-            content
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        }
-        .safeAreaInset(edge: .bottom, spacing: 0) {
-            if let bottom {
-                bottom
-            }
-        }
+        let tab = UITabBarAppearance()
+        tab.configureWithOpaqueBackground()
+        tab.backgroundColor = canvasUIColor
+        UITabBar.appearance().standardAppearance = tab
+        UITabBar.appearance().scrollEdgeAppearance = tab
     }
 }
 
 extension View {
-    func selahTabScrollContent() -> some View {
-        contentMargins(.bottom, SelahLayout.tabBarScrollMargin, for: .scrollContent)
+    func selahCanvas() -> some View {
+        self
+            .scrollContentBackground(.hidden)
+            .background(SelahColors.background)
     }
 
-    func selahFlowScrollContent() -> some View {
-        contentMargins(.bottom, SelahLayout.flowScrollMargin, for: .scrollContent)
+    func selahRootChrome() -> some View {
+        self
+            .preferredColorScheme(.light)
+            .background(SelahColors.background.ignoresSafeArea())
+    }
+}
+
+struct SelahComposerBar: View {
+    @Binding var text: String
+    var isSending: Bool
+    var onSend: () -> Void
+
+    var body: some View {
+        SelahFooterBar {
+            HStack(alignment: .bottom, spacing: 10) {
+                TextField("Say it plainly…", text: $text, axis: .vertical)
+                    .lineLimit(1...4)
+                    .font(SelahFont.ui(.body))
+                    .textFieldStyle(.roundedBorder)
+                    .accessibilityIdentifier("talk.composer")
+                Button(action: onSend) {
+                    Image(systemName: "arrow.up.circle.fill")
+                        .font(.title)
+                }
+                .disabled(!canSend || isSending)
+                .accessibilityLabel("Send")
+            }
+        }
     }
 
-    func selahTabContentFrame() -> some View {
-        frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+    private var canSend: Bool {
+        !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 }

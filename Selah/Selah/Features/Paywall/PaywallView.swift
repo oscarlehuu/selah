@@ -13,46 +13,121 @@ struct PaywallView: View {
         let emphasizeWeekly = PaywallExitPolicy.shouldEmphasizeWeekly(
             paywallPresentationCount: env.subscription.paywallPresentationCount
         )
-        SelahFlowScreen {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    HeroImageView(name: "selah-hero-window")
-                        .frame(height: 168)
-                        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-
-                    Text("SELAH PREMIUM")
-                        .font(SelahFont.figtree(12, weight: .semibold))
-                        .foregroundStyle(SelahColors.gold)
-
-                    Text(OnboardingCopy.paywallHeadline(distance: env.quizDistance))
-                        .font(SelahFont.newsreader(28, weight: .semibold))
-                        .foregroundStyle(SelahColors.text)
-                        .fixedSize(horizontal: false, vertical: true)
-
+        NavigationStack {
+            List {
+                Section {
+                    Text(OnboardingCopy.paywallHeadline(distance: env.quizDistance, desire: env.quizDesire))
+                        .font(SelahFont.display(.title2))
                     Text("5 minutes a day. Private. On your phone.")
-                        .font(SelahFont.figtree(16))
-                        .foregroundStyle(SelahColors.textMuted)
-
+                        .foregroundStyle(.secondary)
                     if emphasizeWeekly {
                         Text("Most people start weekly — then keep going.")
-                            .font(SelahFont.figtree(14, weight: .medium))
-                            .foregroundStyle(SelahColors.gold)
+                            .foregroundStyle(SelahColors.accent)
                     }
-
-                    VStack(spacing: 10) {
-                        ForEach(SubscriptionTier.allCases, id: \.self) { tier in
-                            PaywallTierRow(
-                                tier: tier,
-                                selected: selectedTier == tier,
-                                emphasizeWeekly: emphasizeWeekly && tier == .weekly
-                            ) { selectedTier = tier }
+                }
+                Section("Included") {
+                    Label {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Private by design")
+                            Text("Talk, reflect, confess. On-device only.")
+                                .font(SelahFont.ui(.footnote))
+                                .foregroundStyle(.secondary)
                         }
+                    } icon: {
+                        Image(systemName: "lock.fill")
                     }
-
-                    Text("Cancel anytime. No trial — you start today.")
-                        .font(SelahFont.figtree(13))
-                        .foregroundStyle(SelahColors.textSoft)
-
+                    Label {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("5 minutes a day")
+                            Text("Your \(planThemeLabel) plan, offline Bible, gentle streak.")
+                                .font(SelahFont.ui(.footnote))
+                                .foregroundStyle(.secondary)
+                        }
+                    } icon: {
+                        Image(systemName: "book.fill")
+                    }
+                    Label {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Guided prayer")
+                            Text("Lectio Divina and prayers for the mood you’re actually in.")
+                                .font(SelahFont.ui(.footnote))
+                                .foregroundStyle(.secondary)
+                        }
+                    } icon: {
+                        Image(systemName: "hands.sparkles.fill")
+                    }
+                }
+                Section {
+                    ForEach(orderedTiers(emphasizeWeekly: emphasizeWeekly), id: \.self) { tier in
+                        Button {
+                            selectedTier = tier
+                        } label: {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    HStack {
+                                        Text(tier.title)
+                                        if tier == .yearly {
+                                            Text("Best value")
+                                                .font(SelahFont.ui(.caption2, weight: .semibold))
+                                                .foregroundStyle(SelahColors.accent)
+                                        }
+                                        if emphasizeWeekly && tier == .weekly {
+                                            Text("Popular")
+                                                .font(SelahFont.ui(.caption2, weight: .semibold))
+                                                .foregroundStyle(SelahColors.accent)
+                                        }
+                                    }
+                                    Text(tier.detailLabel)
+                                        .font(SelahFont.ui(.footnote))
+                                        .foregroundStyle(.secondary)
+                                }
+                                Spacer()
+                                Text(tier.shortPrice)
+                                    .font(SelahFont.ui(.body, weight: .semibold))
+                                if selectedTier == tier {
+                                    Image(systemName: "checkmark")
+                                        .foregroundStyle(SelahColors.primaryDeep)
+                                }
+                            }
+                        }
+                        .accessibilityIdentifier("paywall.tier.\(tier.rawValue)")
+                    }
+                } header: {
+                    Text("Choose a plan")
+                } footer: {
+                    Text("Auto-renews until cancelled. \(OnboardingCopy.companionDisclaimer) It does not replace a pastor, priest, counsellor, or sacramental confession.")
+                }
+                if let errorMessage {
+                    Section {
+                        Text(errorMessage).foregroundStyle(.red)
+                    }
+                }
+            }
+            .listStyle(.insetGrouped)
+            .selahCanvas()
+            .navigationTitle("Selah Premium")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Restore purchase", action: onRestore)
+                        .accessibilityIdentifier("paywall.restore")
+                }
+            }
+            .safeAreaInset(edge: .bottom) {
+                SelahFooterBar {
+                    SelahPrimaryButton(
+                        title: isPurchasing ? "Working…" : "Start Selah · \(selectedTier.ctaPrice)",
+                        style: .gold,
+                        isLoading: isPurchasing,
+                        action: { Task { await purchase() } }
+                    )
+                    .disabled(isPurchasing)
+                    .accessibilityIdentifier("paywall.subscribe")
+                    Button("See monthly plan") {
+                        selectedTier = .monthly
+                        showExitMonthly = true
+                    }
+                    .font(SelahFont.ui(.subheadline, weight: .semibold))
                     HStack(spacing: 16) {
                         if let url = URL(string: AppConfiguration.privacyPolicyURL) {
                             Link("Privacy", destination: url)
@@ -60,53 +135,28 @@ struct PaywallView: View {
                         if let url = URL(string: AppConfiguration.termsURL) {
                             Link("Terms", destination: url)
                         }
-                        Button("Restore", action: onRestore)
                     }
-                    .font(SelahFont.figtree(13))
-                    .foregroundStyle(SelahColors.textMuted)
-
-                    if let errorMessage {
-                        Text(errorMessage)
-                            .font(SelahFont.figtree(13))
-                            .foregroundStyle(.red)
-                    }
-                }
-                .padding(.horizontal, 20)
-                .padding(.top, 12)
-                .padding(.bottom, 16)
-            }
-            .selahFlowScrollContent()
-        } bottom: {
-            SelahPinnedBottomBar {
-                VStack(spacing: 10) {
-                    SelahPrimaryButton(
-                        title: isPurchasing ? "Working…" : "Start Selah",
-                        style: .gold,
-                        isLoading: isPurchasing,
-                        action: { Task { await purchase() } }
-                    )
-                    .disabled(isPurchasing)
-                    .accessibilityIdentifier("paywall.subscribe")
-
-                    Button("See monthly plan") {
-                        selectedTier = .monthly
-                        showExitMonthly = true
-                    }
-                    .font(SelahFont.figtree(14))
-                    .foregroundStyle(SelahColors.textMuted)
+                    .font(SelahFont.ui(.footnote))
                 }
             }
         }
-        .onAppear {
-            if PaywallExitPolicy.defaultTierIsYearly(
-                paywallPresentationCount: env.subscription.paywallPresentationCount
-            ) {
-                selectedTier = .yearly
-            } else {
-                selectedTier = .weekly
-            }
-        }
+        .tint(SelahColors.primaryDeep)
+        .selahRootChrome()
         .interactiveDismissDisabled()
+        .onAppear {
+            selectedTier = PaywallExitPolicy.defaultTierIsYearly(
+                paywallPresentationCount: env.subscription.paywallPresentationCount
+            ) ? .yearly : .weekly
+        }
+        .accessibilityIdentifier("gate.paywall")
+    }
+
+    private var planThemeLabel: String {
+        env.quizDesire?.planLabel.lowercased() ?? env.currentPlanTheme?.label.lowercased() ?? "peace"
+    }
+
+    private func orderedTiers(emphasizeWeekly: Bool) -> [SubscriptionTier] {
+        emphasizeWeekly ? [.weekly, .yearly, .monthly] : [.weekly, .yearly, .monthly]
     }
 
     private func purchase() async {
@@ -117,56 +167,14 @@ struct PaywallView: View {
         if ok {
             AnalyticsService.track("subscribe", properties: ["tier": selectedTier.rawValue])
         } else {
-            let cancelled = PaywallExitPolicy.shouldShowMonthlyExitOffer(
+            if PaywallExitPolicy.shouldShowMonthlyExitOffer(
                 paymentSheetCancelled: true,
                 seeMonthlyPlanTapped: false
-            )
-            if cancelled { showExitMonthly = true }
+            ) {
+                showExitMonthly = true
+            }
             errorMessage = env.subscription.lastError ?? "Purchase didn’t finish. Try again or restore."
         }
-    }
-}
-
-private struct PaywallTierRow: View {
-    let tier: SubscriptionTier
-    let selected: Bool
-    let emphasizeWeekly: Bool
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    HStack {
-                        Text(tier.title)
-                            .font(SelahFont.figtree(16, weight: .semibold))
-                            .foregroundStyle(SelahColors.text)
-                        if emphasizeWeekly {
-                            Text("Popular")
-                                .font(SelahFont.figtree(11, weight: .semibold))
-                                .foregroundStyle(SelahColors.gold)
-                        }
-                    }
-                    Text(tier.priceLabel)
-                        .font(SelahFont.figtree(13))
-                        .foregroundStyle(SelahColors.textMuted)
-                }
-                Spacer()
-                if selected {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundStyle(SelahColors.gold)
-                }
-            }
-            .padding(14)
-            .background(SelahColors.surface)
-            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .stroke(selected ? SelahColors.gold : SelahColors.text.opacity(0.08), lineWidth: selected ? 2 : 1)
-            )
-        }
-        .buttonStyle(.plain)
-        .accessibilityIdentifier("paywall.tier.\(tier.rawValue)")
     }
 }
 
@@ -174,19 +182,23 @@ struct ExitMonthlyOfferView: View {
     var onDismiss: () -> Void
 
     var body: some View {
-        VStack(spacing: 16) {
-            Text("Start with monthly")
-                .font(SelahFont.newsreader(24, weight: .semibold))
-            Text("$14.99 / month. Same private space. Cancel anytime.")
-                .font(SelahFont.figtree(16))
-                .foregroundStyle(SelahColors.textMuted)
-                .multilineTextAlignment(.center)
-            SelahPrimaryButton(title: "Use monthly", action: onDismiss)
-            Button("Keep looking", action: onDismiss)
-                .font(SelahFont.figtree(14))
-                .foregroundStyle(SelahColors.textMuted)
+        NavigationStack {
+            ContentUnavailableView(
+                "Start with monthly",
+                systemImage: "calendar",
+                description: Text("$14.99 / month. Same private space. Cancel anytime.")
+            )
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Keep looking", action: onDismiss)
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Use monthly", action: onDismiss)
+                }
+            }
+            .navigationTitle("Monthly plan")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .padding(24)
         .presentationDetents([.medium])
     }
 }

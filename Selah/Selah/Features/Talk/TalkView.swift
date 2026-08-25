@@ -6,114 +6,137 @@ struct TalkView: View {
     @State private var messages: [(role: String, text: String)] = []
     @State private var isSending = false
     @State private var showCrisis = false
+    @State private var showPrivacy = false
     @State private var sessionId: UUID?
-    @State private var mode: TalkMode = .heart
+    @State private var confirmClear = false
 
     var body: some View {
         SelahTabScreen("Talk") {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    modePicker
-                    disclaimer
-                    if messages.isEmpty { emptyState }
-                    else {
-                        ForEach(Array(messages.enumerated()), id: \.offset) { _, message in
-                            bubble(message)
+            List {
+                Section {
+                    Picker("Mode", selection: Binding(
+                        get: { env.selectedTalkMode },
+                        set: { env.selectedTalkMode = $0; seedIntro(force: true) }
+                    )) {
+                        ForEach(TalkMode.allCases) { item in
+                            Text(item.title).tag(item)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    Text(privacyBanner)
+                        .font(SelahFont.ui(.caption))
+                        .foregroundStyle(.secondary)
+                }
+                Section {
+                    ForEach(Array(messages.enumerated()), id: \.offset) { _, message in
+                        Text(message.text)
+                            .font(SelahFont.ui(message.role == "sys" ? .footnote : .body))
+                            .foregroundStyle(message.role == "user" ? .primary : .secondary)
+                            .frame(maxWidth: .infinity, alignment: message.role == "user" ? .trailing : .leading)
+                    }
+                    if isSending { ProgressView("Selah is preparing") }
+                }
+                if messages.count <= 3 {
+                    Section("Try saying") {
+                        ForEach(env.selectedTalkMode.suggestions, id: \.self) { suggestion in
+                            Button(suggestion) { input = suggestion; send() }
                         }
                     }
                 }
-                .padding(.horizontal, 20)
-                .padding(.top, 8)
-                .padding(.bottom, 24)
+                Section {
+                    Button("Need urgent help?") { showCrisis = true }
+                    if !CompanionTextService.isOnDeviceCompanionAvailable {
+                        Text(CompanionTextService.unavailableMessage)
+                            .foregroundStyle(.secondary)
+                    }
+                } footer: {
+                    Text(OnboardingCopy.companionDisclaimer)
+                }
             }
-            .selahTabScrollContent()
+            .listStyle(.insetGrouped)
             .scrollDismissesKeyboard(.interactively)
-            .safeAreaInset(edge: .bottom, spacing: 0) {
+            .safeAreaInset(edge: .bottom) {
                 SelahComposerBar(text: $input, isSending: isSending, onSend: send)
             }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        showPrivacy = true
+                    } label: {
+                        Image(systemName: "lock.shield")
+                    }
+                    .accessibilityLabel("How privacy works")
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        confirmClear = true
+                    } label: {
+                        Image(systemName: "trash")
+                    }
+                    .accessibilityLabel("Clear this session")
+                }
+            }
+            .confirmationDialog("Clear this session?", isPresented: $confirmClear, titleVisibility: .visible) {
+                Button("Delete conversation", role: .destructive) { messages = []; seedIntro(force: true) }
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                Text("The conversation is deleted from this device. It was never anywhere else.")
+            }
+            .sheet(isPresented: $showCrisis) { CrisisResourcesView() }
+            .sheet(isPresented: $showPrivacy) { PrivacyInfoView() }
         }
         .onAppear {
             AnalyticsService.track("talk_open", properties: [
                 "fm_available": CompanionTextService.isOnDeviceCompanionAvailable
             ])
             if sessionId == nil { sessionId = env.startTalkSession() }
-            if messages.isEmpty {
-                if env.isDemoMode { seedDemo() }
-                else if let sessionId { messages = env.talkMessages(for: sessionId) }
-            }
+            applyPendingContext()
+            if messages.isEmpty { seedIntro(force: false) }
         }
         .onDisappear {
             if !messages.isEmpty {
-                AnalyticsService.track("session_complete", properties: ["mode": mode.rawValue])
+                AnalyticsService.track("session_complete", properties: ["mode": env.selectedTalkMode.rawValue])
             }
             env.clearTalkSessionsIfNeeded()
         }
-        .sheet(isPresented: $showCrisis) { CrisisResourcesView() }
     }
 
-    private var modePicker: some View {
-        HStack(spacing: 8) {
-            ForEach(TalkMode.allCases, id: \.self) { item in
-                Button {
-                    mode = item
-                } label: {
-                    Text(item.title)
-                        .font(SelahFont.figtree(13, weight: .semibold))
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 8)
-                        .background(mode == item ? SelahColors.primaryDeep : SelahColors.surface)
-                        .foregroundStyle(mode == item ? Color.white : SelahColors.textMuted)
-                        .clipShape(Capsule())
-                }
-                .buttonStyle(.plain)
+    private var privacyBanner: String {
+        let extra = env.settings?.autoDeleteTalkSessions == true ? " · auto-deletes when you leave" : ""
+        return "On-device only\(extra)"
+    }
+
+    private func applyPendingContext() {
+        if let mood = env.pendingTalkMood {
+            messages = [
+                (role: "sys", text: env.selectedTalkMode.systemPrompt),
+                (role: "assistant", text: "You said you feel \(mood.title.lowercased()). We can start there. No tidy words needed.")
+            ]
+            env.pendingTalkMood = nil
+        } else if let verse = env.pendingTalkVerse {
+            env.selectedTalkMode = .reflect
+            messages = [
+                (role: "sys", text: "Reflect · \(verse) · nothing leaves this phone"),
+                (role: "assistant", text: "Let’s stay with \(verse). Read it once more. Which word will not let you go?")
+            ]
+            env.pendingTalkVerse = nil
+        }
+    }
+
+    private func seedIntro(force: Bool) {
+        if env.isDemoMode && messages.isEmpty && !force {
+            let lines = DemoSeedData.talkPreviewLines
+            if lines.count >= 3 {
+                messages = [(role: "user", text: lines[1]), (role: "assistant", text: lines[2])]
+                return
             }
         }
-    }
-
-    private var disclaimer: some View {
-        HStack(alignment: .top, spacing: 8) {
-            Image(systemName: "lock.fill").foregroundStyle(SelahColors.primaryDeep)
-            Text("Selah is not God, a priest, or crisis care. Private on your phone.")
-                .font(SelahFont.figtree(13))
-                .foregroundStyle(SelahColors.textMuted)
+        if force || messages.isEmpty {
+            messages = [
+                (role: "sys", text: env.selectedTalkMode.systemPrompt),
+                (role: "assistant", text: env.selectedTalkMode.openingLine)
+            ]
         }
-        .padding(12)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(SelahColors.primarySoft.opacity(0.55))
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-    }
-
-    private var emptyState: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(mode.emptyTitle)
-                .font(SelahFont.newsreader(24, weight: .semibold))
-            Text(mode.emptyBody)
-                .font(SelahFont.figtree(16))
-                .foregroundStyle(SelahColors.textMuted)
-            if !CompanionTextService.isOnDeviceCompanionAvailable {
-                Text(CompanionTextService.unavailableMessage)
-                    .font(SelahFont.figtree(14))
-                    .foregroundStyle(SelahColors.textSoft)
-            }
-        }
-        .padding(.top, 12)
-    }
-
-    private func bubble(_ message: (role: String, text: String)) -> some View {
-        let isUser = message.role == "user"
-        return Text(message.text)
-            .font(SelahFont.figtree(15))
-            .foregroundStyle(SelahColors.text)
-            .padding(14)
-            .background(isUser ? SelahColors.primarySoft : SelahColors.surface)
-            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-            .frame(maxWidth: .infinity, alignment: isUser ? .trailing : .leading)
-    }
-
-    private func seedDemo() {
-        let lines = DemoSeedData.talkPreviewLines
-        guard lines.count >= 3 else { return }
-        messages = [(role: "user", text: lines[1]), (role: "assistant", text: lines[2])]
     }
 
     private func send() {
@@ -129,7 +152,7 @@ struct TalkView: View {
         input = ""
         isSending = true
         Task {
-            let reply = await CompanionTextService.talkReply(to: text, mode: mode.promptHint)
+            let reply = await CompanionTextService.talkReply(to: text, mode: env.selectedTalkMode.promptHint)
             messages.append((role: "assistant", text: reply))
             if let sessionId { env.appendTalkMessage(sessionId: sessionId, role: "assistant", content: reply) }
             isSending = false
@@ -137,60 +160,52 @@ struct TalkView: View {
     }
 }
 
-private enum TalkMode: String, CaseIterable {
-    case heart, reflect, release
-    var title: String {
-        switch self {
-        case .heart: "Heart"
-        case .reflect: "Reflect"
-        case .release: "Release"
-        }
-    }
-    var emptyTitle: String {
-        switch self {
-        case .heart: "Share what's on your heart"
-        case .reflect: "Reflect with God"
-        case .release: "Release what's heavy"
-        }
-    }
-    var emptyBody: String {
-        switch self {
-        case .heart: "Gratitude, longing, or joy — speak freely. Nothing leaves this device."
-        case .reflect: "Wonder aloud about Scripture or what God might be saying."
-        case .release: "Confess or let go of shame here. Selah is a private room, not a person."
-        }
-    }
-    var promptHint: String {
-        switch self {
-        case .heart: "Respond warmly to what the user shared from the heart."
-        case .reflect: "Help the user reflect on Scripture and God's presence."
-        case .release: "Respond with grace as the user releases guilt or heaviness."
-        }
-    }
-}
-
 struct CrisisResourcesView: View {
     @Environment(\.dismiss) private var dismiss
+
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
+            List {
+                Section {
                     Text("You deserve real support right now.")
-                        .font(SelahFont.newsreader(22, weight: .semibold))
+                        .font(SelahFont.display(.title3))
+                }
+                Section("Hotlines") {
                     Text("US: Call or text 988")
                     Text("Australia: Lifeline 13 11 14")
                     Text("UK & Ireland: Samaritans 116 123")
                     Text("Emergency: local emergency number")
                 }
-                .font(SelahFont.figtree(16))
-                .padding(24)
             }
-            .background(SundayLightBackground())
             .navigationTitle("Crisis resources")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .confirmationAction) {
                     Button("Close") { dismiss() }
+                }
+            }
+        }
+    }
+}
+
+struct PrivacyInfoView: View {
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        NavigationStack {
+            List {
+                Section("How privacy works") {
+                    Text("Talk, journal, and prayer stay on this iPhone. The companion uses Apple Intelligence on-device when available. Nothing is uploaded to Selah.")
+                }
+                Section {
+                    Text(OnboardingCopy.companionDisclaimer)
+                }
+            }
+            .navigationTitle("Privacy")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done") { dismiss() }
                 }
             }
         }

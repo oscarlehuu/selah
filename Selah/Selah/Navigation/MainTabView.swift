@@ -12,27 +12,32 @@ struct MainTabView: View {
             TodayView()
                 .tabItem { Label(MainTab.today.title, systemImage: MainTab.today.symbol) }
                 .tag(MainTab.today)
+                .accessibilityIdentifier("tab.today")
 
             ReadView()
                 .tabItem { Label(MainTab.read.title, systemImage: MainTab.read.symbol) }
                 .tag(MainTab.read)
+                .accessibilityIdentifier("tab.read")
 
             TalkView()
                 .tabItem { Label(MainTab.talk.title, systemImage: MainTab.talk.symbol) }
                 .tag(MainTab.talk)
+                .accessibilityIdentifier("tab.talk")
 
             PrayView()
                 .tabItem { Label(MainTab.pray.title, systemImage: MainTab.pray.symbol) }
                 .tag(MainTab.pray)
+                .accessibilityIdentifier("tab.pray")
 
             JourneyView()
                 .tabItem { Label(MainTab.journey.title, systemImage: MainTab.journey.symbol) }
                 .tag(MainTab.journey)
+                .accessibilityIdentifier("tab.journey")
         }
-        .tabViewStyle(.tabBarOnly)
         .tint(SelahColors.primaryDeep)
-        .toolbarBackground(SelahColors.background.opacity(0.94), for: .tabBar)
+        .toolbarBackground(SelahColors.background, for: .tabBar)
         .toolbarBackground(.visible, for: .tabBar)
+        .background(SelahColors.background.ignoresSafeArea())
         .onChange(of: env.selectedMainTab) { _, tab in
             env.qualifyingTracker.setPrayOrTalkActive(tab.isPrayOrTalk)
         }

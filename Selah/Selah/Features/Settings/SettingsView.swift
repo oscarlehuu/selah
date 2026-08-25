@@ -4,40 +4,59 @@ struct SettingsView: View {
     @Environment(AppEnvironment.self) private var env
     @Environment(\.dismiss) private var dismiss
     @State private var restoreMessage: String?
+    @State private var showCrisis = false
+    @State private var showPrivacy = false
 
     var body: some View {
         NavigationStack {
-            ZStack {
-                SundayLightBackground()
-                List {
-                    Section("Subscription") {
-                        Button("Restore purchases") { restore() }
-                        Link("Manage subscription", destination: URL(string: "https://apps.apple.com/account/subscriptions")!)
-                        if let restoreMessage { Text(restoreMessage).font(.caption) }
-                    }
-                    Section("Notifications") {
-                        Stepper("Reminder \(formattedTime)", value: hourBinding, in: 5...21)
-                            .font(SelahFont.figtree(15))
-                    }
-                    Section("Journal") {
-                        Toggle("iCloud encrypted sync", isOn: boolBinding(\.journalCloudSyncEnabled))
-                        Toggle("Require Face ID", isOn: boolBinding(\.requireFaceIDForJournal))
-                    }
-                    Section("Talk") {
-                        Toggle("Auto-delete sessions", isOn: autoDeleteBinding)
-                    }
-                    Section("Legal") {
-                        if let url = URL(string: AppConfiguration.privacyPolicyURL) { Link("Privacy", destination: url) }
-                        if let url = URL(string: AppConfiguration.termsURL) { Link("Terms", destination: url) }
-                        Text(AppConfiguration.supportEmail)
-                    }
+            Form {
+                Section("Subscription") {
+                    Text(env.isSubscribed ? "Selah · Yearly" : "Not subscribed")
+                    Button("Restore", action: restore)
+                        .accessibilityIdentifier("settings.restore")
+                    Link("Manage subscription", destination: URL(string: "https://apps.apple.com/account/subscriptions")!)
+                    if let restoreMessage { Text(restoreMessage).font(.caption) }
                 }
-                .scrollContentBackground(.hidden)
+                Section("Privacy") {
+                    LabeledContent("On-device AI", value: "Always on")
+                    Toggle("Auto-delete sessions", isOn: autoDeleteBinding)
+                    Button("How privacy works") { showPrivacy = true }
+                    Toggle("iCloud encrypted sync", isOn: boolBinding(\.journalCloudSyncEnabled))
+                    Toggle("Require Face ID", isOn: boolBinding(\.requireFaceIDForJournal))
+                }
+                Section("Daily rhythm") {
+                    Stepper(
+                        "Morning verse \(formattedTime)",
+                        value: hourBinding,
+                        in: 5...21
+                    )
+                    LabeledContent("Translation", value: "KJV")
+                }
+                Section("Care") {
+                    Button("Urgent help & hotlines") { showCrisis = true }
+                    Text(OnboardingCopy.companionDisclaimer)
+                        .foregroundStyle(.secondary)
+                }
+                Section("Legal & support") {
+                    if let url = URL(string: AppConfiguration.privacyPolicyURL) {
+                        Link("Privacy Policy", destination: url)
+                    }
+                    if let url = URL(string: AppConfiguration.termsURL) {
+                        Link("Terms of Use", destination: url)
+                    }
+                    Link(AppConfiguration.supportEmail, destination: URL(string: "mailto:\(AppConfiguration.supportEmail)")!)
+                }
             }
+            .selahCanvas()
             .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) { Button("Done") { dismiss() } }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done") { dismiss() }
+                }
             }
+            .sheet(isPresented: $showCrisis) { CrisisResourcesView() }
+            .sheet(isPresented: $showPrivacy) { PrivacyInfoView() }
             .onAppear { AnalyticsService.track("settings_open") }
         }
     }

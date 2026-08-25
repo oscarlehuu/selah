@@ -19,11 +19,14 @@ final class AppEnvironment {
     var graceNote: String?
     var selectedMainTab: MainTab = .today
     var prayQuickMode = false
+    var pendingTalkMood: OnboardingMood?
+    var pendingTalkVerse: String?
+    var selectedTalkMode: TalkMode = .heart
 
     private let modelContext: ModelContext
 
     init(modelContext: ModelContext, demoMode: Bool = DemoMode.isEnabled) throws {
-        let useDemo = demoMode && !DemoMode.uiTestFreshStart
+        let useDemo = demoMode && !DemoMode.uiTestFreshStart && !DemoMode.screenshotPaywall
         isDemoMode = useDemo
         self.modelContext = modelContext
         bibleRepository = try BibleRepository()
@@ -33,15 +36,25 @@ final class AppEnvironment {
         journalCrypto = JournalEncryptionService()
         crisisMatcher = CrisisKeywordMatcher()
         qualifyingTracker = QualifyingForegroundTracker()
-        subscription.configure(demoMode: useDemo)
+        if DemoMode.screenshotPaywall {
+            subscription.isSubscribed = false
+        } else {
+            subscription.configure(demoMode: useDemo)
+        }
         AnalyticsService.configure(demoMode: useDemo)
         qualifyingTracker.onThreshold = { [weak self] in
             Task { @MainActor in self?.recordQualifyingPrayTalkTime() }
         }
         bootstrapModels()
-        if useDemo { applyDemoSeed() }
-        else if DemoMode.uiTestFreshStart { applyUITestFreshStart() }
-        else { processStreakOnOpen() }
+        if DemoMode.screenshotPaywall {
+            applyPaywallScreenshotState()
+        } else if useDemo {
+            applyDemoSeed()
+        } else if DemoMode.uiTestFreshStart {
+            applyUITestFreshStart()
+        } else {
+            processStreakOnOpen()
+        }
     }
 
     var isSubscribed: Bool { isDemoMode || subscription.isSubscribed }
@@ -77,6 +90,10 @@ final class AppEnvironment {
 
     var quizDistance: OnboardingDistance? {
         OnboardingDistance(rawValue: settings?.quizDistance ?? "")
+    }
+
+    var quizDesire: OnboardingDesire? {
+        OnboardingDesire(rawValue: settings?.quizDesire ?? "")
     }
 
     func markPlanDayComplete(globalDay: Int) {
@@ -120,6 +137,18 @@ final class AppEnvironment {
 
     func openMainTab(_ tab: MainTab) { selectedMainTab = tab }
 
+    func openTalk(mood: OnboardingMood) {
+        pendingTalkMood = mood
+        selectedTalkMode = mood == .empty ? .reflect : .heart
+        selectedMainTab = .talk
+    }
+
+    func openTalkReflect(reference: String) {
+        pendingTalkVerse = reference
+        selectedTalkMode = .reflect
+        selectedMainTab = .talk
+    }
+
     func persist() { try? modelContext.save() }
 
     func startFiveMinutePray() {
@@ -127,15 +156,21 @@ final class AppEnvironment {
         selectedMainTab = .pray
     }
 
-    func completeOnboarding(distance: OnboardingDistance, desire: OnboardingDesire, habit: String) {
+    func completeOnboarding(distance: OnboardingDistance, desire: OnboardingDesire, habit: OnboardingHabit) {
         guard let settings else { return }
         settings.quizDistance = distance.rawValue
         settings.quizDesire = desire.rawValue
-        settings.quizHabit = habit
+        settings.quizHabit = habit.rawValue
         settings.planThemeKey = desire.planKey
         settings.onboardingComplete = true
         try? modelContext.save()
-        AnalyticsService.track("onboarding_15_social")
+    }
+
+    func applyGraceDayFromUser() {
+        guard let streakModel, !streakModel.graceUsedThisWeek else { return }
+        streakModel.graceUsedThisWeek = true
+        try? modelContext.save()
+        AnalyticsService.track("grace_day_used")
     }
 
     func incrementPaywallPresentation() {
@@ -207,8 +242,20 @@ final class AppEnvironment {
         settings?.planThemeKey = DemoSeedData.planTheme.lowercased()
         settings?.onboardingComplete = true
         settings?.sawNotificationPrompt = true
+        if let tab = DemoMode.screenshotTab {
+            selectedMainTab = tab
+        }
         seedDemoPlanProgress()
         seedDemoJournalEntries()
+        try? modelContext.save()
+    }
+
+    private func applyPaywallScreenshotState() {
+        settings?.onboardingComplete = true
+        settings?.sawNotificationPrompt = false
+        settings?.quizDistance = OnboardingDistance.guilt.rawValue
+        settings?.quizDesire = OnboardingDesire.peace.rawValue
+        subscription.isSubscribed = false
         try? modelContext.save()
     }
 
