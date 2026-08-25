@@ -8,12 +8,24 @@ struct WelcomeSanctuaryView: View {
     private let ink = Color(hex: 0x4A3D28)
 
     var body: some View {
-        ZStack {
-            sanctuaryBackground
-            VStack(spacing: 0) {
+        VStack(spacing: 0) {
+            hero
+            meaning
+            foot
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background { sanctuaryBackground }
+        .ignoresSafeArea()
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("onboarding.welcome.sanctuary")
+        .onAppear { breathe() }
+    }
+
+    private var hero: some View {
+        ZStack(alignment: .bottom) {
+            VStack(spacing: 10) {
                 Spacer(minLength: 24)
                 mark
-                    .padding(.bottom, 14)
                 Text(OnboardingCopy.welcomeTitle)
                     .font(SelahFont.display(.largeTitle))
                     .foregroundStyle(ink)
@@ -23,38 +35,46 @@ struct WelcomeSanctuaryView: View {
                     .tracking(2.6)
                     .textCase(.uppercase)
                     .foregroundStyle(ink.opacity(0.72))
-                    .padding(.top, 10)
                     .accessibilityLabel(OnboardingCopy.welcomeSubtitle)
                 Spacer(minLength: 16)
-                verseBlock
-                    .padding(.bottom, 18)
-                Text(OnboardingCopy.welcomeMeaning)
-                    .font(SelahFont.ui(.subheadline))
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(ink.opacity(0.86))
-                    .padding(.horizontal, 8)
-                Spacer(minLength: 20)
-                SelahPrimaryButton(title: OnboardingCopy.welcomeCTA, style: .gold, action: onBegin)
-                    .accessibilityIdentifier("onboarding.continue")
-                Text(OnboardingCopy.welcomeDurationHint)
-                    .font(SelahFont.ui(.caption))
-                    .foregroundStyle(ink.opacity(0.62))
-                    .padding(.top, 10)
             }
-            .padding(.horizontal, 26)
-            .safeAreaPadding(.top, 8)
-            .safeAreaPadding(.bottom, 12)
+            verseBlock
+                .padding(.horizontal, 30)
+                .padding(.bottom, 22)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .ignoresSafeArea()
-        .accessibilityElement(children: .contain)
-        .accessibilityIdentifier("onboarding.welcome.sanctuary")
-        .onAppear { breathe() }
+    }
+
+    private var meaning: some View {
+        Text(OnboardingCopy.welcomeMeaning)
+            .font(SelahFont.ui(.subheadline))
+            .multilineTextAlignment(.center)
+            .foregroundStyle(ink.opacity(0.86))
+            .padding(.horizontal, SelahSpacing.lectio)
+            .padding(.top, 22)
+            .padding(.bottom, 6)
+    }
+
+    private var foot: some View {
+        VStack(spacing: 8) {
+            SelahPrimaryButton(title: OnboardingCopy.welcomeCTA, style: .gold, action: onBegin)
+                .accessibilityIdentifier("onboarding.continue")
+            Text(OnboardingCopy.welcomeDurationHint)
+                .font(SelahFont.ui(.caption))
+                .foregroundStyle(ink.opacity(0.62))
+        }
+        .padding(.horizontal, SelahSpacing.pad)
+        .padding(.top, 12)
+        .safeAreaPadding(.bottom, 14)
     }
 
     private var sanctuaryBackground: some View {
         ZStack {
-            sundayLightFallback
+            LinearGradient(
+                colors: [SelahColors.primarySoft, SelahColors.background, SelahColors.backgroundWarm],
+                startPoint: .top,
+                endPoint: .bottom
+            )
             if let photo = SelahHero.windowImage {
                 Image(uiImage: photo)
                     .resizable()
@@ -72,30 +92,15 @@ struct WelcomeSanctuaryView: View {
                 endPoint: .bottom
             )
         }
+        .ignoresSafeArea()
         .allowsHitTesting(false)
-    }
-
-    private var sundayLightFallback: some View {
-        LinearGradient(
-            colors: [
-                SelahColors.primarySoft,
-                SelahColors.background,
-                SelahColors.backgroundWarm
-            ],
-            startPoint: .top,
-            endPoint: .bottom
-        )
     }
 
     private var mark: some View {
         ZStack {
-            Circle()
-                .fill(Color.white.opacity(0.10))
-                .frame(width: 128, height: 128)
+            Circle().fill(Color.white.opacity(0.10)).frame(width: 128, height: 128)
                 .scaleEffect(markGlow ? 1.06 : 0.94)
-            Circle()
-                .fill(Color.white.opacity(0.24))
-                .frame(width: 100, height: 100)
+            Circle().fill(Color.white.opacity(0.24)).frame(width: 100, height: 100)
             Circle()
                 .fill(Color.white.opacity(0.55))
                 .frame(width: 76, height: 76)

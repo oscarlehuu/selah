@@ -11,26 +11,29 @@ struct JourneyView: View {
 
     var body: some View {
         let moment = presentation
-        SelahTabScreen("Journey") {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    weekHero(moment)
-                    planCard(moment)
-                    JourneyJournalSection(entries: Array(journalEntries.prefix(12))) { entry in
-                        selectedEntry = entry
+        SelahTabScreen {
+            VStack(spacing: 0) {
+                SelahCompactHeader(title: "Journey") {
+                    Color.clear.frame(width: 44, height: 44)
+                } right: {
+                    SelahHeaderIconButton(
+                        systemName: "gearshape",
+                        label: "Settings",
+                        identifier: "selah.settings.open"
+                    ) {
+                        showSettings = true
                     }
                 }
-                .padding(.horizontal, 16)
-                .padding(.bottom, 28)
-            }
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        showSettings = true
-                    } label: {
-                        Image(systemName: "gearshape")
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        weekHero(moment)
+                        planCard(moment)
+                        JourneyJournalSection(entries: Array(journalEntries.prefix(12))) { entry in
+                            selectedEntry = entry
+                        }
                     }
-                    .accessibilityLabel("Settings")
+                    .padding(.horizontal, SelahSpacing.pad)
+                    .padding(.bottom, 28)
                 }
             }
             .sheet(isPresented: $showSettings) { SettingsView() }

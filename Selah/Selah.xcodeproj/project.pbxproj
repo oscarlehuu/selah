@@ -42,6 +42,7 @@
 		7A62507644F77BAAE577FB52 /* PaywallExitOfferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F4B1A1C9BB8C31E718544D /* PaywallExitOfferTests.swift */; };
 		7BB7CDEBCAAB7147DEE46BDC /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6DF875D6CB9898C25B9AD9 /* RootView.swift */; };
 		7F671D3F3204F78FE7BAECFC /* JournalEncryptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F0E021F29AC5BC9F90856C /* JournalEncryptionService.swift */; };
+		8298BCF1E033895D51F6FA3C /* SelahChromeLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C72AF8AAF6717BA14815560 /* SelahChromeLayoutTests.swift */; };
 		844B082CA336B4DFEC16F88F /* OnboardingFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227899F4FD42D79762A8C910 /* OnboardingFlowView.swift */; };
 		870651D1BC992451B8786048 /* ModelContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE93D1C35FEB0ED1EC7A2A /* ModelContainerFactory.swift */; };
 		875672E2C8D192D2C536F9DB /* PaywallExitPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39678197E53F7644146F42A /* PaywallExitPolicy.swift */; };
@@ -56,6 +57,7 @@
 		A43CC8440A0D9DEEBB78721A /* JourneyPresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EEA50CE4E340217394CF5A /* JourneyPresentationTests.swift */; };
 		A7EF23175EF9DBAC3841846C /* OnboardingCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF881C043A3DBCA64006E64A /* OnboardingCopy.swift */; };
 		AAC1E6D6CA824342AAB95B1F /* AppGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF126BFC8A60B798E505BFB2 /* AppGate.swift */; };
+		B5694AF845607BABBDB5799A /* SelahCompactHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDA68E44630AE51FE98984A /* SelahCompactHeader.swift */; };
 		B5E524C62D49D97AED8A0401 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 093B6D793617022470024834 /* Assets.xcassets */; };
 		B5FA1DB18C9D8BFD961C7228 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 559A18C1BE0BB510DA5A94FA /* README.md */; };
 		B7916A97ED06FB935CC6B3CE /* OnboardingCopyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B5AB98BA79CB3133766DE /* OnboardingCopyTests.swift */; };
@@ -71,6 +73,7 @@
 		DA39C249D995A2C142722066 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB7A2A584CA092661B4A88 /* PaywallView.swift */; };
 		DB40EA05D994EEA552828602 /* DemoSeedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDBFC98328CC2CF99A87849 /* DemoSeedData.swift */; };
 		EB255719068909C4A0167735 /* BiometricGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8BD4929F2DE6B313DC8471 /* BiometricGate.swift */; };
+		EBA8B56C06C07EFB41993278 /* SelahSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B516A8B1A1C974A8D3ED1E8F /* SelahSpacing.swift */; };
 		EDE610EC79CD100CDC662BB6 /* JourneyJournalSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89ACDABFC9C1FFA2CB9D6E5 /* JourneyJournalSection.swift */; };
 		EE1C71C170EE960C1ABEC258 /* Newsreader.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F77F4FD830EE6E3115B67D20 /* Newsreader.ttf */; };
 		F4E4AC8C7C5765B6A613EE41 /* SelahComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34954A88A9B1BAC753D2179C /* SelahComponents.swift */; };
@@ -107,6 +110,7 @@
 		28E2FB3B0D2ABC6203B9C0CA /* VerseOfTheDayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerseOfTheDayService.swift; sourceTree = "<group>"; };
 		291BD810F604CEDFD2EFDCC7 /* BibleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleRepository.swift; sourceTree = "<group>"; };
 		2BB1A812268E1A068D42FD27 /* MainTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTab.swift; sourceTree = "<group>"; };
+		2C72AF8AAF6717BA14815560 /* SelahChromeLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelahChromeLayoutTests.swift; sourceTree = "<group>"; };
 		2CDBFC98328CC2CF99A87849 /* DemoSeedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSeedData.swift; sourceTree = "<group>"; };
 		2F8B5AB98BA79CB3133766DE /* OnboardingCopyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCopyTests.swift; sourceTree = "<group>"; };
 		2FFDCC11945524B83701EC47 /* PaywallGateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallGateTests.swift; sourceTree = "<group>"; };
@@ -125,6 +129,7 @@
 		57BBAE851CA3254BA1F5B368 /* QualifyingForegroundTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualifyingForegroundTracker.swift; sourceTree = "<group>"; };
 		598E57D85801739916C3EDC0 /* WelcomeMomentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeMomentTests.swift; sourceTree = "<group>"; };
 		5E96E2ACC4A1BE64C1A4E890 /* NativeChromeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeChromeUITests.swift; sourceTree = "<group>"; };
+		5EDA68E44630AE51FE98984A /* SelahCompactHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelahCompactHeader.swift; sourceTree = "<group>"; };
 		5FF9EAAA5FB9318C3E64C61C /* JourneyPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyPresentation.swift; sourceTree = "<group>"; };
 		6180D61B3C86A0C1E9370026 /* TalkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkMode.swift; sourceTree = "<group>"; };
 		64A0E13DD7A314EE00663357 /* V4MomentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V4MomentUITests.swift; sourceTree = "<group>"; };
@@ -149,6 +154,7 @@
 		AB3CCD14A103148E4D5332DE /* Selah.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Selah.entitlements; sourceTree = "<group>"; };
 		B0A03CBBE487415293612390 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		B39678197E53F7644146F42A /* PaywallExitPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallExitPolicy.swift; sourceTree = "<group>"; };
+		B516A8B1A1C974A8D3ED1E8F /* SelahSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelahSpacing.swift; sourceTree = "<group>"; };
 		BB959296CF65A0EBD0362A83 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		BDC2F559556E97CE4594B8AE /* SelahUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SelahUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE335695ABBAE227E2D86AFF /* OnboardingFlowMappingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowMappingTests.swift; sourceTree = "<group>"; };
@@ -200,10 +206,12 @@
 			isa = PBXGroup;
 			children = (
 				1EA78F48C149B3AE290BCA55 /* SelahColors.swift */,
+				5EDA68E44630AE51FE98984A /* SelahCompactHeader.swift */,
 				34954A88A9B1BAC753D2179C /* SelahComponents.swift */,
 				49E88FEE60DD58B9AE5A1BA9 /* SelahFont.swift */,
 				1146D906EB13E1CF3C336EA4 /* SelahHero.swift */,
 				A5837D69D58641B4DE75C86C /* SelahScreenLayout.swift */,
+				B516A8B1A1C974A8D3ED1E8F /* SelahSpacing.swift */,
 				8B3CCEF8741E46DC5EB1D6E4 /* SelahTabScreen.swift */,
 			);
 			path = DesignSystem;
@@ -280,6 +288,7 @@
 				F6F4B1A1C9BB8C31E718544D /* PaywallExitOfferTests.swift */,
 				2FFDCC11945524B83701EC47 /* PaywallGateTests.swift */,
 				EC8FB9F35A1BD281B95513B2 /* PaywallHeadlineTests.swift */,
+				2C72AF8AAF6717BA14815560 /* SelahChromeLayoutTests.swift */,
 				FFC178B3A51CD70F806C175C /* StreakLogicTests.swift */,
 				598E57D85801739916C3EDC0 /* WelcomeMomentTests.swift */,
 			);
@@ -596,6 +605,7 @@
 				7A62507644F77BAAE577FB52 /* PaywallExitOfferTests.swift in Sources */,
 				1B15A57765AB0C29F327C777 /* PaywallGateTests.swift in Sources */,
 				8F4D785D59E6E7AA6F55E989 /* PaywallHeadlineTests.swift in Sources */,
+				8298BCF1E033895D51F6FA3C /* SelahChromeLayoutTests.swift in Sources */,
 				3E18CFE9493457293951F51C /* StreakLogicTests.swift in Sources */,
 				01E15A503EA571A8F6612388 /* WelcomeMomentTests.swift in Sources */,
 			);
@@ -640,11 +650,13 @@
 				7BB7CDEBCAAB7147DEE46BDC /* RootView.swift in Sources */,
 				A16497EFC811A3E49D6EBB67 /* SelahApp.swift in Sources */,
 				50C03AF86BA789CE52662DB5 /* SelahColors.swift in Sources */,
+				B5694AF845607BABBDB5799A /* SelahCompactHeader.swift in Sources */,
 				F4E4AC8C7C5765B6A613EE41 /* SelahComponents.swift in Sources */,
 				D3365CDFAD55789D860E1511 /* SelahFont.swift in Sources */,
 				8A6E932A8062360B1476FAA4 /* SelahHero.swift in Sources */,
 				0FCADE14CFC4CBB761493CDD /* SelahModels.swift in Sources */,
 				BE6C6F929F27C07987EA8F39 /* SelahScreenLayout.swift in Sources */,
+				EBA8B56C06C07EFB41993278 /* SelahSpacing.swift in Sources */,
 				027AA8ED1A34F27AF78AB304 /* SelahTabScreen.swift in Sources */,
 				12165995B6321DAFFD6B0942 /* SettingsView.swift in Sources */,
 				FCF81841FD36D2709915185B /* StreakLogic.swift in Sources */,

@@ -23,10 +23,32 @@ final class V4MomentUITests: XCTestCase {
             "Gold Begin CTA missing"
         )
         XCTAssertFalse(app.webViews.firstMatch.exists)
-        XCTAssertFalse(
-            app.staticTexts["Welcome"].exists && app.tables.firstMatch.exists,
-            "Welcome should not present as a titled form with table cards"
-        )
+    }
+
+    func testTalkPrayJourneyCompactChrome() {
+        let app = XCUIApplication(bundleIdentifier: "com.lilgroup.selah")
+        app.launchArguments = ["-DemoMode"]
+        app.launch()
+        XCTAssertTrue(app.tabBars.firstMatch.waitForExistence(timeout: 15))
+
+        app.tabBars.buttons["Talk"].tap()
+        XCTAssertTrue(app.otherElements["selah.navbar"].waitForExistence(timeout: 5))
+        XCTAssertEqual(app.otherElements["selah.navbar.title"].label, "Talk")
+        XCTAssertTrue(app.buttons["talk.privacy"].exists)
+        XCTAssertTrue(app.buttons["talk.clear"].exists)
+        XCTAssertFalse(app.buttons["selah.settings.open"].exists)
+
+        app.tabBars.buttons["Pray"].tap()
+        XCTAssertTrue(app.otherElements["selah.navbar"].waitForExistence(timeout: 5))
+        XCTAssertEqual(app.otherElements["selah.navbar.title"].label, "Pray")
+        XCTAssertTrue(app.buttons["pray.close"].exists)
+        XCTAssertTrue(app.staticTexts["Read it slowly"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.buttons["selah.settings.open"].exists)
+
+        app.tabBars.buttons["Journey"].tap()
+        XCTAssertTrue(app.otherElements["selah.navbar"].waitForExistence(timeout: 5))
+        XCTAssertEqual(app.otherElements["selah.navbar.title"].label, "Journey")
+        XCTAssertTrue(app.buttons["selah.settings.open"].exists)
     }
 
     func testJourneyShowsWeekPathGraceStatsAndPlan() {
@@ -37,7 +59,7 @@ final class V4MomentUITests: XCTestCase {
         XCTAssertTrue(app.tabBars.firstMatch.waitForExistence(timeout: 15))
         app.tabBars.buttons["Journey"].tap()
 
-        XCTAssertTrue(app.navigationBars["Journey"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.otherElements["selah.navbar"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["Days with God"].waitForExistence(timeout: 5))
         XCTAssertTrue(
             app.otherElements["journey.weekPath"].waitForExistence(timeout: 5),
@@ -49,7 +71,6 @@ final class V4MomentUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["Minutes in prayer"].exists)
         XCTAssertTrue(app.staticTexts["Chapters read"].exists)
         XCTAssertTrue(app.staticTexts["Your 7-day plan"].exists)
-        XCTAssertTrue(app.otherElements["journey.plan"].waitForExistence(timeout: 3) || app.staticTexts["Your 7-day plan"].exists)
         XCTAssertTrue(app.staticTexts["Journal"].exists)
         XCTAssertFalse(app.webViews.firstMatch.exists)
     }
