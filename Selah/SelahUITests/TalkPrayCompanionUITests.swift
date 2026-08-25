@@ -58,6 +58,7 @@ final class TalkPrayCompanionUITests: XCTestCase {
             "Pray step should generate, offer generate, fail honestly, or show silent Lectio"
         )
 
+        let another = app.buttons["pray.another"]
         if another.waitForExistence(timeout: 2) {
             saveProof(app, name: "03-pray-draft")
             another.tap()

@@ -67,11 +67,12 @@ final class CompanionAvailabilityTests: XCTestCase {
     }
 
     private func skipIfModelAssetsMissing(_ turn: CompanionTurn) throws {
-        let detail = (turn.generationDetail ?? "").lowercased()
-        guard turn.source == .failed else { return }
+        if turn.source == .onDevice { return }
+        let detail = (turn.generationDetail ?? turn.reply).lowercased()
         if detail.contains("model catalog")
             || detail.contains("no underlying assets")
-            || detail.contains("modelmanagererror") {
+            || detail.contains("modelmanagererror")
+            || (turn.source == .unavailable && detail.contains("apple intelligence")) {
             throw XCTSkip("Simulator advertises Apple Intelligence, but Foundation Model assets are not installed here.")
         }
     }

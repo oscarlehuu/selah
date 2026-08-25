@@ -101,7 +101,7 @@ struct PrayView: View {
 
     @ViewBuilder
     private var prayStep: some View {
-        if !CompanionTextService.isOnDeviceCompanionAvailable {
+        if !CompanionTextService.isOnDeviceCompanionAvailable || engine.turn?.source == .unavailable {
             Text(CompanionTextService.silentPrayMessage)
                 .foregroundStyle(.secondary)
                 .accessibilityIdentifier("pray.silent")

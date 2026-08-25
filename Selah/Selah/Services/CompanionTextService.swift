@@ -75,11 +75,21 @@ enum CompanionTextService {
             case .text(let raw):
                 return parse(raw, .onDevice)
             case .failed(let detail):
+                if isMissingModelAssets(detail) {
+                    return .unavailable(unavailableMessage)
+                }
                 return .failed(failedMessage, detail: detail)
             }
         }
         #endif
         return .unavailable(unavailableMessage)
+    }
+
+    private static func isMissingModelAssets(_ detail: String) -> Bool {
+        let lower = detail.lowercased()
+        return lower.contains("model catalog")
+            || lower.contains("no underlying assets")
+            || lower.contains("modelmanagererror")
     }
 
     #if canImport(FoundationModels)
