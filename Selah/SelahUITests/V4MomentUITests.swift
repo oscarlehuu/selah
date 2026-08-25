@@ -22,6 +22,9 @@ final class V4MomentUITests: XCTestCase {
                 || app.buttons["Begin"].exists,
             "Gold Begin CTA missing"
         )
+        XCTAssertTrue(app.buttons["onboarding.skip"].waitForExistence(timeout: 3), "Welcome Skip overlay missing")
+        XCTAssertFalse(app.navigationBars["Welcome"].exists)
+        XCTAssertFalse(app.navigationBars["Selah"].exists)
         XCTAssertFalse(app.webViews.firstMatch.exists)
     }
 

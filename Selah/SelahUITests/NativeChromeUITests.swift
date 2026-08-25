@@ -11,14 +11,20 @@ final class NativeChromeUITests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(
-            app.navigationBars.firstMatch.waitForExistence(timeout: 15),
-            "Onboarding must use UINavigationBar, not a custom web header"
+            app.otherElements["onboarding.welcome.sanctuary"].waitForExistence(timeout: 15),
+            "Welcome must be a full-bleed sanctuary, not a web header"
+        )
+        XCTAssertTrue(
+            app.buttons["onboarding.skip"].waitForExistence(timeout: 5),
+            "Welcome Skip must stay as an overlay when the system nav bar is hidden"
         )
         XCTAssertTrue(
             app.buttons["onboarding.continue"].waitForExistence(timeout: 5)
                 || app.buttons["Begin"].waitForExistence(timeout: 2),
             "Primary onboarding CTA missing"
         )
+        XCTAssertFalse(app.navigationBars["Today"].exists)
+        XCTAssertFalse(app.navigationBars["Welcome"].exists)
         XCTAssertFalse(app.webViews.firstMatch.exists, "App must not embed the HTML mock")
         XCTAssertFalse(app.staticTexts["Coming soon"].exists)
         XCTAssertFalse(app.buttons["Coming soon"].exists)
