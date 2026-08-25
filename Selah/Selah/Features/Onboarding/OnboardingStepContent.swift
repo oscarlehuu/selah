@@ -207,13 +207,15 @@ struct OnboardingStepContent: View {
                     .font(SelahFont.ui(.caption, weight: .semibold))
                     .foregroundStyle(.secondary)
             }
-            Section("A prayer you can say") {
+            Section {
                 if isGenerating {
                     ProgressView("Preparing a prayer")
                 } else {
                     Text(demoResult.isEmpty ? CompanionTextService.unavailableMessage : demoResult)
                         .font(SelahFont.verse(.body))
                 }
+            } header: {
+                Text("A prayer you can say")
             } footer: {
                 Text(OnboardingCopy.companionDisclaimer)
             }
