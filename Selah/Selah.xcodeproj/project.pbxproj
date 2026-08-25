@@ -12,6 +12,7 @@
 		02DC7278B0BB729F01AEBCEB /* CrisisKeywordMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D50758BE1314017DA139E7 /* CrisisKeywordMatcherTests.swift */; };
 		033FC2B3409A5E510B122043 /* NativeChromeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E96E2ACC4A1BE64C1A4E890 /* NativeChromeUITests.swift */; };
 		0894F00AA4DDCE5C8E43ABFE /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = C9A43BEE85680C873449F6C5 /* RevenueCat */; };
+		0E963D630B2DEDBF564EF7F2 /* TalkSessionEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF952F290242A926605EE5C /* TalkSessionEngineTests.swift */; };
 		0FC6C32E749679EAFAEDEF6E /* NotificationPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6FD5D08A4207E03214E4E0 /* NotificationPromptView.swift */; };
 		0FCADE14CFC4CBB761493CDD /* SelahModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838C3BA2893257D94EE21D29 /* SelahModels.swift */; };
 		12165995B6321DAFFD6B0942 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD52CCF648677AB6AA5CB8B /* SettingsView.swift */; };
@@ -29,27 +30,36 @@
 		4CCF2A074FDF4682EDFBBFF1 /* ReadingPlanRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B68C79929C4F5EE6742002E /* ReadingPlanRepository.swift */; };
 		50C03AF86BA789CE52662DB5 /* SelahColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA78F48C149B3AE290BCA55 /* SelahColors.swift */; };
 		5407C5658D2E9AD4BF38158C /* BibleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291BD810F604CEDFD2EFDCC7 /* BibleRepository.swift */; };
+		57F955361B265EEA304F7661 /* TalkPrayCompanionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6153B7E9D2D446BA605FB4 /* TalkPrayCompanionUITests.swift */; };
 		5807F5BF35658DD567B0E50C /* Figtree.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D462C69E6485F2BB7987BC53 /* Figtree.ttf */; };
 		5BBEEB33B689827734462371 /* OnboardingOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0D31C25F934961BBB20FA /* OnboardingOptions.swift */; };
 		684646858720070AA00CD5FC /* TalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC43C88A0A8F3A40F5BDE09 /* TalkView.swift */; };
 		6A3FF1BAEB36681142910F44 /* VerseOfTheDayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E2FB3B0D2ABC6203B9C0CA /* VerseOfTheDayService.swift */; };
 		6E348907E6CEC3BB9A3D5570 /* PrayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A9F85775DEB8CD543D9D78 /* PrayView.swift */; };
 		6EE7C033BBDF679B8684D5F4 /* MainTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB1A812268E1A068D42FD27 /* MainTab.swift */; };
+		6EE98B12ADEA625EC7E71B24 /* CompanionGenerating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229A4A3BEA235AF1EB7FD384 /* CompanionGenerating.swift */; };
 		704A50640F04F7A8BAB32213 /* BibleBookCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7843447802CCEB57C215D140 /* BibleBookCatalog.swift */; };
+		71BA652B5E198CF2240A4050 /* TalkSessionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00921A4F7CB459F848F87E1 /* TalkSessionEngine.swift */; };
+		720374125C498906BD98B5A1 /* TalkSupportSheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D43703D2CD6B8BF1541DD /* TalkSupportSheets.swift */; };
+		734A7D1BF8D429DE58D5B010 /* CompanionPromptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C862F0C563A49F4B9E403C /* CompanionPromptTests.swift */; };
 		7A62507644F77BAAE577FB52 /* PaywallExitOfferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F4B1A1C9BB8C31E718544D /* PaywallExitOfferTests.swift */; };
 		7BB7CDEBCAAB7147DEE46BDC /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6DF875D6CB9898C25B9AD9 /* RootView.swift */; };
 		7F671D3F3204F78FE7BAECFC /* JournalEncryptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F0E021F29AC5BC9F90856C /* JournalEncryptionService.swift */; };
 		844B082CA336B4DFEC16F88F /* OnboardingFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227899F4FD42D79762A8C910 /* OnboardingFlowView.swift */; };
 		870651D1BC992451B8786048 /* ModelContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE93D1C35FEB0ED1EC7A2A /* ModelContainerFactory.swift */; };
 		875672E2C8D192D2C536F9DB /* PaywallExitPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39678197E53F7644146F42A /* PaywallExitPolicy.swift */; };
+		8F200674ADA7E74B3C2057E5 /* LectioStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F8FD64B78AFB7B69938FDF /* LectioStep.swift */; };
 		8F4D785D59E6E7AA6F55E989 /* PaywallHeadlineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8FB9F35A1BD281B95513B2 /* PaywallHeadlineTests.swift */; };
 		9615D212FAC27A54A552441B /* AppFlowScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919FD51E804FD9A324724C10 /* AppFlowScreenshotTests.swift */; };
 		98AB8C523B3919254149C592 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 67A233483504614AD02C0F2E /* GRDB */; };
+		9B849C3653AA1DD25CAF896F /* CompanionTurnParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C6027688E8A635A1608AC7 /* CompanionTurnParserTests.swift */; };
 		A16497EFC811A3E49D6EBB67 /* SelahApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699E4315B6E2D4D22377638 /* SelahApp.swift */; };
 		A2636125B449881C86C47897 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F7C9E07D873C8ED6ED115 /* TodayView.swift */; };
+		A2934F75141D41B107F2745B /* CompanionPrompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0C442CAC03A911820DE6A3 /* CompanionPrompts.swift */; };
 		A2CDBD7C8BAB3F8B36F19F0B /* JournalEntryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE6B445BB7ADD39AE13EB5B /* JournalEntryDetailView.swift */; };
 		A7EF23175EF9DBAC3841846C /* OnboardingCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF881C043A3DBCA64006E64A /* OnboardingCopy.swift */; };
 		AAC1E6D6CA824342AAB95B1F /* AppGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF126BFC8A60B798E505BFB2 /* AppGate.swift */; };
+		B2061A22B9076253C3E56164 /* LectioPrayEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78806FA888B50FE112933566 /* LectioPrayEngine.swift */; };
 		B5E524C62D49D97AED8A0401 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 093B6D793617022470024834 /* Assets.xcassets */; };
 		B5FA1DB18C9D8BFD961C7228 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 559A18C1BE0BB510DA5A94FA /* README.md */; };
 		B7916A97ED06FB935CC6B3CE /* OnboardingCopyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B5AB98BA79CB3133766DE /* OnboardingCopyTests.swift */; };
@@ -59,6 +69,7 @@
 		C70F4B08D44D911EEE912D5F /* CompanionAvailabilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE87C8F83EE4A440FC3570B7 /* CompanionAvailabilityTests.swift */; };
 		CD359B304F0C5F238A430425 /* JourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA64D8528FA9BD6D6AC0DD6 /* JourneyView.swift */; };
 		CDE378533D282B306F433CA5 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB959296CF65A0EBD0362A83 /* MainTabView.swift */; };
+		CDF6AD0E70DFAE4F5875D740 /* CompanionTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46BAA1A1973DED6C62F6C2D /* CompanionTurn.swift */; };
 		D1D618DA994B2208184CBD2A /* SubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4C0C567D665189A71BB4CF /* SubscriptionService.swift */; };
 		D3365CDFAD55789D860E1511 /* SelahFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E88FEE60DD58B9AE5A1BA9 /* SelahFont.swift */; };
 		DA39C249D995A2C142722066 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB7A2A584CA092661B4A88 /* PaywallView.swift */; };
@@ -93,8 +104,10 @@
 		093B6D793617022470024834 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		168B564307C7764979643B5D /* BibleBookCatalogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleBookCatalogTests.swift; sourceTree = "<group>"; };
 		16D50758BE1314017DA139E7 /* CrisisKeywordMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrisisKeywordMatcherTests.swift; sourceTree = "<group>"; };
+		1B3D43703D2CD6B8BF1541DD /* TalkSupportSheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkSupportSheets.swift; sourceTree = "<group>"; };
 		1EA78F48C149B3AE290BCA55 /* SelahColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelahColors.swift; sourceTree = "<group>"; };
 		227899F4FD42D79762A8C910 /* OnboardingFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowView.swift; sourceTree = "<group>"; };
+		229A4A3BEA235AF1EB7FD384 /* CompanionGenerating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionGenerating.swift; sourceTree = "<group>"; };
 		28E2FB3B0D2ABC6203B9C0CA /* VerseOfTheDayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerseOfTheDayService.swift; sourceTree = "<group>"; };
 		291BD810F604CEDFD2EFDCC7 /* BibleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleRepository.swift; sourceTree = "<group>"; };
 		2BB1A812268E1A068D42FD27 /* MainTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTab.swift; sourceTree = "<group>"; };
@@ -109,6 +122,7 @@
 		49E88FEE60DD58B9AE5A1BA9 /* SelahFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelahFont.swift; sourceTree = "<group>"; };
 		4BEDB053426AB38601BFD739 /* OnboardingStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStep.swift; sourceTree = "<group>"; };
 		4DCE93D1C35FEB0ED1EC7A2A /* ModelContainerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelContainerFactory.swift; sourceTree = "<group>"; };
+		54F8FD64B78AFB7B69938FDF /* LectioStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectioStep.swift; sourceTree = "<group>"; };
 		553F7C9E07D873C8ED6ED115 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		559A18C1BE0BB510DA5A94FA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		57BBAE851CA3254BA1F5B368 /* QualifyingForegroundTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualifyingForegroundTracker.swift; sourceTree = "<group>"; };
@@ -116,6 +130,7 @@
 		6180D61B3C86A0C1E9370026 /* TalkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkMode.swift; sourceTree = "<group>"; };
 		717D9496DDA4A712617E7A0D /* OnboardingStepContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStepContent.swift; sourceTree = "<group>"; };
 		7843447802CCEB57C215D140 /* BibleBookCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleBookCatalog.swift; sourceTree = "<group>"; };
+		78806FA888B50FE112933566 /* LectioPrayEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectioPrayEngine.swift; sourceTree = "<group>"; };
 		838C3BA2893257D94EE21D29 /* SelahModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelahModels.swift; sourceTree = "<group>"; };
 		8B3CCEF8741E46DC5EB1D6E4 /* SelahTabScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelahTabScreen.swift; sourceTree = "<group>"; };
 		8D6DF875D6CB9898C25B9AD9 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -130,6 +145,9 @@
 		9B68C79929C4F5EE6742002E /* ReadingPlanRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingPlanRepository.swift; sourceTree = "<group>"; };
 		9E94463E0E94A0D0A5B9DBF6 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		9EE6B445BB7ADD39AE13EB5B /* JournalEntryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryDetailView.swift; sourceTree = "<group>"; };
+		9F6153B7E9D2D446BA605FB4 /* TalkPrayCompanionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkPrayCompanionUITests.swift; sourceTree = "<group>"; };
+		A0C6027688E8A635A1608AC7 /* CompanionTurnParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionTurnParserTests.swift; sourceTree = "<group>"; };
+		A46BAA1A1973DED6C62F6C2D /* CompanionTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionTurn.swift; sourceTree = "<group>"; };
 		A5837D69D58641B4DE75C86C /* SelahScreenLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelahScreenLayout.swift; sourceTree = "<group>"; };
 		AAC43C88A0A8F3A40F5BDE09 /* TalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkView.swift; sourceTree = "<group>"; };
 		AB3CCD14A103148E4D5332DE /* Selah.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Selah.entitlements; sourceTree = "<group>"; };
@@ -137,14 +155,18 @@
 		B39678197E53F7644146F42A /* PaywallExitPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallExitPolicy.swift; sourceTree = "<group>"; };
 		BB959296CF65A0EBD0362A83 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		BDC2F559556E97CE4594B8AE /* SelahUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SelahUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDF952F290242A926605EE5C /* TalkSessionEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkSessionEngineTests.swift; sourceTree = "<group>"; };
 		BE335695ABBAE227E2D86AFF /* OnboardingFlowMappingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowMappingTests.swift; sourceTree = "<group>"; };
 		BE4C0C567D665189A71BB4CF /* SubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionService.swift; sourceTree = "<group>"; };
+		CA0C442CAC03A911820DE6A3 /* CompanionPrompts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionPrompts.swift; sourceTree = "<group>"; };
 		CC6FD5D08A4207E03214E4E0 /* NotificationPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPromptView.swift; sourceTree = "<group>"; };
+		D00921A4F7CB459F848F87E1 /* TalkSessionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkSessionEngine.swift; sourceTree = "<group>"; };
 		D383D57B0C7DE0C19A816B99 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		D462C69E6485F2BB7987BC53 /* Figtree.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Figtree.ttf; sourceTree = "<group>"; };
 		D9B89EF7DD2D030D78E4375F /* ReadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadView.swift; sourceTree = "<group>"; };
 		DE331C6DCDEA12D94E52464E /* Selah.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Selah.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3F0E021F29AC5BC9F90856C /* JournalEncryptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEncryptionService.swift; sourceTree = "<group>"; };
+		E7C862F0C563A49F4B9E403C /* CompanionPromptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionPromptTests.swift; sourceTree = "<group>"; };
 		EC8FB9F35A1BD281B95513B2 /* PaywallHeadlineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallHeadlineTests.swift; sourceTree = "<group>"; };
 		EF126BFC8A60B798E505BFB2 /* AppGate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGate.swift; sourceTree = "<group>"; };
 		F6F4B1A1C9BB8C31E718544D /* PaywallExitOfferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallExitOfferTests.swift; sourceTree = "<group>"; };
@@ -211,6 +233,8 @@
 		45A47561BAE53FE8B7DAB8CD /* Talk */ = {
 			isa = PBXGroup;
 			children = (
+				D00921A4F7CB459F848F87E1 /* TalkSessionEngine.swift */,
+				1B3D43703D2CD6B8BF1541DD /* TalkSupportSheets.swift */,
 				AAC43C88A0A8F3A40F5BDE09 /* TalkView.swift */,
 			);
 			path = Talk;
@@ -222,7 +246,10 @@
 				D383D57B0C7DE0C19A816B99 /* AnalyticsService.swift */,
 				291BD810F604CEDFD2EFDCC7 /* BibleRepository.swift */,
 				8E8BD4929F2DE6B313DC8471 /* BiometricGate.swift */,
+				229A4A3BEA235AF1EB7FD384 /* CompanionGenerating.swift */,
+				CA0C442CAC03A911820DE6A3 /* CompanionPrompts.swift */,
 				FE2E99F48CF3103937A925D8 /* CompanionTextService.swift */,
+				A46BAA1A1973DED6C62F6C2D /* CompanionTurn.swift */,
 				4701EC00A4A904B98C9A6DD5 /* CrisisKeywordMatcher.swift */,
 				E3F0E021F29AC5BC9F90856C /* JournalEncryptionService.swift */,
 				9B68C79929C4F5EE6742002E /* ReadingPlanRepository.swift */,
@@ -255,6 +282,8 @@
 			children = (
 				168B564307C7764979643B5D /* BibleBookCatalogTests.swift */,
 				FE87C8F83EE4A440FC3570B7 /* CompanionAvailabilityTests.swift */,
+				E7C862F0C563A49F4B9E403C /* CompanionPromptTests.swift */,
+				A0C6027688E8A635A1608AC7 /* CompanionTurnParserTests.swift */,
 				16D50758BE1314017DA139E7 /* CrisisKeywordMatcherTests.swift */,
 				2F8B5AB98BA79CB3133766DE /* OnboardingCopyTests.swift */,
 				BE335695ABBAE227E2D86AFF /* OnboardingFlowMappingTests.swift */,
@@ -262,6 +291,7 @@
 				2FFDCC11945524B83701EC47 /* PaywallGateTests.swift */,
 				EC8FB9F35A1BD281B95513B2 /* PaywallHeadlineTests.swift */,
 				FFC178B3A51CD70F806C175C /* StreakLogicTests.swift */,
+				BDF952F290242A926605EE5C /* TalkSessionEngineTests.swift */,
 			);
 			path = SelahTests;
 			sourceTree = "<group>";
@@ -323,6 +353,7 @@
 				919FD51E804FD9A324724C10 /* AppFlowScreenshotTests.swift */,
 				95FD874C4771DD0D51C25B34 /* DemoTabScreenshotTests.swift */,
 				5E96E2ACC4A1BE64C1A4E890 /* NativeChromeUITests.swift */,
+				9F6153B7E9D2D446BA605FB4 /* TalkPrayCompanionUITests.swift */,
 			);
 			path = SelahUITests;
 			sourceTree = "<group>";
@@ -355,6 +386,8 @@
 		A7F6BDF40B97C7683EF1814C /* Pray */ = {
 			isa = PBXGroup;
 			children = (
+				78806FA888B50FE112933566 /* LectioPrayEngine.swift */,
+				54F8FD64B78AFB7B69938FDF /* LectioStep.swift */,
 				92A9F85775DEB8CD543D9D78 /* PrayView.swift */,
 			);
 			path = Pray;
@@ -565,6 +598,8 @@
 			files = (
 				40396A706773731887A29949 /* BibleBookCatalogTests.swift in Sources */,
 				C70F4B08D44D911EEE912D5F /* CompanionAvailabilityTests.swift in Sources */,
+				734A7D1BF8D429DE58D5B010 /* CompanionPromptTests.swift in Sources */,
+				9B849C3653AA1DD25CAF896F /* CompanionTurnParserTests.swift in Sources */,
 				02DC7278B0BB729F01AEBCEB /* CrisisKeywordMatcherTests.swift in Sources */,
 				B7916A97ED06FB935CC6B3CE /* OnboardingCopyTests.swift in Sources */,
 				F807A0912F729D8843E08171 /* OnboardingFlowMappingTests.swift in Sources */,
@@ -572,6 +607,7 @@
 				1B15A57765AB0C29F327C777 /* PaywallGateTests.swift in Sources */,
 				8F4D785D59E6E7AA6F55E989 /* PaywallHeadlineTests.swift in Sources */,
 				3E18CFE9493457293951F51C /* StreakLogicTests.swift in Sources */,
+				0E963D630B2DEDBF564EF7F2 /* TalkSessionEngineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,13 +622,18 @@
 				704A50640F04F7A8BAB32213 /* BibleBookCatalog.swift in Sources */,
 				5407C5658D2E9AD4BF38158C /* BibleRepository.swift in Sources */,
 				EB255719068909C4A0167735 /* BiometricGate.swift in Sources */,
+				6EE98B12ADEA625EC7E71B24 /* CompanionGenerating.swift in Sources */,
+				A2934F75141D41B107F2745B /* CompanionPrompts.swift in Sources */,
 				C4E5B4EC9EC76FE0B5952003 /* CompanionTextService.swift in Sources */,
+				CDF6AD0E70DFAE4F5875D740 /* CompanionTurn.swift in Sources */,
 				4459373DE148FEAFE9E4B8D3 /* CrisisKeywordMatcher.swift in Sources */,
 				279345D8DDA151DC6D214C03 /* DemoMode.swift in Sources */,
 				DB40EA05D994EEA552828602 /* DemoSeedData.swift in Sources */,
 				7F671D3F3204F78FE7BAECFC /* JournalEncryptionService.swift in Sources */,
 				A2CDBD7C8BAB3F8B36F19F0B /* JournalEntryDetailView.swift in Sources */,
 				CD359B304F0C5F238A430425 /* JourneyView.swift in Sources */,
+				B2061A22B9076253C3E56164 /* LectioPrayEngine.swift in Sources */,
+				8F200674ADA7E74B3C2057E5 /* LectioStep.swift in Sources */,
 				6EE7C033BBDF679B8684D5F4 /* MainTab.swift in Sources */,
 				CDE378533D282B306F433CA5 /* MainTabView.swift in Sources */,
 				870651D1BC992451B8786048 /* ModelContainerFactory.swift in Sources */,
@@ -620,6 +661,8 @@
 				FCF81841FD36D2709915185B /* StreakLogic.swift in Sources */,
 				D1D618DA994B2208184CBD2A /* SubscriptionService.swift in Sources */,
 				4BC9668DE722F80CB1706A6F /* TalkMode.swift in Sources */,
+				71BA652B5E198CF2240A4050 /* TalkSessionEngine.swift in Sources */,
+				720374125C498906BD98B5A1 /* TalkSupportSheets.swift in Sources */,
 				684646858720070AA00CD5FC /* TalkView.swift in Sources */,
 				A2636125B449881C86C47897 /* TodayView.swift in Sources */,
 				6A3FF1BAEB36681142910F44 /* VerseOfTheDayService.swift in Sources */,
@@ -633,6 +676,7 @@
 				9615D212FAC27A54A552441B /* AppFlowScreenshotTests.swift in Sources */,
 				0181F867CD3465F5F3DEE089 /* DemoTabScreenshotTests.swift in Sources */,
 				033FC2B3409A5E510B122043 /* NativeChromeUITests.swift in Sources */,
+				57F955361B265EEA304F7661 /* TalkPrayCompanionUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,7 +727,9 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Selah;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -791,7 +837,9 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Selah;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

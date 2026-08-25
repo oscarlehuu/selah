@@ -24,59 +24,76 @@ enum CompanionTextService {
     Apple Intelligence is not available on this phone yet. Selah still keeps your reading, Bible, and private journal here — nothing is sent to a cloud companion.
     """
 
-    static func talkReply(to userMessage: String, mode: String) async -> String {
-        guard isOnDeviceCompanionAvailable else { return unavailableMessage }
+    static let silentPrayMessage = """
+    Pray in the quiet. There is no generated draft on this iPhone — that needs Apple Intelligence. Speak to God in your own words, or rest here.
+    """
+
+    static let failedMessage = "Selah could not generate a response right now. You are still heard by God."
+
+    static func talkReply(
+        to userMessage: String,
+        mode: TalkMode,
+        history: [TalkLine] = []
+    ) async -> CompanionTurn {
+        guard isOnDeviceCompanionAvailable else { return .unavailable(unavailableMessage) }
         #if canImport(FoundationModels)
         if #available(iOS 26.0, *) {
-            return await generate(
-                prompt: """
-                Private on-device Christian companion. Mode: \(mode).
-                User said: "\(userMessage)"
-                Reply in 2-4 sentences with empathy and one Scripture reference.
-                You are not God, a pastor, priest, or therapist.
-                """
+            let raw = await generate(
+                instructions: CompanionPrompts.talkInstructions(mode: mode),
+                prompt: CompanionPrompts.talkUserPrompt(message: userMessage, history: history)
             )
+            guard let raw else { return .failed(failedMessage) }
+            return CompanionTurnParser.parseTalk(raw, source: .onDevice)
         }
         #endif
-        return unavailableMessage
+        return .unavailable(unavailableMessage)
     }
 
     static func reflection(for mood: String) async -> String {
-        guard isOnDeviceCompanionAvailable else { return unavailableMessage }
-        #if canImport(FoundationModels)
-        if #available(iOS 26.0, *) {
-            return await generate(
-                prompt: """
-                Write a short prayer reflection (3-4 sentences) for someone feeling \(mood).
-                Warm, grace-filled. Include one KJV-style reference. Not a pastor. Not God.
-                """
-            )
-        }
-        #endif
-        return unavailableMessage
+        let turn = await reflectionTurn(for: mood)
+        return turn.persistedText
     }
 
-    static func prayerDraft(context: String) async -> String {
-        guard isOnDeviceCompanionAvailable else { return unavailableMessage }
+    static func reflectionTurn(for mood: String) async -> CompanionTurn {
+        guard isOnDeviceCompanionAvailable else { return .unavailable(unavailableMessage) }
         #if canImport(FoundationModels)
         if #available(iOS 26.0, *) {
-            return await generate(
-                prompt: "Write a personal prayer (4-6 lines) for: \(context). Address God directly. Grace tone."
+            let raw = await generate(
+                instructions: CompanionPrompts.reflectionInstructions(),
+                prompt: CompanionPrompts.reflectionUserPrompt(mood: mood)
             )
+            guard let raw else { return .failed(failedMessage) }
+            return CompanionTurnParser.parseTalk(raw, source: .onDevice)
         }
         #endif
-        return unavailableMessage
+        return .unavailable(unavailableMessage)
+    }
+
+    static func prayerDraft(context: PrayerDraftContext) async -> CompanionTurn {
+        guard isOnDeviceCompanionAvailable else { return .unavailable(unavailableMessage) }
+        #if canImport(FoundationModels)
+        if #available(iOS 26.0, *) {
+            let raw = await generate(
+                instructions: CompanionPrompts.prayerInstructions(),
+                prompt: CompanionPrompts.prayerUserPrompt(context: context)
+            )
+            guard let raw else { return .failed(failedMessage) }
+            return CompanionTurnParser.parsePrayer(raw, source: .onDevice)
+        }
+        #endif
+        return .unavailable(unavailableMessage)
     }
 
     #if canImport(FoundationModels)
     @available(iOS 26.0, *)
-    private static func generate(prompt: String) async -> String {
+    private static func generate(instructions: String, prompt: String) async -> String? {
         do {
-            let session = LanguageModelSession()
+            let session = LanguageModelSession(instructions: instructions)
             let response = try await session.respond(to: prompt)
-            return response.content
+            let content = response.content.trimmingCharacters(in: .whitespacesAndNewlines)
+            return content.isEmpty ? nil : content
         } catch {
-            return "Selah could not generate a response right now. You are still heard by God."
+            return nil
         }
     }
     #endif

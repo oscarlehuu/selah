@@ -21,6 +21,8 @@ final class AppEnvironment {
     var prayQuickMode = false
     var pendingTalkMood: OnboardingMood?
     var pendingTalkVerse: String?
+    var pendingPrayMood: String?
+    var pendingPrayVerse: String?
     var selectedTalkMode: TalkMode = .heart
 
     private let modelContext: ModelContext

@@ -58,6 +58,7 @@ struct SelahComposerBar: View {
                 }
                 .disabled(!canSend || isSending)
                 .accessibilityLabel("Send")
+                .accessibilityIdentifier("talk.send")
             }
         }
     }

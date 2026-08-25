@@ -2,10 +2,10 @@ import SwiftUI
 
 struct PrayView: View {
     @Environment(AppEnvironment.self) private var env
+    @State private var engine = LectioPrayEngine()
     @State private var step = 0
     @State private var reflectionWord = ""
-    @State private var generatedPrayer = ""
-    @State private var isGenerating = false
+    @State private var useQuickDurations = false
     @State private var secondsRemaining = 0
     @State private var timerTask: Task<Void, Never>?
 
@@ -45,6 +45,7 @@ struct PrayView: View {
                         style: step < 3 ? .primary : .gold,
                         action: advance
                     )
+                    .accessibilityIdentifier(step < 3 ? "pray.continue" : "pray.amen")
                     if step > 0 {
                         Button("Back") { step -= 1 }
                             .font(SelahFont.ui(.subheadline, weight: .semibold))
@@ -56,7 +57,11 @@ struct PrayView: View {
             AnalyticsService.track("pray_open", properties: [
                 "fm_available": CompanionTextService.isOnDeviceCompanionAvailable
             ])
-            if env.prayQuickMode { env.prayQuickMode = false }
+            if !CompanionTextService.isOnDeviceCompanionAvailable {
+                AnalyticsService.track("fm_unavailable_shown")
+            }
+            useQuickDurations = env.prayQuickMode
+            env.prayQuickMode = false
             startTimer()
             trackStep(step)
         }
@@ -64,6 +69,9 @@ struct PrayView: View {
         .onChange(of: step) { _, newStep in
             trackStep(newStep)
             startTimer()
+            if newStep == 2 {
+                Task { await generatePrayer(force: false) }
+            }
         }
     }
 
@@ -79,21 +87,46 @@ struct PrayView: View {
                 .font(SelahFont.verse(.body))
         case 1:
             TextField("What word stood out?", text: $reflectionWord)
+                .accessibilityIdentifier("pray.word")
             ForEach(["refuge", "strength", "present help"], id: \.self) { word in
                 Button(word) { reflectionWord = word }
             }
         case 2:
-            if generatedPrayer.isEmpty {
-                Button("Generate prayer") { generate() }
-                    .disabled(isGenerating)
-                if isGenerating { ProgressView() }
-            } else {
-                Text(generatedPrayer).font(SelahFont.verse(.body))
-                Button("Another prayer") { generate() }
-            }
+            prayStep
         default:
             Text("Nothing left to do. Breathe with the light and let the silence be enough.")
                 .foregroundStyle(.secondary)
+        }
+    }
+
+    @ViewBuilder
+    private var prayStep: some View {
+        if !CompanionTextService.isOnDeviceCompanionAvailable {
+            Text(CompanionTextService.silentPrayMessage)
+                .foregroundStyle(.secondary)
+                .accessibilityIdentifier("pray.silent")
+        } else if engine.isGenerating && engine.turn == nil {
+            ProgressView("Preparing a prayer")
+        } else if let turn = engine.turn, turn.source != .unavailable {
+            Text(turn.reply)
+                .font(SelahFont.verse(.body))
+                .accessibilityIdentifier("pray.draft")
+            if let ref = turn.scriptureReference {
+                Text(ref)
+                    .font(SelahFont.ui(.caption, weight: .semibold))
+                    .foregroundStyle(.secondary)
+            }
+            Button("Another prayer") {
+                Task { await generatePrayer(force: true) }
+            }
+            .disabled(engine.isGenerating)
+            .accessibilityIdentifier("pray.another")
+        } else {
+            Button("Generate prayer") {
+                Task { await generatePrayer(force: true) }
+            }
+            .disabled(engine.isGenerating)
+            .accessibilityIdentifier("pray.generate")
         }
     }
 
@@ -104,7 +137,15 @@ struct PrayView: View {
         return "God is our refuge and strength, a very present help in trouble."
     }
 
-    private var durations: [Int] { env.prayQuickMode ? [90, 90, 90, 30] : [120, 120, 120, 60] }
+    private var passageReference: String {
+        if let pending = env.pendingPrayVerse, !pending.isEmpty { return pending }
+        if let day = env.currentPlanTheme?.day(globalDay: env.planGlobalDay) {
+            return "\(day.book) \(day.chapter)"
+        }
+        return "Psalm 46:1"
+    }
+
+    private var durations: [Int] { useQuickDurations ? [90, 90, 90, 30] : [120, 120, 120, 60] }
 
     private func startTimer() {
         timerTask?.cancel()
@@ -126,32 +167,30 @@ struct PrayView: View {
     private func advance() {
         if step < 3 {
             step += 1
+            return
+        }
+        AnalyticsService.track("amen_tap")
+        AnalyticsService.track("lectio_complete")
+        let drafted = engine.turn?.source == .onDevice ? (engine.turn?.reply ?? "") : ""
+        let text = reflectionWord.isEmpty ? drafted : reflectionWord
+        if !text.isEmpty { try? env.saveJournalEntry(plaintext: text) }
+        step = 0
+        reflectionWord = ""
+        engine.reset()
+        env.openMainTab(.today)
+    }
+
+    private func generatePrayer(force: Bool) async {
+        if !force, engine.turn?.source == .onDevice { return }
+        let context = PrayerDraftContext(
+            reflectionWord: reflectionWord,
+            verse: passageReference,
+            mood: env.pendingPrayMood
+        )
+        if force {
+            _ = await engine.anotherPrayer() ?? engine.draft(context)
         } else {
-            AnalyticsService.track("amen_tap")
-            AnalyticsService.track("lectio_complete")
-            let text = reflectionWord.isEmpty ? generatedPrayer : reflectionWord
-            if !text.isEmpty { try? env.saveJournalEntry(plaintext: text) }
+            _ = await engine.draft(context)
         }
     }
-
-    private func generate() {
-        isGenerating = true
-        Task {
-            generatedPrayer = await CompanionTextService.prayerDraft(context: reflectionWord)
-            isGenerating = false
-        }
-    }
-}
-
-private struct LectioStep {
-    let name: String
-    let headline: String
-    let guide: String
-
-    static let all = [
-        LectioStep(name: "Read", headline: "Read it slowly", guide: "Read the words once out loud, then once in silence. Don’t study it. Just let it arrive."),
-        LectioStep(name: "Reflect", headline: "Where does it touch you?", guide: "One word probably stood out. Stay with that word for a moment instead of moving on."),
-        LectioStep(name: "Pray", headline: "Say it back to God", guide: "Here is a prayer in your own weather. Change any word. It is yours."),
-        LectioStep(name: "Rest", headline: "Now just stay", guide: "Nothing left to do. Breathe with the light and let the silence be enough.")
-    ]
 }

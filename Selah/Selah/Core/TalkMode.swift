@@ -38,10 +38,17 @@ enum TalkMode: String, CaseIterable, Identifiable, Hashable {
     }
 
     var promptHint: String {
+        companionInstructions
+    }
+
+    var companionInstructions: String {
         switch self {
-        case .heart: "Respond warmly to what the user shared from the heart."
-        case .reflect: "Help the user reflect on Scripture and God's presence."
-        case .release: "Respond with grace as the user releases guilt or heaviness."
+        case .heart:
+            "Mode: Heart. Listen first. Validate what they named. Invite honest speech to God. Do not fix them or preach."
+        case .reflect:
+            "Mode: Reflect. Stay with Scripture. Ask one question at a time. Help them notice a word or phrase."
+        case .release:
+            "Mode: Release. Help them name what they are putting down. Grace without shame. Do not grant sacramental absolution. Not a confessional. God is the one who receives it."
         }
     }
 }
