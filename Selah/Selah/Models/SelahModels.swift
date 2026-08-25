@@ -123,7 +123,7 @@ final class AppSettingsModel {
         notificationHour: Int = 6,
         notificationMinute: Int = 30,
         autoDeleteTalkSessions: Bool = false,
-        journalCloudSyncEnabled: Bool = true,
+        journalCloudSyncEnabled: Bool = false,
         requireFaceIDForJournal: Bool = true,
         onboardingComplete: Bool = false,
         sawNotificationPrompt: Bool = false,
