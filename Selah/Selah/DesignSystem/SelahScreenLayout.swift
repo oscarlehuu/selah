@@ -1,66 +1,37 @@
 import SwiftUI
 
-enum SelahLayout {
-    static let tabBarScrollMargin: CGFloat = 56
-    static let flowScrollMargin: CGFloat = 24
-}
-
-struct SelahPinnedBottomBar<Content: View>: View {
-    @ViewBuilder let content: Content
-
+struct DemoModeBanner: View {
     var body: some View {
-        content
-            .padding(.horizontal, 16)
-            .padding(.top, 10)
-            .padding(.bottom, 8)
-            .background {
-                SelahColors.background.opacity(0.96)
-                    .ignoresSafeArea(edges: .bottom)
-            }
+        Text("Demo")
+            .font(SelahFont.ui(.caption2, weight: .semibold))
+            .foregroundStyle(.secondary)
     }
 }
 
-struct SelahFlowScreen<Content: View>: View {
-    private let content: Content
-    private let bottom: AnyView?
-
-    init(@ViewBuilder content: () -> Content) {
-        self.content = content()
-        self.bottom = nil
-    }
-
-    init<B: View>(
-        @ViewBuilder content: () -> Content,
-        @ViewBuilder bottom: () -> B
-    ) {
-        self.content = content()
-        self.bottom = AnyView(bottom())
-    }
+struct SelahComposerBar: View {
+    @Binding var text: String
+    var isSending: Bool
+    var onSend: () -> Void
 
     var body: some View {
-        ZStack {
-            SundayLightBackground()
-            content
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        }
-        .safeAreaInset(edge: .bottom, spacing: 0) {
-            if let bottom {
-                bottom
+        SelahFooterBar {
+            HStack(alignment: .bottom, spacing: 10) {
+                TextField("Say it plainly…", text: $text, axis: .vertical)
+                    .lineLimit(1...4)
+                    .font(SelahFont.ui(.body))
+                    .textFieldStyle(.roundedBorder)
+                    .accessibilityIdentifier("talk.composer")
+                Button(action: onSend) {
+                    Image(systemName: "arrow.up.circle.fill")
+                        .font(.title)
+                }
+                .disabled(!canSend || isSending)
+                .accessibilityLabel("Send")
             }
         }
     }
-}
 
-extension View {
-    func selahTabScrollContent() -> some View {
-        contentMargins(.bottom, SelahLayout.tabBarScrollMargin, for: .scrollContent)
-    }
-
-    func selahFlowScrollContent() -> some View {
-        contentMargins(.bottom, SelahLayout.flowScrollMargin, for: .scrollContent)
-    }
-
-    func selahTabContentFrame() -> some View {
-        frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+    private var canSend: Bool {
+        !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 }

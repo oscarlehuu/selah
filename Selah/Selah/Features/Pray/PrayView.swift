@@ -3,38 +3,52 @@ import SwiftUI
 struct PrayView: View {
     @Environment(AppEnvironment.self) private var env
     @State private var step = 0
-    @State private var reflection = ""
+    @State private var reflectionWord = ""
     @State private var generatedPrayer = ""
     @State private var isGenerating = false
     @State private var secondsRemaining = 0
     @State private var timerTask: Task<Void, Never>?
 
-    private let steps = ["Read", "Reflect", "Pray", "Rest"]
+    private let steps = LectioStep.all
 
     var body: some View {
         SelahTabScreen("Pray") {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    Text("Lectio divina")
-                        .font(SelahFont.figtree(12, weight: .semibold))
-                        .foregroundStyle(SelahColors.textSoft)
-                    Text(steps[step])
-                        .font(SelahFont.newsreader(28, weight: .semibold))
+            List {
+                Section {
+                    ProgressView(value: Double(step + 1), total: 4)
+                    Text(steps[step].headline)
+                        .font(SelahFont.display(.title2))
+                    Text(steps[step].guide)
+                        .foregroundStyle(.secondary)
                     if secondsRemaining > 0 {
                         Text(timerLabel)
-                            .font(SelahFont.figtree(14, weight: .medium))
+                            .font(SelahFont.ui(.footnote, weight: .medium))
                             .foregroundStyle(SelahColors.primaryDeep)
                     }
+                }
+                Section(steps[step].name) {
                     stepContent
                 }
-                .padding(.horizontal, 20)
-                .padding(.top, 8)
-                .padding(.bottom, 24)
             }
-            .selahTabScrollContent()
-            .safeAreaInset(edge: .bottom, spacing: 0) {
-                SelahPinnedBottomBar {
-                    SelahPrimaryButton(title: step < 3 ? "Next" : "Amen") { advance() }
+            .listStyle(.insetGrouped)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Text("5 min")
+                        .font(SelahFont.ui(.caption, weight: .semibold))
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .safeAreaInset(edge: .bottom) {
+                SelahFooterBar {
+                    SelahPrimaryButton(
+                        title: step < 3 ? (step == 2 ? "Continue to rest" : "Continue") : "Amen",
+                        style: step < 3 ? .primary : .gold,
+                        action: advance
+                    )
+                    if step > 0 {
+                        Button("Back") { step -= 1 }
+                            .font(SelahFont.ui(.subheadline, weight: .semibold))
+                    }
                 }
             }
         }
@@ -61,40 +75,40 @@ struct PrayView: View {
     private var stepContent: some View {
         switch step {
         case 0:
-            Text(passagePreview)
-                .font(SelahFont.verse(18))
+            Text("“\(passagePreview)”")
+                .font(SelahFont.verse(.body))
         case 1:
-            TextField("What is God showing you?", text: $reflection, axis: .vertical)
-                .lineLimit(3...8)
-                .font(SelahFont.figtree(16))
-                .padding(12)
-                .background(SelahColors.surface)
-                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            TextField("What word stood out?", text: $reflectionWord)
+            ForEach(["refuge", "strength", "present help"], id: \.self) { word in
+                Button(word) { reflectionWord = word }
+            }
         case 2:
             if generatedPrayer.isEmpty {
-                SelahPrimaryButton(title: "Generate prayer", isLoading: isGenerating) { generate() }
+                Button("Generate prayer") { generate() }
+                    .disabled(isGenerating)
+                if isGenerating { ProgressView() }
             } else {
-                Text(generatedPrayer).font(SelahFont.verse(18))
+                Text(generatedPrayer).font(SelahFont.verse(.body))
+                Button("Another prayer") { generate() }
             }
         default:
-            Text("Rest in God's presence for a moment.")
-                .font(SelahFont.figtree(16))
-                .foregroundStyle(SelahColors.textMuted)
+            Text("Nothing left to do. Breathe with the light and let the silence be enough.")
+                .foregroundStyle(.secondary)
         }
     }
 
     private var passagePreview: String {
-        guard let day = env.currentPlanTheme?.day(globalDay: env.planGlobalDay) else {
-            return "Open your heart to today's passage."
+        if let day = env.currentPlanTheme?.day(globalDay: env.planGlobalDay) {
+            return "\(day.book) \(day.chapter) — \(day.reflectionPrompt)"
         }
-        return "\(day.book) \(day.chapter) — \(day.reflectionPrompt)"
+        return "God is our refuge and strength, a very present help in trouble."
     }
 
     private var durations: [Int] { env.prayQuickMode ? [90, 90, 90, 30] : [120, 120, 120, 60] }
 
     private func startTimer() {
         timerTask?.cancel()
-        secondsRemaining = durations[step]
+        secondsRemaining = durations[min(step, durations.count - 1)]
         timerTask = Task {
             while secondsRemaining > 0 {
                 try? await Task.sleep(for: .seconds(1))
@@ -115,15 +129,29 @@ struct PrayView: View {
         } else {
             AnalyticsService.track("amen_tap")
             AnalyticsService.track("lectio_complete")
-            try? env.saveJournalEntry(plaintext: reflection.isEmpty ? generatedPrayer : reflection)
+            let text = reflectionWord.isEmpty ? generatedPrayer : reflectionWord
+            if !text.isEmpty { try? env.saveJournalEntry(plaintext: text) }
         }
     }
 
     private func generate() {
         isGenerating = true
         Task {
-            generatedPrayer = await CompanionTextService.prayerDraft(context: reflection)
+            generatedPrayer = await CompanionTextService.prayerDraft(context: reflectionWord)
             isGenerating = false
         }
     }
+}
+
+private struct LectioStep {
+    let name: String
+    let headline: String
+    let guide: String
+
+    static let all = [
+        LectioStep(name: "Read", headline: "Read it slowly", guide: "Read the words once out loud, then once in silence. Don’t study it. Just let it arrive."),
+        LectioStep(name: "Reflect", headline: "Where does it touch you?", guide: "One word probably stood out. Stay with that word for a moment instead of moving on."),
+        LectioStep(name: "Pray", headline: "Say it back to God", guide: "Here is a prayer in your own weather. Change any word. It is yours."),
+        LectioStep(name: "Rest", headline: "Now just stay", guide: "Nothing left to do. Breathe with the light and let the silence be enough.")
+    ]
 }

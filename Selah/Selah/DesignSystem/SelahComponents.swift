@@ -1,22 +1,5 @@
 import SwiftUI
 
-extension SelahColors {
-    static let goldHi = Color(hex: 0xEDBE55)
-    static let gold = Color(hex: 0xD9A63F)
-    static let goldDeep = Color(hex: 0xB98A28)
-}
-
-struct SundayLightBackground: View {
-    var body: some View {
-        LinearGradient(
-            colors: [SelahColors.background, SelahColors.backgroundWarm, SelahColors.primarySoft.opacity(0.35)],
-            startPoint: .top,
-            endPoint: .bottom
-        )
-        .ignoresSafeArea()
-    }
-}
-
 struct SelahPrimaryButton: View {
     let title: String
     var style: Style = .primary
@@ -35,95 +18,57 @@ struct SelahPrimaryButton: View {
     var body: some View {
         Button(action: action) {
             HStack {
-                if isLoading {
-                    ProgressView().tint(.white)
-                }
+                if isLoading { ProgressView() }
                 Text(title)
-                    .font(SelahFont.figtree(17, weight: .semibold))
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 16)
-            .foregroundStyle(foreground)
-            .background(background)
-            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-            .shadow(color: shadowColor, radius: 8, y: 4)
         }
+        .buttonStyle(.borderedProminent)
+        .buttonBorderShape(.roundedRectangle(radius: 12))
+        .controlSize(.large)
+        .tint(tint)
         .disabled(isLoading)
     }
 
-    private var foreground: Color {
-        style == .secondary ? SelahColors.text : .white
-    }
-
-    @ViewBuilder
-    private var background: some View {
+    private var tint: Color {
         switch style {
-        case .primary:
-            SelahColors.primaryDeep
-        case .gold:
-            LinearGradient(colors: [SelahColors.goldHi, SelahColors.gold, SelahColors.goldDeep], startPoint: .topLeading, endPoint: .bottomTrailing)
-        case .secondary:
-            SelahColors.backgroundWarm
+        case .primary: SelahColors.primaryDeep
+        case .gold: SelahColors.accent
+        case .secondary: SelahColors.textMuted
         }
-    }
-
-    private var shadowColor: Color {
-        style == .gold ? SelahColors.goldDeep.opacity(0.35) : SelahColors.primaryDeep.opacity(0.25)
     }
 }
 
-struct SelahCard<Content: View>: View {
-    @ViewBuilder let content: Content
+struct SelahFooterBar<Content: View>: View {
+    @ViewBuilder var content: Content
 
     var body: some View {
-        content
-            .padding(16)
-            .background(SelahColors.surface)
-            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .stroke(SelahColors.text.opacity(0.08))
-            )
-            .shadow(color: SelahColors.text.opacity(0.06), radius: 8, y: 2)
+        VStack(spacing: 10) {
+            content
+        }
+        .padding(.horizontal, 16)
+        .padding(.top, 8)
+        .padding(.bottom, 8)
+        .frame(maxWidth: .infinity)
+        .background(.bar)
     }
 }
 
-struct HeroImageView: View {
-    let name: String
+struct FootVerseCaption: View {
+    let text: String
+    let ref: String
 
     var body: some View {
-        ZStack {
-            LinearGradient(
-                colors: [
-                    SelahColors.primarySoft,
-                    SelahColors.backgroundWarm,
-                    SelahColors.gold.opacity(0.25)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            if let uiImage = heroUIImage {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFill()
-            }
-            LinearGradient(
-                colors: [Color.white.opacity(0.15), SelahColors.background.opacity(0.85)],
-                startPoint: .top,
-                endPoint: .bottom
-            )
+        VStack(spacing: 4) {
+            Text("“\(text)”")
+                .font(SelahFont.verse(.footnote))
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+            Text(ref)
+                .font(SelahFont.ui(.caption2, weight: .semibold))
+                .foregroundStyle(.tertiary)
         }
-        .clipped()
-    }
-
-    private var heroUIImage: UIImage? {
-        if let image = UIImage(named: name) { return image }
-        if let image = UIImage(named: "\(name).jpg") { return image }
-        if let url = Bundle.main.url(forResource: name, withExtension: "jpg"),
-           let data = try? Data(contentsOf: url),
-           let image = UIImage(data: data) {
-            return image
-        }
-        return nil
+        .frame(maxWidth: .infinity)
+        .accessibilityElement(children: .combine)
     }
 }

@@ -28,6 +28,30 @@ enum SubscriptionTier: String, CaseIterable {
         case .yearly: "$49.99 / year"
         }
     }
+
+    var shortPrice: String {
+        switch self {
+        case .weekly: "$7.99"
+        case .monthly: "$14.99"
+        case .yearly: "$49.99"
+        }
+    }
+
+    var ctaPrice: String {
+        switch self {
+        case .weekly: "$7.99/wk"
+        case .monthly: "$14.99/mo"
+        case .yearly: "$49.99/yr"
+        }
+    }
+
+    var detailLabel: String {
+        switch self {
+        case .weekly: "Billed every week"
+        case .monthly: "Billed every month"
+        case .yearly: "$4.16 / month · save 72%"
+        }
+    }
 }
 
 @MainActor

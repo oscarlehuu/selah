@@ -30,8 +30,10 @@ struct RootView: View {
                 NotificationPromptView()
             } else {
                 MainTabView()
+                    .accessibilityIdentifier("gate.main")
             }
         }
+        .tint(SelahColors.primaryDeep)
         .animation(.easeInOut(duration: 0.25), value: env.onboardingComplete)
         .alert("Restore", isPresented: $showRestoreAlert) {
             Button("OK", role: .cancel) {}

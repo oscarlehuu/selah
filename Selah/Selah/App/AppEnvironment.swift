@@ -19,6 +19,9 @@ final class AppEnvironment {
     var graceNote: String?
     var selectedMainTab: MainTab = .today
     var prayQuickMode = false
+    var pendingTalkMood: OnboardingMood?
+    var pendingTalkVerse: String?
+    var selectedTalkMode: TalkMode = .heart
 
     private let modelContext: ModelContext
 
@@ -79,6 +82,10 @@ final class AppEnvironment {
         OnboardingDistance(rawValue: settings?.quizDistance ?? "")
     }
 
+    var quizDesire: OnboardingDesire? {
+        OnboardingDesire(rawValue: settings?.quizDesire ?? "")
+    }
+
     func markPlanDayComplete(globalDay: Int) {
         guard let settings else { return }
         let existing = (try? modelContext.fetch(FetchDescriptor<PlanProgressModel>())) ?? []
@@ -120,6 +127,18 @@ final class AppEnvironment {
 
     func openMainTab(_ tab: MainTab) { selectedMainTab = tab }
 
+    func openTalk(mood: OnboardingMood) {
+        pendingTalkMood = mood
+        selectedTalkMode = mood == .empty ? .reflect : .heart
+        selectedMainTab = .talk
+    }
+
+    func openTalkReflect(reference: String) {
+        pendingTalkVerse = reference
+        selectedTalkMode = .reflect
+        selectedMainTab = .talk
+    }
+
     func persist() { try? modelContext.save() }
 
     func startFiveMinutePray() {
@@ -127,15 +146,21 @@ final class AppEnvironment {
         selectedMainTab = .pray
     }
 
-    func completeOnboarding(distance: OnboardingDistance, desire: OnboardingDesire, habit: String) {
+    func completeOnboarding(distance: OnboardingDistance, desire: OnboardingDesire, habit: OnboardingHabit) {
         guard let settings else { return }
         settings.quizDistance = distance.rawValue
         settings.quizDesire = desire.rawValue
-        settings.quizHabit = habit
+        settings.quizHabit = habit.rawValue
         settings.planThemeKey = desire.planKey
         settings.onboardingComplete = true
         try? modelContext.save()
-        AnalyticsService.track("onboarding_15_social")
+    }
+
+    func applyGraceDayFromUser() {
+        guard let streakModel, !streakModel.graceUsedThisWeek else { return }
+        streakModel.graceUsedThisWeek = true
+        try? modelContext.save()
+        AnalyticsService.track("grace_day_used")
     }
 
     func incrementPaywallPresentation() {

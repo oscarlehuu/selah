@@ -50,17 +50,6 @@
                ReferencedContainer = "container:Selah.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8110D5DB3290E05ED5696EFB"
-               BuildableName = "SelahUITests.xctest"
-               BlueprintName = "SelahUITests"
-               ReferencedContainer = "container:Selah.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <CommandLineArguments>
       </CommandLineArguments>

@@ -29,7 +29,6 @@ struct SelahApp: App {
             RootView()
                 .environment(bootstrap.environment)
                 .modelContainer(bootstrap.container)
-                .background(SundayLightBackground())
         }
     }
 }

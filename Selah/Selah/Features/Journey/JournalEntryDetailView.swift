@@ -9,27 +9,29 @@ struct JournalEntryDetailView: View {
 
     var body: some View {
         NavigationStack {
-            ZStack {
-                SundayLightBackground()
+            Group {
                 if isLoading {
-                    ProgressView()
+                    ProgressView("Unlocking")
                 } else if let plaintext {
-                    ScrollView {
-                        Text(plaintext)
-                            .font(SelahFont.verse(18))
-                            .foregroundStyle(SelahColors.text)
-                            .padding(24)
+                    List {
+                        Section {
+                            Text(plaintext)
+                                .font(SelahFont.verse(.body))
+                        }
                     }
+                    .listStyle(.insetGrouped)
                 } else {
-                    Text("Could not unlock this entry.")
-                        .font(SelahFont.figtree(16))
-                        .foregroundStyle(SelahColors.textMuted)
+                    ContentUnavailableView(
+                        "Could not unlock this entry",
+                        systemImage: "lock.fill",
+                        description: Text("Face ID is required when journal lock is on.")
+                    )
                 }
             }
             .navigationTitle(entry.createdAt.formatted(date: .abbreviated, time: .omitted))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .confirmationAction) {
                     Button("Done") { dismiss() }
                 }
             }
