@@ -36,6 +36,7 @@ final class CompanionAvailabilityTests: XCTestCase {
             throw XCTSkip("Foundation Models unavailable on this simulator")
         }
         let turn = await CompanionTextService.talkReply(to: "I’m exhausted", mode: .heart)
+        try skipIfModelAssetsMissing(turn)
         XCTAssertEqual(
             turn.source,
             .onDevice,
@@ -54,6 +55,7 @@ final class CompanionAvailabilityTests: XCTestCase {
         let turn = await CompanionTextService.prayerDraft(
             context: PrayerDraftContext(reflectionWord: "refuge", verse: "Psalm 46:1", mood: "heavy")
         )
+        try skipIfModelAssetsMissing(turn)
         XCTAssertEqual(
             turn.source,
             .onDevice,
@@ -62,5 +64,15 @@ final class CompanionAvailabilityTests: XCTestCase {
         XCTAssertFalse(turn.reply.isEmpty)
         XCTAssertNotEqual(turn.reply, CompanionTextService.unavailableMessage)
         XCTAssertFalse(turn.reply.lowercased().contains("god is typing"))
+    }
+
+    private func skipIfModelAssetsMissing(_ turn: CompanionTurn) throws {
+        let detail = (turn.generationDetail ?? "").lowercased()
+        guard turn.source == .failed else { return }
+        if detail.contains("model catalog")
+            || detail.contains("no underlying assets")
+            || detail.contains("modelmanagererror") {
+            throw XCTSkip("Simulator advertises Apple Intelligence, but Foundation Model assets are not installed here.")
+        }
     }
 }
