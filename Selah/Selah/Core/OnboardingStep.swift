@@ -11,6 +11,8 @@ enum OnboardingStep: Int, CaseIterable, Identifiable {
 
     var allowsSkipToPaywall: Bool { Self.prePaywall.contains(self) }
 
+    var hidesStandardOnboardingChrome: Bool { self == .welcome }
+
     var navigationTitle: String {
         switch self {
         case .welcome: "Welcome"

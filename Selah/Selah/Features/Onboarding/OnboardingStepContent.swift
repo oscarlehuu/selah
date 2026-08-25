@@ -12,7 +12,7 @@ struct OnboardingStepContent: View {
 
     var body: some View {
         switch step {
-        case .welcome: welcome
+        case .welcome: EmptyView()
         case .hook: prose(OnboardingCopy.hookTitle, OnboardingCopy.hookBody)
         case .stat: stat
         case .quizDistance: distanceQuiz
@@ -28,29 +28,6 @@ struct OnboardingStepContent: View {
         case .social: social
         case .widget: EmptyView()
         }
-    }
-
-    private var welcome: some View {
-        List {
-            Section {
-                Label(OnboardingCopy.welcomeSubtitle, systemImage: "sunrise.fill")
-                    .font(SelahFont.ui(.subheadline, weight: .semibold))
-                    .foregroundStyle(SelahColors.accent)
-                Text(OnboardingCopy.welcomeTitle)
-                    .font(SelahFont.display(.largeTitle))
-                Text("“\(OnboardingCopy.welcomeVerse)”")
-                    .font(SelahFont.verse(.title3))
-                Text(OnboardingCopy.welcomeVerseRef)
-                    .font(SelahFont.ui(.caption, weight: .semibold))
-                    .foregroundStyle(.secondary)
-            }
-            Section {
-                Text(OnboardingCopy.welcomeMeaning)
-                Text(OnboardingCopy.welcomeDurationHint)
-                    .foregroundStyle(.secondary)
-            }
-        }
-        .listStyle(.insetGrouped)
     }
 
     private func prose(_ title: String, _ body: String) -> some View {

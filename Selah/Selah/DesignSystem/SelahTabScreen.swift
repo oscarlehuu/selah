@@ -1,11 +1,9 @@
 import SwiftUI
 
 struct SelahTabScreen<Content: View>: View {
-    let title: String
     @ViewBuilder var content: Content
 
-    init(_ title: String, @ViewBuilder content: () -> Content) {
-        self.title = title
+    init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }
 
@@ -13,10 +11,7 @@ struct SelahTabScreen<Content: View>: View {
         NavigationStack {
             content
                 .selahCanvas()
-                .navigationTitle(title)
-                .navigationBarTitleDisplayMode(.large)
-                .toolbarBackground(SelahColors.background, for: .navigationBar)
-                .toolbarBackground(.visible, for: .navigationBar)
+                .toolbar(.hidden, for: .navigationBar)
         }
         .background(SelahColors.background.ignoresSafeArea())
     }

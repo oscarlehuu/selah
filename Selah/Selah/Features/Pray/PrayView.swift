@@ -12,30 +12,58 @@ struct PrayView: View {
     private let steps = LectioStep.all
 
     var body: some View {
-        SelahTabScreen("Pray") {
-            List {
-                Section {
-                    ProgressView(value: Double(step + 1), total: 4)
-                    Text(steps[step].headline)
-                        .font(SelahFont.display(.title2))
-                    Text(steps[step].guide)
-                        .foregroundStyle(.secondary)
-                    if secondsRemaining > 0 {
-                        Text(timerLabel)
-                            .font(SelahFont.ui(.footnote, weight: .medium))
-                            .foregroundStyle(SelahColors.primaryDeep)
-                    }
-                }
-                Section(steps[step].name) {
-                    stepContent
-                }
-            }
-            .listStyle(.insetGrouped)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+        SelahTabScreen {
+            VStack(spacing: 0) {
+                SelahCompactHeader(title: "Pray") {
+                    SelahHeaderIconButton(
+                        systemName: "xmark",
+                        label: "Close",
+                        identifier: "pray.close"
+                    ) { env.openMainTab(.today) }
+                } right: {
                     Text("5 min")
                         .font(SelahFont.ui(.caption, weight: .semibold))
-                        .foregroundStyle(.secondary)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+                        .background(SelahColors.surface)
+                        .clipShape(Capsule())
+                        .accessibilityIdentifier("pray.duration")
+                }
+
+                HStack(spacing: 6) {
+                    ForEach(Array(steps.enumerated()), id: \.offset) { index, item in
+                        VStack(spacing: 6) {
+                            Capsule()
+                                .fill(index <= step ? SelahColors.primaryDeep : SelahColors.text.opacity(0.12))
+                                .frame(width: 26, height: 3)
+                            Text(item.name)
+                                .font(SelahFont.ui(.caption2, weight: .bold))
+                                .tracking(0.6)
+                                .textCase(.uppercase)
+                                .foregroundStyle(index == step ? SelahColors.primaryDeep : SelahColors.textSoft)
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
+                }
+                .padding(.top, 6)
+                .padding(.bottom, 18)
+                .padding(.horizontal, SelahSpacing.lectio)
+                .accessibilityIdentifier("pray.steps")
+
+                ScrollView {
+                    VStack(spacing: 10) {
+                        Text(steps[step].headline)
+                            .font(SelahFont.display(.title2))
+                        Text(steps[step].guide)
+                            .font(SelahFont.ui(.subheadline))
+                            .foregroundStyle(SelahColors.textMuted)
+                        stepContent
+                            .padding(.top, 8)
+                    }
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, SelahSpacing.lectio)
+                    .padding(.bottom, 24)
                 }
             }
             .safeAreaInset(edge: .bottom) {
@@ -67,20 +95,23 @@ struct PrayView: View {
         }
     }
 
-    private var timerLabel: String {
-        String(format: "%d:%02d remaining", secondsRemaining / 60, secondsRemaining % 60)
-    }
-
     @ViewBuilder
     private var stepContent: some View {
         switch step {
         case 0:
             Text("“\(passagePreview)”")
                 .font(SelahFont.verse(.body))
+                .padding(22)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(SelahColors.surface)
+                .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
         case 1:
             TextField("What word stood out?", text: $reflectionWord)
-            ForEach(["refuge", "strength", "present help"], id: \.self) { word in
-                Button(word) { reflectionWord = word }
+                .multilineTextAlignment(.center)
+            HStack {
+                ForEach(["refuge", "strength", "present help"], id: \.self) { word in
+                    Button(word) { reflectionWord = word }
+                }
             }
         case 2:
             if generatedPrayer.isEmpty {
@@ -88,12 +119,17 @@ struct PrayView: View {
                     .disabled(isGenerating)
                 if isGenerating { ProgressView() }
             } else {
-                Text(generatedPrayer).font(SelahFont.verse(.body))
+                Text(generatedPrayer)
+                    .font(SelahFont.verse(.body))
+                    .padding(22)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(SelahColors.surface)
+                    .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
                 Button("Another prayer") { generate() }
             }
         default:
             Text("Nothing left to do. Breathe with the light and let the silence be enough.")
-                .foregroundStyle(.secondary)
+                .foregroundStyle(SelahColors.textMuted)
         }
     }
 

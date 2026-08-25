@@ -103,6 +103,7 @@ schemes:
     build:
       targets:
         Selah: all
+        SelahTests: [test]
         SelahUITests: [test]
     run:
       config: Debug

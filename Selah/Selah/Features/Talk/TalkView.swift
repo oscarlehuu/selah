@@ -11,70 +11,86 @@ struct TalkView: View {
     @State private var confirmClear = false
 
     var body: some View {
-        SelahTabScreen("Talk") {
-            List {
-                Section {
-                    Picker("Mode", selection: Binding(
-                        get: { env.selectedTalkMode },
-                        set: { env.selectedTalkMode = $0; seedIntro(force: true) }
-                    )) {
-                        ForEach(TalkMode.allCases) { item in
-                            Text(item.title).tag(item)
+        SelahTabScreen {
+            VStack(spacing: 0) {
+                SelahCompactHeader(title: "Talk") {
+                    SelahHeaderIconButton(
+                        systemName: "lock.shield",
+                        label: "How privacy works",
+                        identifier: "talk.privacy"
+                    ) { showPrivacy = true }
+                } right: {
+                    SelahHeaderIconButton(
+                        systemName: "trash",
+                        label: "Clear this session",
+                        identifier: "talk.clear"
+                    ) { confirmClear = true }
+                }
+
+                Picker("Mode", selection: Binding(
+                    get: { env.selectedTalkMode },
+                    set: { env.selectedTalkMode = $0; seedIntro(force: true) }
+                )) {
+                    ForEach(TalkMode.allCases) { item in
+                        Text(item.title).tag(item)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .padding(.horizontal, SelahSpacing.md)
+                .padding(.top, 2)
+                .padding(.bottom, 8)
+
+                Text(privacyBanner)
+                    .font(SelahFont.ui(.caption, weight: .semibold))
+                    .foregroundStyle(SelahColors.primaryDeep)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, SelahSpacing.md)
+                    .padding(.vertical, 9)
+                    .background(SelahColors.primarySoft)
+                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    .padding(.horizontal, SelahSpacing.md)
+                    .padding(.bottom, 10)
+
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 10) {
+                        ForEach(Array(messages.enumerated()), id: \.offset) { _, message in
+                            Text(message.text)
+                                .font(SelahFont.ui(message.role == "sys" ? .footnote : .body))
+                                .foregroundStyle(message.role == "user" ? SelahColors.text : SelahColors.textMuted)
+                                .frame(maxWidth: .infinity, alignment: message.role == "user" ? .trailing : (message.role == "sys" ? .center : .leading))
                         }
+                        if isSending { ProgressView("Selah is preparing") }
                     }
-                    .pickerStyle(.segmented)
-                    Text(privacyBanner)
-                        .font(SelahFont.ui(.caption))
-                        .foregroundStyle(.secondary)
+                    .padding(.top, SelahSpacing.chatTop)
+                    .padding(.horizontal, SelahSpacing.chatHorizontal)
+                    .padding(.bottom, SelahSpacing.chatBottom)
                 }
-                Section {
-                    ForEach(Array(messages.enumerated()), id: \.offset) { _, message in
-                        Text(message.text)
-                            .font(SelahFont.ui(message.role == "sys" ? .footnote : .body))
-                            .foregroundStyle(message.role == "user" ? .primary : .secondary)
-                            .frame(maxWidth: .infinity, alignment: message.role == "user" ? .trailing : .leading)
-                    }
-                    if isSending { ProgressView("Selah is preparing") }
-                }
+                .scrollDismissesKeyboard(.interactively)
+
                 if messages.count <= 3 {
-                    Section("Try saying") {
-                        ForEach(env.selectedTalkMode.suggestions, id: \.self) { suggestion in
-                            Button(suggestion) { input = suggestion; send() }
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 8) {
+                            ForEach(env.selectedTalkMode.suggestions, id: \.self) { suggestion in
+                                Button(suggestion) { input = suggestion; send() }
+                                    .font(SelahFont.ui(.footnote))
+                            }
                         }
+                        .padding(.horizontal, SelahSpacing.chatHorizontal)
                     }
+                    .padding(.bottom, 10)
                 }
-                Section {
-                    Button("Need urgent help?") { showCrisis = true }
-                    if !CompanionTextService.isOnDeviceCompanionAvailable {
-                        Text(CompanionTextService.unavailableMessage)
-                            .foregroundStyle(.secondary)
-                    }
-                } footer: {
-                    Text(OnboardingCopy.companionDisclaimer)
-                }
+
+                Button("Need urgent help?") { showCrisis = true }
+                    .font(SelahFont.ui(.caption, weight: .semibold))
+                Text(OnboardingCopy.companionDisclaimer)
+                    .font(SelahFont.ui(.caption2))
+                    .foregroundStyle(SelahColors.textSoft)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 6)
             }
-            .listStyle(.insetGrouped)
-            .scrollDismissesKeyboard(.interactively)
             .safeAreaInset(edge: .bottom) {
                 SelahComposerBar(text: $input, isSending: isSending, onSend: send)
-            }
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        showPrivacy = true
-                    } label: {
-                        Image(systemName: "lock.shield")
-                    }
-                    .accessibilityLabel("How privacy works")
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        confirmClear = true
-                    } label: {
-                        Image(systemName: "trash")
-                    }
-                    .accessibilityLabel("Clear this session")
-                }
             }
             .confirmationDialog("Clear this session?", isPresented: $confirmClear, titleVisibility: .visible) {
                 Button("Delete conversation", role: .destructive) { messages = []; seedIntro(force: true) }

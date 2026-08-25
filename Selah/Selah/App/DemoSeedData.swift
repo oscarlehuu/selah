@@ -6,6 +6,7 @@ enum DemoSeedData {
     static let planTheme = "Peace"
     static let planWeek = 2
     static let planDaysCompleteThisWeek = 5
+    static let prayerMinutes = 96
     static let verseOfDay = "Be still, and know that I am God."
     static let verseReference = "Psalm 46:10 · KJV"
     static let subscriptionLabel = "Selah · Yearly"

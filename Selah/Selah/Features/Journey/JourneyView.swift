@@ -4,103 +4,175 @@ import SwiftData
 struct JourneyView: View {
     @Environment(AppEnvironment.self) private var env
     @Query(sort: \JournalEntryModel.createdAt, order: .reverse) private var journalEntries: [JournalEntryModel]
+    @Query private var planProgress: [PlanProgressModel]
     @State private var selectedEntry: JournalEntryModel?
     @State private var showSettings = false
+    @State private var confirmGrace = false
 
     var body: some View {
-        SelahTabScreen("Journey") {
-            List {
-                Section("Days with God") {
-                    Text("\(env.streakModel?.streakDays ?? 0)")
-                        .font(SelahFont.display(.largeTitle))
-                    Text(streakCaption)
-                        .foregroundStyle(.secondary)
-                    if env.streakModel?.graceUsedThisWeek == false {
-                        Button("Use a grace day") {
-                            env.applyGraceDayFromUser()
-                        }
-                    } else {
-                        Label("Grace day used · welcome back", systemImage: "checkmark.circle")
-                            .foregroundStyle(.secondary)
-                    }
-                }
-                Section("This week") {
-                    LabeledContent("Longest streak", value: "\(env.streakModel?.longestStreak ?? 0)")
-                    LabeledContent("Theme", value: env.currentPlanTheme?.label ?? "Peace")
-                    LabeledContent("Week", value: "\(env.planWeek)")
-                }
-                Section {
-                    ForEach(env.currentPlanTheme?.weekDays(week: env.planWeek) ?? []) { day in
-                        HStack {
-                            Image(systemName: day.globalDay < env.planGlobalDay ? "checkmark.circle.fill" : "book")
-                                .foregroundStyle(day.globalDay < env.planGlobalDay ? SelahColors.accent : .secondary)
-                            VStack(alignment: .leading) {
-                                Text("\(day.book) \(day.chapter)")
-                                Text(day.focus)
-                                    .font(SelahFont.ui(.footnote))
-                                    .foregroundStyle(.secondary)
-                            }
-                            Spacer()
-                            if day.globalDay == env.planGlobalDay {
-                                Button("Open") { env.openMainTab(.read) }
-                            }
-                        }
-                    }
-                } header: {
-                    Text("Your 7-day plan")
-                }
-
-                Section {
-                    if journalEntries.isEmpty {
-                        Text("Come sit a while")
-                            .font(SelahFont.display(.title3))
-                        Text("Anything you save from Talk or Pray will rest here, encrypted, only on this phone.")
-                            .foregroundStyle(.secondary)
-                    } else {
-                        ForEach(journalEntries.prefix(12)) { entry in
-                            Button {
-                                selectedEntry = entry
-                            } label: {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(entry.previewHint.isEmpty ? "Journal entry" : entry.previewHint)
-                                        .foregroundStyle(.primary)
-                                    Text(entry.createdAt.formatted(date: .abbreviated, time: .omitted))
-                                        .font(SelahFont.ui(.caption))
-                                        .foregroundStyle(.secondary)
-                                }
-                            }
-                        }
-                    }
-                } header: {
-                    Text("Journal")
-                } footer: {
-                    Label("Encrypted on this iPhone", systemImage: "lock.fill")
-                }
-            }
-            .listStyle(.insetGrouped)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
+        let moment = presentation
+        SelahTabScreen {
+            VStack(spacing: 0) {
+                SelahCompactHeader(title: "Journey") {
+                    Color.clear.frame(width: 44, height: 44)
+                } right: {
+                    SelahHeaderIconButton(
+                        systemName: "gearshape",
+                        label: "Settings",
+                        identifier: "selah.settings.open"
+                    ) {
                         showSettings = true
-                    } label: {
-                        Image(systemName: "gearshape")
                     }
-                    .accessibilityLabel("Settings")
+                }
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        weekHero(moment)
+                        planCard(moment)
+                        JourneyJournalSection(entries: Array(journalEntries.prefix(12))) { entry in
+                            selectedEntry = entry
+                        }
+                    }
+                    .padding(.horizontal, SelahSpacing.pad)
+                    .padding(.bottom, 28)
                 }
             }
             .sheet(isPresented: $showSettings) { SettingsView() }
             .sheet(item: $selectedEntry) { entry in
                 JournalEntryDetailView(entry: entry)
             }
+            .confirmationDialog(JourneyCopy.graceConfirmTitle, isPresented: $confirmGrace, titleVisibility: .visible) {
+                Button(JourneyCopy.graceConfirmUse) { env.applyGraceDayFromUser() }
+                Button(JourneyCopy.graceConfirmDefer, role: .cancel) {}
+            } message: {
+                Text(JourneyCopy.graceConfirmBody)
+            }
             .onAppear { AnalyticsService.track("journey_open") }
         }
     }
 
-    private var streakCaption: String {
-        let days = env.streakModel?.streakDays ?? 0
-        if env.streakModel?.graceUsedThisWeek == false {
-            return "You’ve shown up \(days) days. A grace day is waiting if you need it."
+    private func weekHero(_ moment: JourneyPresentation) -> some View {
+        VStack(spacing: 12) {
+            Text(JourneyCopy.daysWithGod)
+                .font(SelahFont.ui(.caption, weight: .semibold))
+                .tracking(1.2)
+                .textCase(.uppercase)
+                .foregroundStyle(SelahColors.textSoft)
+            Text("\(moment.streakDays)")
+                .font(SelahFont.display(.largeTitle))
+                .foregroundStyle(SelahColors.text)
+            Text(moment.streakCaption)
+                .font(SelahFont.ui(.subheadline))
+                .foregroundStyle(SelahColors.textMuted)
+                .multilineTextAlignment(.center)
+            JourneyWeekPathView(days: moment.weekPath)
+            graceChip(moment)
+            JourneyStatsRow(tiles: moment.stats)
         }
-        return "You’ve shown up \(days) days. Grace day used this week. No shame, keep going."
+        .frame(maxWidth: .infinity)
+        .padding(.top, 8)
+    }
+
+    @ViewBuilder
+    private func graceChip(_ moment: JourneyPresentation) -> some View {
+        if moment.graceAvailable {
+            Button {
+                confirmGrace = true
+            } label: {
+                Label(moment.graceChipTitle, systemImage: "heart.fill")
+                    .font(SelahFont.ui(.subheadline, weight: .semibold))
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 10)
+                    .background(SelahColors.primarySoft)
+                    .foregroundStyle(SelahColors.primaryDeep)
+                    .clipShape(Capsule())
+            }
+            .accessibilityIdentifier("journey.grace")
+        } else {
+            Label(moment.graceChipTitle, systemImage: "checkmark.circle.fill")
+                .font(SelahFont.ui(.subheadline, weight: .semibold))
+                .foregroundStyle(SelahColors.textMuted)
+                .accessibilityIdentifier("journey.grace")
+        }
+    }
+
+    private func planCard(_ moment: JourneyPresentation) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Text(JourneyCopy.planSection)
+                    .font(SelahFont.display(.title3))
+                Spacer()
+                Text(moment.planThemeLabel)
+                    .font(SelahFont.ui(.caption, weight: .semibold))
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 6)
+                    .background(SelahColors.accentSoft)
+                    .foregroundStyle(SelahColors.accentDeep)
+                    .clipShape(Capsule())
+            }
+            VStack(spacing: 0) {
+                ForEach(moment.planDays) { day in
+                    planRow(day, currentGlobalDay: moment.currentGlobalDay)
+                    if day.id != moment.planDays.last?.id {
+                        Divider().opacity(0.5)
+                    }
+                }
+            }
+            .background(SelahColors.surface)
+            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .stroke(SelahColors.text.opacity(0.08), lineWidth: 1)
+            )
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("journey.plan")
+    }
+
+    private func planRow(_ day: ReadingPlanDay, currentGlobalDay: Int) -> some View {
+        let done = day.globalDay < currentGlobalDay
+        return HStack(spacing: 12) {
+            Image(systemName: done ? "checkmark.circle.fill" : "book")
+                .foregroundStyle(done ? SelahColors.accentDeep : SelahColors.textSoft)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("\(day.book) \(day.chapter)")
+                    .font(SelahFont.ui(.body, weight: .semibold))
+                Text(day.focus)
+                    .font(SelahFont.ui(.footnote))
+                    .foregroundStyle(SelahColors.textMuted)
+            }
+            Spacer()
+            if day.globalDay == currentGlobalDay {
+                Button("Open") { env.openMainTab(.read) }
+                    .font(SelahFont.ui(.subheadline, weight: .semibold))
+            }
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 12)
+    }
+
+    private var presentation: JourneyPresentation {
+        let themeKey = env.settings?.planThemeKey ?? "peace"
+        let rows = planProgress.filter { $0.themeKey == themeKey }
+        let dates: [Date]
+        let minutes: Int
+        if env.isDemoMode {
+            dates = JourneyWeekPath.demoCompletedDates(count: DemoSeedData.planDaysCompleteThisWeek)
+            minutes = DemoSeedData.prayerMinutes
+        } else {
+            dates = rows.compactMap(\.completedAt)
+            let completed = Set(rows.map(\.globalDay))
+            minutes = (env.currentPlanTheme?.days ?? []).filter { completed.contains($0.globalDay) }.reduce(0) { $0 + $1.minutes }
+        }
+        return JourneyPresentation.make(
+            streakDays: env.streakModel?.streakDays ?? 0,
+            longestStreak: env.streakModel?.longestStreak ?? 0,
+            graceUsedThisWeek: env.streakModel?.graceUsedThisWeek ?? false,
+            completedDates: dates,
+            prayerMinutes: minutes,
+            chaptersRead: rows.count,
+            planDays: env.currentPlanTheme?.weekDays(week: env.planWeek) ?? [],
+            planThemeLabel: env.currentPlanTheme?.label ?? "Peace",
+            currentGlobalDay: env.planGlobalDay
+        )
     }
 }

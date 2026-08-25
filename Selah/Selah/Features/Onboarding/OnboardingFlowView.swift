@@ -16,48 +16,51 @@ struct OnboardingFlowView: View {
 
     var body: some View {
         NavigationStack {
-            OnboardingStepContent(
-                step: step,
-                distance: $distance,
-                desire: $desire,
-                habit: $habit,
-                mood: $mood,
-                demoResult: demoResult,
-                isGenerating: isGenerating,
-                buildProgress: buildProgress
-            )
-            .selahCanvas()
-            .navigationTitle(step.navigationTitle)
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                if stepIndex > 0 {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button("Back", action: goBack)
+            Group {
+                if step.hidesStandardOnboardingChrome {
+                    WelcomeSanctuaryView(onBegin: advance)
+                        .overlay(alignment: .topTrailing) {
+                            Button("Skip", action: skipToPaywall)
+                                .font(SelahFont.ui(.subheadline, weight: .semibold))
+                                .foregroundStyle(Color(hex: 0x4A3D28).opacity(0.72))
+                                .frame(minWidth: 44, minHeight: 44)
+                                .padding(.horizontal, SelahSpacing.md)
+                                .safeAreaPadding(.top, 4)
+                                .accessibilityIdentifier("onboarding.skip")
+                        }
+                } else {
+                    OnboardingStepContent(
+                        step: step,
+                        distance: $distance,
+                        desire: $desire,
+                        habit: $habit,
+                        mood: $mood,
+                        demoResult: demoResult,
+                        isGenerating: isGenerating,
+                        buildProgress: buildProgress
+                    )
+                    .selahCanvas()
+                    .safeAreaInset(edge: .bottom) {
+                        if step != .building {
+                            standardFooter
+                        }
                     }
                 }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Skip", action: skipToPaywall)
-                        .accessibilityIdentifier("onboarding.skip")
-                }
             }
-            .safeAreaInset(edge: .bottom) {
-                if step != .building {
-                    SelahFooterBar {
-                        if let verse = step.footVerse {
-                            FootVerseCaption(text: verse.text, ref: verse.ref)
+            .navigationTitle(step.hidesStandardOnboardingChrome ? "" : step.navigationTitle)
+            .navigationBarTitleDisplayMode(step.hidesStandardOnboardingChrome ? .inline : .large)
+            .toolbarBackground(step.hidesStandardOnboardingChrome ? .hidden : .visible, for: .navigationBar)
+            .toolbar(step.hidesStandardOnboardingChrome ? .hidden : .automatic, for: .navigationBar)
+            .toolbar {
+                if !step.hidesStandardOnboardingChrome {
+                    if stepIndex > 0 {
+                        ToolbarItem(placement: .topBarLeading) {
+                            Button("Back", action: goBack)
                         }
-                        SelahPrimaryButton(
-                            title: step.primaryCTA,
-                            style: step == .welcome || step == .demoMood ? .gold : .primary,
-                            isLoading: isGenerating,
-                            action: advance
-                        )
-                        .disabled(!canAdvance || isGenerating)
-                        .accessibilityIdentifier("onboarding.continue")
-                        if step == .commitment {
-                            Button("I want to try", action: advance)
-                                .font(SelahFont.ui(.subheadline, weight: .semibold))
-                        }
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button("Skip", action: skipToPaywall)
+                            .accessibilityIdentifier("onboarding.skip")
                     }
                 }
             }
@@ -68,6 +71,26 @@ struct OnboardingFlowView: View {
         .task(id: step) {
             if step == .building {
                 await runBuildThenAdvance()
+            }
+        }
+    }
+
+    private var standardFooter: some View {
+        SelahFooterBar {
+            if let verse = step.footVerse {
+                FootVerseCaption(text: verse.text, ref: verse.ref)
+            }
+            SelahPrimaryButton(
+                title: step.primaryCTA,
+                style: step == .demoMood ? .gold : .primary,
+                isLoading: isGenerating,
+                action: advance
+            )
+            .disabled(!canAdvance || isGenerating)
+            .accessibilityIdentifier("onboarding.continue")
+            if step == .commitment {
+                Button("I want to try", action: advance)
+                    .font(SelahFont.ui(.subheadline, weight: .semibold))
             }
         }
     }

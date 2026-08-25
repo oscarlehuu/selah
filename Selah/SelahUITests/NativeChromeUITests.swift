@@ -11,14 +11,20 @@ final class NativeChromeUITests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(
-            app.navigationBars.firstMatch.waitForExistence(timeout: 15),
-            "Onboarding must use UINavigationBar, not a custom web header"
+            app.otherElements["onboarding.welcome.sanctuary"].waitForExistence(timeout: 15),
+            "Welcome must be a full-bleed sanctuary, not a web header"
+        )
+        XCTAssertTrue(
+            app.buttons["onboarding.skip"].waitForExistence(timeout: 5),
+            "Welcome Skip must stay as an overlay when the system nav bar is hidden"
         )
         XCTAssertTrue(
             app.buttons["onboarding.continue"].waitForExistence(timeout: 5)
                 || app.buttons["Begin"].waitForExistence(timeout: 2),
             "Primary onboarding CTA missing"
         )
+        XCTAssertFalse(app.navigationBars["Today"].exists)
+        XCTAssertFalse(app.navigationBars["Welcome"].exists)
         XCTAssertFalse(app.webViews.firstMatch.exists, "App must not embed the HTML mock")
         XCTAssertFalse(app.staticTexts["Coming soon"].exists)
         XCTAssertFalse(app.buttons["Coming soon"].exists)
@@ -26,7 +32,7 @@ final class NativeChromeUITests: XCTestCase {
         XCTAssertFalse(app.buttons["Demo"].exists)
     }
 
-    func testMainTabsUseSystemTabBarAndLargeTitles() {
+    func testMainTabsUseCompactChromeNotLargeTitles() {
         let app = launchDemo()
 
         XCTAssertTrue(app.tabBars.firstMatch.waitForExistence(timeout: 15), "Missing UITabBar")
@@ -34,23 +40,33 @@ final class NativeChromeUITests: XCTestCase {
             XCTAssertTrue(app.tabBars.buttons[name].exists, "Missing tab: \(name)")
         }
 
-        XCTAssertTrue(app.navigationBars["Today"].waitForExistence(timeout: 5))
-        XCTAssertFalse(app.staticTexts["Coming soon"].exists)
-        XCTAssertFalse(app.buttons["Coming soon"].exists)
-        XCTAssertFalse(app.staticTexts["Demo"].exists, "No Demo chip on native tabs")
+        XCTAssertTrue(app.buttons["selah.settings.open"].waitForExistence(timeout: 5), "Today floating Settings gear missing")
+        XCTAssertFalse(app.navigationBars["Today"].exists, "Today must have no navbar")
         XCTAssertFalse(app.webViews.firstMatch.exists)
+        XCTAssertFalse(app.staticTexts["Coming soon"].exists)
+        XCTAssertFalse(app.staticTexts["Demo"].exists)
 
         app.tabBars.buttons["Read"].tap()
-        XCTAssertTrue(app.navigationBars.firstMatch.waitForExistence(timeout: 5), "Read needs a navigation bar")
+        XCTAssertTrue(app.otherElements["selah.navbar"].waitForExistence(timeout: 5), "Read needs a compact navbar")
 
         app.tabBars.buttons["Talk"].tap()
-        XCTAssertTrue(app.navigationBars["Talk"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.otherElements["selah.navbar"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Talk"].exists)
+        XCTAssertTrue(app.buttons["talk.privacy"].exists)
+        XCTAssertTrue(app.buttons["talk.clear"].exists)
+        XCTAssertFalse(app.buttons["selah.settings.open"].exists, "Talk must not show Settings")
 
         app.tabBars.buttons["Pray"].tap()
-        XCTAssertTrue(app.navigationBars["Pray"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.otherElements["selah.navbar"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Pray"].exists)
+        XCTAssertTrue(app.buttons["pray.close"].exists)
+        XCTAssertTrue(app.staticTexts["5 min"].exists || app.otherElements["pray.duration"].exists)
+        XCTAssertFalse(app.buttons["selah.settings.open"].exists, "Pray must not show Settings")
 
         app.tabBars.buttons["Journey"].tap()
-        XCTAssertTrue(app.navigationBars["Journey"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.otherElements["selah.navbar"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Journey"].exists)
+        XCTAssertTrue(app.buttons["selah.settings.open"].waitForExistence(timeout: 3), "Journey header holds Settings")
     }
 
     func testSettingsOpensAsNativeSheet() {

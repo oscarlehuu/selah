@@ -14,8 +14,24 @@ struct ReadView: View {
     @State private var markedRead = false
 
     var body: some View {
-        SelahTabScreen("Read") {
-            List {
+        SelahTabScreen {
+            VStack(spacing: 0) {
+                SelahCompactHeader(title: bookTitle) {
+                    Button("Aa") { showBookPicker = true }
+                        .font(SelahFont.ui(.body, weight: .bold))
+                        .frame(minWidth: 44, minHeight: 44)
+                        .accessibilityLabel("Text size")
+                        .accessibilityIdentifier("read.textSize")
+                } right: {
+                    SelahHeaderIconButton(
+                        systemName: "bookmark",
+                        label: "Bookmark chapter",
+                        identifier: "read.bookmark"
+                    ) {
+                        try? env.saveJournalEntry(plaintext: bookTitle)
+                    }
+                }
+                List {
                 if let day = env.currentPlanTheme?.day(globalDay: env.planGlobalDay) {
                     Section {
                         LabeledContent("Plan day \(env.planGlobalDay)", value: "\(day.book) \(day.chapter)")
@@ -47,32 +63,26 @@ struct ReadView: View {
                 }
             }
             .listStyle(.plain)
-            .navigationTitle(bookTitle)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button("Book") { showBookPicker = true }
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        env.openTalkReflect(reference: bookTitle)
-                    } label: {
-                        Image(systemName: "bubble.left")
-                    }
-                    .accessibilityLabel("Reflect on this chapter")
-                }
-            }
             .safeAreaInset(edge: .bottom) {
                 SelahFooterBar {
-                    SelahPrimaryButton(
-                        title: markedRead ? "Read today" : "Mark as read",
-                        style: markedRead ? .secondary : .primary
-                    ) {
-                        env.markPlanDayComplete(globalDay: env.planGlobalDay)
-                        markedRead = true
-                        AnalyticsService.track("plan_day_complete")
+                    HStack(spacing: 8) {
+                        SelahPrimaryButton(
+                            title: markedRead ? "Read today" : "Mark as read",
+                            style: markedRead ? .secondary : .primary
+                        ) {
+                            env.markPlanDayComplete(globalDay: env.planGlobalDay)
+                            markedRead = true
+                            AnalyticsService.track("plan_day_complete")
+                        }
+                        .disabled(markedRead)
+                        Button {
+                            env.openTalkReflect(reference: bookTitle)
+                        } label: {
+                            Image(systemName: "bubble.left")
+                                .frame(width: 44, height: 44)
+                        }
+                        .accessibilityLabel("Reflect on this chapter")
                     }
-                    .disabled(markedRead)
                 }
             }
             .sheet(isPresented: $showBookPicker) {
@@ -111,6 +121,7 @@ struct ReadView: View {
             }
             .onChange(of: selectedBookId) { _, _ in loadVerses() }
             .onChange(of: chapter) { _, _ in loadVerses() }
+            }
         }
     }
 
