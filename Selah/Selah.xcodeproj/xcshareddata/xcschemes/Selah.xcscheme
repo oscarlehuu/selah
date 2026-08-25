@@ -21,20 +21,6 @@
                ReferencedContainer = "container:Selah.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8110D5DB3290E05ED5696EFB"
-               BuildableName = "SelahUITests.xctest"
-               BlueprintName = "SelahUITests"
-               ReferencedContainer = "container:Selah.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -53,6 +39,28 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EAB6837029060148BA6C63D4"
+               BuildableName = "SelahTests.xctest"
+               BlueprintName = "SelahTests"
+               ReferencedContainer = "container:Selah.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8110D5DB3290E05ED5696EFB"
+               BuildableName = "SelahUITests.xctest"
+               BlueprintName = "SelahUITests"
+               ReferencedContainer = "container:Selah.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <CommandLineArguments>
       </CommandLineArguments>
@@ -79,9 +87,6 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
       </CommandLineArguments>
-      <StoreKitConfigurationFileReference
-         identifier = "../../Configuration/Selah.storekit">
-      </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -99,6 +104,8 @@
             ReferencedContainer = "container:Selah.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+      </CommandLineArguments>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
