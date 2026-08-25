@@ -36,7 +36,11 @@ final class CompanionAvailabilityTests: XCTestCase {
             throw XCTSkip("Foundation Models unavailable on this simulator")
         }
         let turn = await CompanionTextService.talkReply(to: "I’m exhausted", mode: .heart)
-        XCTAssertEqual(turn.source, .onDevice)
+        XCTAssertEqual(
+            turn.source,
+            .onDevice,
+            CompanionTextService.lastGenerationError ?? turn.reply
+        )
         XCTAssertFalse(turn.reply.isEmpty)
         XCTAssertNotEqual(turn.reply, CompanionTextService.unavailableMessage)
         XCTAssertFalse(turn.reply.lowercased().contains("god is typing"))
@@ -50,7 +54,11 @@ final class CompanionAvailabilityTests: XCTestCase {
         let turn = await CompanionTextService.prayerDraft(
             context: PrayerDraftContext(reflectionWord: "refuge", verse: "Psalm 46:1", mood: "heavy")
         )
-        XCTAssertEqual(turn.source, .onDevice)
+        XCTAssertEqual(
+            turn.source,
+            .onDevice,
+            CompanionTextService.lastGenerationError ?? turn.reply
+        )
         XCTAssertFalse(turn.reply.isEmpty)
         XCTAssertNotEqual(turn.reply, CompanionTextService.unavailableMessage)
         XCTAssertFalse(turn.reply.lowercased().contains("god is typing"))

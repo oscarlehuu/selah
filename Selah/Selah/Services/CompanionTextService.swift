@@ -30,6 +30,9 @@ enum CompanionTextService {
 
     static let failedMessage = "Selah could not generate a response right now. You are still heard by God."
 
+    /// Last Foundation Models error, for tests. Never shown as a fake prayer.
+    static var lastGenerationError: String?
+
     static func talkReply(
         to userMessage: String,
         mode: TalkMode,
@@ -87,12 +90,14 @@ enum CompanionTextService {
     #if canImport(FoundationModels)
     @available(iOS 26.0, *)
     private static func generate(instructions: String, prompt: String) async -> String? {
+        lastGenerationError = nil
         do {
-            let session = LanguageModelSession(instructions: instructions)
-            let response = try await session.respond(to: prompt)
+            let session = LanguageModelSession()
+            let response = try await session.respond(to: "\(instructions)\n\n\(prompt)")
             let content = response.content.trimmingCharacters(in: .whitespacesAndNewlines)
             return content.isEmpty ? nil : content
         } catch {
+            lastGenerationError = String(describing: error)
             return nil
         }
     }
