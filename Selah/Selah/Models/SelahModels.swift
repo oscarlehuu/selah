@@ -58,7 +58,7 @@ final class PlanProgressModel {
 @Model
 final class JournalEntryModel {
     var id: UUID = UUID()
-    var createdAt: Date = .now
+    var createdAt: Date = Date()
     var encryptedPayload: Data = Data()
     var iv: Data = Data()
     var tag: Data = Data()
@@ -77,7 +77,7 @@ final class JournalEntryModel {
 @Model
 final class TalkSessionModel {
     var id: UUID = UUID()
-    var startedAt: Date = .now
+    var startedAt: Date = Date()
     var mode: String = "talk"
 
     init(id: UUID = UUID(), startedAt: Date = .now, mode: String = "talk") {
@@ -93,7 +93,7 @@ final class TalkMessageModel {
     var sessionId: UUID = UUID()
     var role: String = ""
     var content: String = ""
-    var createdAt: Date = .now
+    var createdAt: Date = Date()
 
     init(id: UUID = UUID(), sessionId: UUID, role: String, content: String, createdAt: Date = .now) {
         self.id = id
