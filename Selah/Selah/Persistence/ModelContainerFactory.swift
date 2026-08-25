@@ -14,7 +14,7 @@ enum ModelContainerFactory {
         let config = ModelConfiguration(
             schema: schema,
             isStoredInMemoryOnly: inMemory,
-            cloudKitDatabase: inMemory ? .none : .automatic
+            cloudKitDatabase: .none
         )
         return try ModelContainer(for: schema, configurations: [config])
     }

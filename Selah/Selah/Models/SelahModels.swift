@@ -3,10 +3,10 @@ import SwiftData
 
 @Model
 final class StreakStateModel {
-    var streakDays: Int
-    var longestStreak: Int
+    var streakDays: Int = 0
+    var longestStreak: Int = 0
     var lastQualifyingDate: Date?
-    var graceUsedThisWeek: Bool
+    var graceUsedThisWeek: Bool = false
     var weekStartSunday: Date?
 
     init(
@@ -44,8 +44,8 @@ final class StreakStateModel {
 
 @Model
 final class PlanProgressModel {
-    var themeKey: String
-    var globalDay: Int
+    var themeKey: String = ""
+    var globalDay: Int = 1
     var completedAt: Date?
 
     init(themeKey: String, globalDay: Int, completedAt: Date? = nil) {
@@ -57,12 +57,12 @@ final class PlanProgressModel {
 
 @Model
 final class JournalEntryModel {
-    var id: UUID
-    var createdAt: Date
-    var encryptedPayload: Data
-    var iv: Data
-    var tag: Data
-    var previewHint: String
+    var id: UUID = UUID()
+    var createdAt: Date = .now
+    var encryptedPayload: Data = Data()
+    var iv: Data = Data()
+    var tag: Data = Data()
+    var previewHint: String = ""
 
     init(id: UUID = UUID(), createdAt: Date = .now, encryptedPayload: Data, iv: Data, tag: Data, previewHint: String = "") {
         self.id = id
@@ -76,9 +76,9 @@ final class JournalEntryModel {
 
 @Model
 final class TalkSessionModel {
-    var id: UUID
-    var startedAt: Date
-    var mode: String
+    var id: UUID = UUID()
+    var startedAt: Date = .now
+    var mode: String = "talk"
 
     init(id: UUID = UUID(), startedAt: Date = .now, mode: String = "talk") {
         self.id = id
@@ -89,11 +89,11 @@ final class TalkSessionModel {
 
 @Model
 final class TalkMessageModel {
-    var id: UUID
-    var sessionId: UUID
-    var role: String
-    var content: String
-    var createdAt: Date
+    var id: UUID = UUID()
+    var sessionId: UUID = UUID()
+    var role: String = ""
+    var content: String = ""
+    var createdAt: Date = .now
 
     init(id: UUID = UUID(), sessionId: UUID, role: String, content: String, createdAt: Date = .now) {
         self.id = id
@@ -106,18 +106,18 @@ final class TalkMessageModel {
 
 @Model
 final class AppSettingsModel {
-    var notificationHour: Int
-    var notificationMinute: Int
-    var autoDeleteTalkSessions: Bool
-    var journalCloudSyncEnabled: Bool
-    var requireFaceIDForJournal: Bool
-    var onboardingComplete: Bool
-    var sawNotificationPrompt: Bool
-    var paywallPresentationCount: Int
+    var notificationHour: Int = 6
+    var notificationMinute: Int = 30
+    var autoDeleteTalkSessions: Bool = false
+    var journalCloudSyncEnabled: Bool = false
+    var requireFaceIDForJournal: Bool = true
+    var onboardingComplete: Bool = false
+    var sawNotificationPrompt: Bool = false
+    var paywallPresentationCount: Int = 0
     var quizDistance: String?
     var quizDesire: String?
     var quizHabit: String?
-    var planThemeKey: String
+    var planThemeKey: String = "peace"
 
     init(
         notificationHour: Int = 6,
