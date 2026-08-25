@@ -26,7 +26,7 @@ final class AppEnvironment {
     private let modelContext: ModelContext
 
     init(modelContext: ModelContext, demoMode: Bool = DemoMode.isEnabled) throws {
-        let useDemo = demoMode && !DemoMode.uiTestFreshStart
+        let useDemo = demoMode && !DemoMode.uiTestFreshStart && !DemoMode.screenshotPaywall
         isDemoMode = useDemo
         self.modelContext = modelContext
         bibleRepository = try BibleRepository()
@@ -36,9 +36,10 @@ final class AppEnvironment {
         journalCrypto = JournalEncryptionService()
         crisisMatcher = CrisisKeywordMatcher()
         qualifyingTracker = QualifyingForegroundTracker()
-        subscription.configure(demoMode: useDemo)
         if DemoMode.screenshotPaywall {
             subscription.isSubscribed = false
+        } else {
+            subscription.configure(demoMode: useDemo)
         }
         AnalyticsService.configure(demoMode: useDemo)
         qualifyingTracker.onThreshold = { [weak self] in

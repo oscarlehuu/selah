@@ -1,15 +1,19 @@
-# Native SwiftUI proof — iPhone 17 Pro simulator
+# Native SwiftUI proof — iPhone 17 Pro
 
-Captured 2026-08-25. Flow/copy from `docs/selah-interactive-mock-v4.html`. Chrome is system NavigationStack / TabView, not a clone of the HTML layout.
+Captured 2026-08-25 with `simctl io screenshot --mask=ignored`.
 
-| File | What it shows |
+These frames are the **device framebuffer**, not a Simulator window photo and not the HTML mock. Center-column top/bottom pixels are Sunday Light cream (`#FAF7F2`), not black letterbox. The only near-black pixels are the Dynamic Island cutout.
+
+| File | Screen |
 |---|---|
-| `onboarding-welcome-nav-bar.png` | Welcome, large title, Skip, Begin |
-| `onboarding-quiz.png` | Quiz Continue after a selection |
-| `paywall-native-nav-bar.png` | Selah Premium, Restore purchase, Start Selah · $49.99/yr |
-| `tab-today.png` … `tab-journey.png` | Five native tabs |
-| `sheet-settings.png` | Settings as a native Form sheet |
-| `today-native-chrome.png` | Live Demo launch of Today |
+| `onboarding-welcome-nav-bar.png` | Welcome (Skip + Begin) |
+| `paywall-native-nav-bar.png` | Hard paywall |
+| `tab-today.png` | Today |
+| `tab-read.png` | Read (KJV) |
+| `tab-talk.png` | Talk |
+| `tab-pray.png` | Pray |
+| `tab-journey.png` | Journey |
+| `sheet-settings.png` | Settings sheet |
 | `native-tabs-walkthrough.mp4` | Tab + Settings walkthrough |
 
-Tests on this simulator: SelahTests 47 passed (1 skipped); SelahUITests 7 passed.
+No WKWebView. No Demo chip. No phone-frame wrapper.
