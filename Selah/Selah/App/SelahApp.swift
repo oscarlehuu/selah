@@ -7,6 +7,7 @@ final class AppBootstrap {
     let environment: AppEnvironment
 
     init() {
+        SelahAppearance.apply()
         do {
             let container = try ModelContainerFactory.make()
             let environment = try AppEnvironment(modelContext: container.mainContext)

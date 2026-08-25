@@ -37,14 +37,23 @@ final class AppEnvironment {
         crisisMatcher = CrisisKeywordMatcher()
         qualifyingTracker = QualifyingForegroundTracker()
         subscription.configure(demoMode: useDemo)
+        if DemoMode.screenshotPaywall {
+            subscription.isSubscribed = false
+        }
         AnalyticsService.configure(demoMode: useDemo)
         qualifyingTracker.onThreshold = { [weak self] in
             Task { @MainActor in self?.recordQualifyingPrayTalkTime() }
         }
         bootstrapModels()
-        if useDemo { applyDemoSeed() }
-        else if DemoMode.uiTestFreshStart { applyUITestFreshStart() }
-        else { processStreakOnOpen() }
+        if DemoMode.screenshotPaywall {
+            applyPaywallScreenshotState()
+        } else if useDemo {
+            applyDemoSeed()
+        } else if DemoMode.uiTestFreshStart {
+            applyUITestFreshStart()
+        } else {
+            processStreakOnOpen()
+        }
     }
 
     var isSubscribed: Bool { isDemoMode || subscription.isSubscribed }
@@ -232,8 +241,20 @@ final class AppEnvironment {
         settings?.planThemeKey = DemoSeedData.planTheme.lowercased()
         settings?.onboardingComplete = true
         settings?.sawNotificationPrompt = true
+        if let tab = DemoMode.screenshotTab {
+            selectedMainTab = tab
+        }
         seedDemoPlanProgress()
         seedDemoJournalEntries()
+        try? modelContext.save()
+    }
+
+    private func applyPaywallScreenshotState() {
+        settings?.onboardingComplete = true
+        settings?.sawNotificationPrompt = false
+        settings?.quizDistance = OnboardingDistance.guilt.rawValue
+        settings?.quizDesire = OnboardingDesire.peace.rawValue
+        subscription.isSubscribed = false
         try? modelContext.save()
     }
 

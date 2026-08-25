@@ -34,6 +34,7 @@ struct RootView: View {
             }
         }
         .tint(SelahColors.primaryDeep)
+        .selahRootChrome()
         .animation(.easeInOut(duration: 0.25), value: env.onboardingComplete)
         .alert("Restore", isPresented: $showRestoreAlert) {
             Button("OK", role: .cancel) {}

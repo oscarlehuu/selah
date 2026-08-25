@@ -47,6 +47,7 @@ struct SettingsView: View {
                     Link(AppConfiguration.supportEmail, destination: URL(string: "mailto:\(AppConfiguration.supportEmail)")!)
                 }
             }
+            .selahCanvas()
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

@@ -22,6 +22,7 @@ struct NotificationPromptView: View {
                 }
             }
             .listStyle(.insetGrouped)
+            .selahCanvas()
             .navigationTitle("Reminders")
             .safeAreaInset(edge: .bottom) {
                 SelahFooterBar {

@@ -35,6 +35,9 @@ struct MainTabView: View {
                 .accessibilityIdentifier("tab.journey")
         }
         .tint(SelahColors.primaryDeep)
+        .toolbarBackground(SelahColors.background, for: .tabBar)
+        .toolbarBackground(.visible, for: .tabBar)
+        .background(SelahColors.background.ignoresSafeArea())
         .onChange(of: env.selectedMainTab) { _, tab in
             env.qualifyingTracker.setPrayOrTalkActive(tab.isPrayOrTalk)
         }

@@ -22,6 +22,8 @@ final class NativeChromeUITests: XCTestCase {
         XCTAssertFalse(app.webViews.firstMatch.exists, "App must not embed the HTML mock")
         XCTAssertFalse(app.staticTexts["Coming soon"].exists)
         XCTAssertFalse(app.buttons["Coming soon"].exists)
+        XCTAssertFalse(app.staticTexts["Demo"].exists, "Demo chip mimics the HTML mock frame — remove it")
+        XCTAssertFalse(app.buttons["Demo"].exists)
     }
 
     func testMainTabsUseSystemTabBarAndLargeTitles() {
@@ -35,6 +37,8 @@ final class NativeChromeUITests: XCTestCase {
         XCTAssertTrue(app.navigationBars["Today"].waitForExistence(timeout: 5))
         XCTAssertFalse(app.staticTexts["Coming soon"].exists)
         XCTAssertFalse(app.buttons["Coming soon"].exists)
+        XCTAssertFalse(app.staticTexts["Demo"].exists, "No Demo chip on native tabs")
+        XCTAssertFalse(app.webViews.firstMatch.exists)
 
         app.tabBars.buttons["Read"].tap()
         XCTAssertTrue(app.navigationBars.firstMatch.waitForExistence(timeout: 5), "Read needs a navigation bar")

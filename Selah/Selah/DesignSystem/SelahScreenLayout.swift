@@ -1,10 +1,40 @@
 import SwiftUI
+import UIKit
 
-struct DemoModeBanner: View {
-    var body: some View {
-        Text("Demo")
-            .font(SelahFont.ui(.caption2, weight: .semibold))
-            .foregroundStyle(.secondary)
+enum SelahAppearance {
+    static let canvasUIColor = UIColor(red: 250 / 255, green: 247 / 255, blue: 242 / 255, alpha: 1)
+
+    static func apply() {
+        UIWindow.appearance().backgroundColor = canvasUIColor
+        UITableView.appearance().backgroundColor = canvasUIColor
+        UICollectionView.appearance().backgroundColor = canvasUIColor
+
+        let nav = UINavigationBarAppearance()
+        nav.configureWithOpaqueBackground()
+        nav.backgroundColor = canvasUIColor
+        UINavigationBar.appearance().standardAppearance = nav
+        UINavigationBar.appearance().scrollEdgeAppearance = nav
+        UINavigationBar.appearance().compactAppearance = nav
+
+        let tab = UITabBarAppearance()
+        tab.configureWithOpaqueBackground()
+        tab.backgroundColor = canvasUIColor
+        UITabBar.appearance().standardAppearance = tab
+        UITabBar.appearance().scrollEdgeAppearance = tab
+    }
+}
+
+extension View {
+    func selahCanvas() -> some View {
+        self
+            .scrollContentBackground(.hidden)
+            .background(SelahColors.background)
+    }
+
+    func selahRootChrome() -> some View {
+        self
+            .preferredColorScheme(.light)
+            .background(SelahColors.background.ignoresSafeArea())
     }
 }
 

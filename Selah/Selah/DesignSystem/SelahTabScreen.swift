@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct SelahTabScreen<Content: View>: View {
-    @Environment(AppEnvironment.self) private var env
     let title: String
     @ViewBuilder var content: Content
 
@@ -13,18 +12,12 @@ struct SelahTabScreen<Content: View>: View {
     var body: some View {
         NavigationStack {
             content
+                .selahCanvas()
                 .navigationTitle(title)
                 .navigationBarTitleDisplayMode(.large)
-                .toolbar {
-                    if env.isDemoMode {
-                        ToolbarItem(placement: .topBarLeading) {
-                            Text("Demo")
-                                .font(SelahFont.ui(.caption, weight: .semibold))
-                                .foregroundStyle(.secondary)
-                                .accessibilityLabel("Demo mode")
-                        }
-                    }
-                }
+                .toolbarBackground(SelahColors.background, for: .navigationBar)
+                .toolbarBackground(.visible, for: .navigationBar)
         }
+        .background(SelahColors.background.ignoresSafeArea())
     }
 }

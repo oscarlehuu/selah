@@ -95,6 +95,9 @@ struct TodayView: View {
             .onAppear {
                 AnalyticsService.track("today_open")
                 AnalyticsService.track("streak_view")
+                if DemoMode.screenshotSettings {
+                    showSettings = true
+                }
             }
             .task {
                 if env.isDemoMode {

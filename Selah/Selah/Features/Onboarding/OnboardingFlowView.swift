@@ -26,6 +26,7 @@ struct OnboardingFlowView: View {
                 isGenerating: isGenerating,
                 buildProgress: buildProgress
             )
+            .selahCanvas()
             .navigationTitle(step.navigationTitle)
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
@@ -62,6 +63,7 @@ struct OnboardingFlowView: View {
             }
         }
         .tint(SelahColors.primaryDeep)
+        .selahRootChrome()
         .onAppear { track() }
         .task(id: step) {
             if step == .building {

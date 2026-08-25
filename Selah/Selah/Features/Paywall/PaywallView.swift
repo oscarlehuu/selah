@@ -104,6 +104,7 @@ struct PaywallView: View {
                 }
             }
             .listStyle(.insetGrouped)
+            .selahCanvas()
             .navigationTitle("Selah Premium")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -140,6 +141,7 @@ struct PaywallView: View {
             }
         }
         .tint(SelahColors.primaryDeep)
+        .selahRootChrome()
         .interactiveDismissDisabled()
         .onAppear {
             selectedTier = PaywallExitPolicy.defaultTierIsYearly(
