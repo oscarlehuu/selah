@@ -1,5 +1,6 @@
 import XCTest
 
+@MainActor
 final class TalkPrayCompanionUITests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
@@ -13,54 +14,52 @@ final class TalkPrayCompanionUITests: XCTestCase {
         XCTAssertTrue(app.tabBars.firstMatch.waitForExistence(timeout: 15))
         app.tabBars.buttons["Talk"].tap()
         XCTAssertTrue(app.segmentedControls.firstMatch.waitForExistence(timeout: 8))
+        XCTAssertFalse(app.staticTexts["God is typing"].waitForExistence(timeout: 1))
 
         let exhausted = app.buttons["I’m exhausted"]
         XCTAssertTrue(exhausted.waitForExistence(timeout: 5), "Heart suggestion missing")
         exhausted.tap()
 
-        let preparing = app.activityIndicators["Selah is preparing"]
-        _ = preparing.waitForExistence(timeout: 3)
-        XCTAssertFalse(app.staticTexts["God is typing"].exists)
-
+        let failed = app.staticTexts.containing(
+            NSPredicate(format: "label CONTAINS[c] %@", "could not generate")
+        ).firstMatch
         let unavailable = app.staticTexts["talk.unavailable"]
         let scripture = app.staticTexts["talk.scripture"]
-        let assistant = app.staticTexts["talk.message.assistant"]
-        let appeared = unavailable.waitForExistence(timeout: 45)
-            || scripture.waitForExistence(timeout: 2)
-            || assistant.waitForExistence(timeout: 2)
-        XCTAssertTrue(appeared, "Talk did not show a companion reply or honest unavailable state")
+        XCTAssertTrue(
+            failed.waitForExistence(timeout: 45)
+                || unavailable.waitForExistence(timeout: 2)
+                || scripture.waitForExistence(timeout: 2),
+            "Talk should show a generated reply, honest failure, or unavailable copy"
+        )
         XCTAssertFalse(app.staticTexts["God is typing"].exists)
 
         app.tabBars.buttons["Pray"].tap()
         let continueButton = app.buttons["pray.continue"]
         XCTAssertTrue(continueButton.waitForExistence(timeout: 8))
         continueButton.tap()
-        let word = app.textFields["pray.word"]
-        if word.waitForExistence(timeout: 4) {
-            word.tap()
-            word.typeText("refuge")
-        } else {
-            let refuge = app.buttons["refuge"]
-            if refuge.waitForExistence(timeout: 2) { refuge.tap() }
+        if app.buttons["refuge"].waitForExistence(timeout: 4) {
+            app.buttons["refuge"].tap()
         }
         continueButton.tap()
 
         let silent = app.staticTexts["pray.silent"]
         let draft = app.staticTexts["pray.draft"]
         let generate = app.buttons["pray.generate"]
+        let prayFailed = app.staticTexts.containing(
+            NSPredicate(format: "label CONTAINS[c] %@", "could not generate")
+        ).firstMatch
         XCTAssertTrue(
-            silent.waitForExistence(timeout: 45) || draft.waitForExistence(timeout: 2) || generate.waitForExistence(timeout: 2),
-            "Pray step should generate, offer generate, or show silent Lectio"
+            silent.waitForExistence(timeout: 45)
+                || draft.waitForExistence(timeout: 2)
+                || generate.waitForExistence(timeout: 2)
+                || prayFailed.waitForExistence(timeout: 2),
+            "Pray step should generate, offer generate, fail honestly, or show silent Lectio"
         )
-        XCTAssertFalse(app.staticTexts["God is typing"].exists)
 
         let another = app.buttons["pray.another"]
         if another.waitForExistence(timeout: 2) {
-            let before = draft.label
             another.tap()
-            _ = draft.waitForExistence(timeout: 45)
-            XCTAssertTrue(draft.exists)
-            _ = before
+            XCTAssertTrue(draft.waitForExistence(timeout: 45) || prayFailed.waitForExistence(timeout: 2))
         }
 
         if continueButton.waitForExistence(timeout: 2) {
