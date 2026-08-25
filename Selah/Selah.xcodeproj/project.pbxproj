@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0181F867CD3465F5F3DEE089 /* DemoTabScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FD874C4771DD0D51C25B34 /* DemoTabScreenshotTests.swift */; };
+		01E15A503EA571A8F6612388 /* WelcomeMomentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598E57D85801739916C3EDC0 /* WelcomeMomentTests.swift */; };
 		027AA8ED1A34F27AF78AB304 /* SelahTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3CCEF8741E46DC5EB1D6E4 /* SelahTabScreen.swift */; };
 		02DC7278B0BB729F01AEBCEB /* CrisisKeywordMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D50758BE1314017DA139E7 /* CrisisKeywordMatcherTests.swift */; };
 		033FC2B3409A5E510B122043 /* NativeChromeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E96E2ACC4A1BE64C1A4E890 /* NativeChromeUITests.swift */; };
@@ -21,6 +22,8 @@
 		279345D8DDA151DC6D214C03 /* DemoMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F975CE9F93FD0F62D026028 /* DemoMode.swift */; };
 		27B70415A5C5C20FA2BECA71 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E94463E0E94A0D0A5B9DBF6 /* AppEnvironment.swift */; };
 		2ED3926C2C16EDC353EB5A3A /* QualifyingForegroundTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BBAE851CA3254BA1F5B368 /* QualifyingForegroundTracker.swift */; };
+		2F2DB07AD58CE72C9D3956E2 /* JourneyWeekPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5A250BE28445D6B2007FC2 /* JourneyWeekPathView.swift */; };
+		352D7D9746B9D430E197C118 /* JourneyPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF9EAAA5FB9318C3E64C61C /* JourneyPresentation.swift */; };
 		3E18CFE9493457293951F51C /* StreakLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC178B3A51CD70F806C175C /* StreakLogicTests.swift */; };
 		40396A706773731887A29949 /* BibleBookCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168B564307C7764979643B5D /* BibleBookCatalogTests.swift */; };
 		41A78480A3CDC9CF3D3DEC7A /* PostHog in Frameworks */ = {isa = PBXBuildFile; productRef = BD7056B44003964C2EF2AEBB /* PostHog */; };
@@ -42,12 +45,15 @@
 		844B082CA336B4DFEC16F88F /* OnboardingFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227899F4FD42D79762A8C910 /* OnboardingFlowView.swift */; };
 		870651D1BC992451B8786048 /* ModelContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE93D1C35FEB0ED1EC7A2A /* ModelContainerFactory.swift */; };
 		875672E2C8D192D2C536F9DB /* PaywallExitPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39678197E53F7644146F42A /* PaywallExitPolicy.swift */; };
+		87F83E1B1541C7F3F5EBC7FE /* WelcomeSanctuaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5529A7A27064189C8E1CB332 /* WelcomeSanctuaryView.swift */; };
+		8A6E932A8062360B1476FAA4 /* SelahHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1146D906EB13E1CF3C336EA4 /* SelahHero.swift */; };
 		8F4D785D59E6E7AA6F55E989 /* PaywallHeadlineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8FB9F35A1BD281B95513B2 /* PaywallHeadlineTests.swift */; };
 		9615D212FAC27A54A552441B /* AppFlowScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919FD51E804FD9A324724C10 /* AppFlowScreenshotTests.swift */; };
 		98AB8C523B3919254149C592 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 67A233483504614AD02C0F2E /* GRDB */; };
 		A16497EFC811A3E49D6EBB67 /* SelahApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699E4315B6E2D4D22377638 /* SelahApp.swift */; };
 		A2636125B449881C86C47897 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F7C9E07D873C8ED6ED115 /* TodayView.swift */; };
 		A2CDBD7C8BAB3F8B36F19F0B /* JournalEntryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE6B445BB7ADD39AE13EB5B /* JournalEntryDetailView.swift */; };
+		A43CC8440A0D9DEEBB78721A /* JourneyPresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EEA50CE4E340217394CF5A /* JourneyPresentationTests.swift */; };
 		A7EF23175EF9DBAC3841846C /* OnboardingCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF881C043A3DBCA64006E64A /* OnboardingCopy.swift */; };
 		AAC1E6D6CA824342AAB95B1F /* AppGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF126BFC8A60B798E505BFB2 /* AppGate.swift */; };
 		B5E524C62D49D97AED8A0401 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 093B6D793617022470024834 /* Assets.xcassets */; };
@@ -55,6 +61,7 @@
 		B7916A97ED06FB935CC6B3CE /* OnboardingCopyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B5AB98BA79CB3133766DE /* OnboardingCopyTests.swift */; };
 		B82B6D8524362DE4DCDE7E79 /* OnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEDB053426AB38601BFD739 /* OnboardingStep.swift */; };
 		BE6C6F929F27C07987EA8F39 /* SelahScreenLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5837D69D58641B4DE75C86C /* SelahScreenLayout.swift */; };
+		C05BF120331161DB32352D0C /* V4MomentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A0E13DD7A314EE00663357 /* V4MomentUITests.swift */; };
 		C4E5B4EC9EC76FE0B5952003 /* CompanionTextService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2E99F48CF3103937A925D8 /* CompanionTextService.swift */; };
 		C70F4B08D44D911EEE912D5F /* CompanionAvailabilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE87C8F83EE4A440FC3570B7 /* CompanionAvailabilityTests.swift */; };
 		CD359B304F0C5F238A430425 /* JourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA64D8528FA9BD6D6AC0DD6 /* JourneyView.swift */; };
@@ -64,6 +71,7 @@
 		DA39C249D995A2C142722066 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB7A2A584CA092661B4A88 /* PaywallView.swift */; };
 		DB40EA05D994EEA552828602 /* DemoSeedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDBFC98328CC2CF99A87849 /* DemoSeedData.swift */; };
 		EB255719068909C4A0167735 /* BiometricGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8BD4929F2DE6B313DC8471 /* BiometricGate.swift */; };
+		EDE610EC79CD100CDC662BB6 /* JourneyJournalSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89ACDABFC9C1FFA2CB9D6E5 /* JourneyJournalSection.swift */; };
 		EE1C71C170EE960C1ABEC258 /* Newsreader.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F77F4FD830EE6E3115B67D20 /* Newsreader.ttf */; };
 		F4E4AC8C7C5765B6A613EE41 /* SelahComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34954A88A9B1BAC753D2179C /* SelahComponents.swift */; };
 		F544C5211BE98BF1AE5AF2B3 /* ReadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B89EF7DD2D030D78E4375F /* ReadView.swift */; };
@@ -91,6 +99,7 @@
 
 /* Begin PBXFileReference section */
 		093B6D793617022470024834 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1146D906EB13E1CF3C336EA4 /* SelahHero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelahHero.swift; sourceTree = "<group>"; };
 		168B564307C7764979643B5D /* BibleBookCatalogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleBookCatalogTests.swift; sourceTree = "<group>"; };
 		16D50758BE1314017DA139E7 /* CrisisKeywordMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrisisKeywordMatcherTests.swift; sourceTree = "<group>"; };
 		1EA78F48C149B3AE290BCA55 /* SelahColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelahColors.swift; sourceTree = "<group>"; };
@@ -109,11 +118,16 @@
 		49E88FEE60DD58B9AE5A1BA9 /* SelahFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelahFont.swift; sourceTree = "<group>"; };
 		4BEDB053426AB38601BFD739 /* OnboardingStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStep.swift; sourceTree = "<group>"; };
 		4DCE93D1C35FEB0ED1EC7A2A /* ModelContainerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelContainerFactory.swift; sourceTree = "<group>"; };
+		51EEA50CE4E340217394CF5A /* JourneyPresentationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyPresentationTests.swift; sourceTree = "<group>"; };
+		5529A7A27064189C8E1CB332 /* WelcomeSanctuaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeSanctuaryView.swift; sourceTree = "<group>"; };
 		553F7C9E07D873C8ED6ED115 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		559A18C1BE0BB510DA5A94FA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		57BBAE851CA3254BA1F5B368 /* QualifyingForegroundTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualifyingForegroundTracker.swift; sourceTree = "<group>"; };
+		598E57D85801739916C3EDC0 /* WelcomeMomentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeMomentTests.swift; sourceTree = "<group>"; };
 		5E96E2ACC4A1BE64C1A4E890 /* NativeChromeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeChromeUITests.swift; sourceTree = "<group>"; };
+		5FF9EAAA5FB9318C3E64C61C /* JourneyPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyPresentation.swift; sourceTree = "<group>"; };
 		6180D61B3C86A0C1E9370026 /* TalkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkMode.swift; sourceTree = "<group>"; };
+		64A0E13DD7A314EE00663357 /* V4MomentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V4MomentUITests.swift; sourceTree = "<group>"; };
 		717D9496DDA4A712617E7A0D /* OnboardingStepContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStepContent.swift; sourceTree = "<group>"; };
 		7843447802CCEB57C215D140 /* BibleBookCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleBookCatalog.swift; sourceTree = "<group>"; };
 		838C3BA2893257D94EE21D29 /* SelahModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelahModels.swift; sourceTree = "<group>"; };
@@ -139,6 +153,7 @@
 		BDC2F559556E97CE4594B8AE /* SelahUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SelahUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE335695ABBAE227E2D86AFF /* OnboardingFlowMappingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowMappingTests.swift; sourceTree = "<group>"; };
 		BE4C0C567D665189A71BB4CF /* SubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionService.swift; sourceTree = "<group>"; };
+		BF5A250BE28445D6B2007FC2 /* JourneyWeekPathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyWeekPathView.swift; sourceTree = "<group>"; };
 		CC6FD5D08A4207E03214E4E0 /* NotificationPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPromptView.swift; sourceTree = "<group>"; };
 		D383D57B0C7DE0C19A816B99 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		D462C69E6485F2BB7987BC53 /* Figtree.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Figtree.ttf; sourceTree = "<group>"; };
@@ -149,6 +164,7 @@
 		EF126BFC8A60B798E505BFB2 /* AppGate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGate.swift; sourceTree = "<group>"; };
 		F6F4B1A1C9BB8C31E718544D /* PaywallExitOfferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallExitOfferTests.swift; sourceTree = "<group>"; };
 		F77F4FD830EE6E3115B67D20 /* Newsreader.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Newsreader.ttf; sourceTree = "<group>"; };
+		F89ACDABFC9C1FFA2CB9D6E5 /* JourneyJournalSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyJournalSection.swift; sourceTree = "<group>"; };
 		FCD52CCF648677AB6AA5CB8B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		FE2E99F48CF3103937A925D8 /* CompanionTextService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionTextService.swift; sourceTree = "<group>"; };
 		FE87C8F83EE4A440FC3570B7 /* CompanionAvailabilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionAvailabilityTests.swift; sourceTree = "<group>"; };
@@ -186,6 +202,7 @@
 				1EA78F48C149B3AE290BCA55 /* SelahColors.swift */,
 				34954A88A9B1BAC753D2179C /* SelahComponents.swift */,
 				49E88FEE60DD58B9AE5A1BA9 /* SelahFont.swift */,
+				1146D906EB13E1CF3C336EA4 /* SelahHero.swift */,
 				A5837D69D58641B4DE75C86C /* SelahScreenLayout.swift */,
 				8B3CCEF8741E46DC5EB1D6E4 /* SelahTabScreen.swift */,
 			);
@@ -197,6 +214,7 @@
 			children = (
 				EF126BFC8A60B798E505BFB2 /* AppGate.swift */,
 				7843447802CCEB57C215D140 /* BibleBookCatalog.swift */,
+				5FF9EAAA5FB9318C3E64C61C /* JourneyPresentation.swift */,
 				FF881C043A3DBCA64006E64A /* OnboardingCopy.swift */,
 				3EA0D31C25F934961BBB20FA /* OnboardingOptions.swift */,
 				4BEDB053426AB38601BFD739 /* OnboardingStep.swift */,
@@ -256,12 +274,14 @@
 				168B564307C7764979643B5D /* BibleBookCatalogTests.swift */,
 				FE87C8F83EE4A440FC3570B7 /* CompanionAvailabilityTests.swift */,
 				16D50758BE1314017DA139E7 /* CrisisKeywordMatcherTests.swift */,
+				51EEA50CE4E340217394CF5A /* JourneyPresentationTests.swift */,
 				2F8B5AB98BA79CB3133766DE /* OnboardingCopyTests.swift */,
 				BE335695ABBAE227E2D86AFF /* OnboardingFlowMappingTests.swift */,
 				F6F4B1A1C9BB8C31E718544D /* PaywallExitOfferTests.swift */,
 				2FFDCC11945524B83701EC47 /* PaywallGateTests.swift */,
 				EC8FB9F35A1BD281B95513B2 /* PaywallHeadlineTests.swift */,
 				FFC178B3A51CD70F806C175C /* StreakLogicTests.swift */,
+				598E57D85801739916C3EDC0 /* WelcomeMomentTests.swift */,
 			);
 			path = SelahTests;
 			sourceTree = "<group>";
@@ -296,7 +316,9 @@
 			isa = PBXGroup;
 			children = (
 				9EE6B445BB7ADD39AE13EB5B /* JournalEntryDetailView.swift */,
+				F89ACDABFC9C1FFA2CB9D6E5 /* JourneyJournalSection.swift */,
 				8FA64D8528FA9BD6D6AC0DD6 /* JourneyView.swift */,
+				BF5A250BE28445D6B2007FC2 /* JourneyWeekPathView.swift */,
 			);
 			path = Journey;
 			sourceTree = "<group>";
@@ -323,6 +345,7 @@
 				919FD51E804FD9A324724C10 /* AppFlowScreenshotTests.swift */,
 				95FD874C4771DD0D51C25B34 /* DemoTabScreenshotTests.swift */,
 				5E96E2ACC4A1BE64C1A4E890 /* NativeChromeUITests.swift */,
+				64A0E13DD7A314EE00663357 /* V4MomentUITests.swift */,
 			);
 			path = SelahUITests;
 			sourceTree = "<group>";
@@ -374,6 +397,7 @@
 				CC6FD5D08A4207E03214E4E0 /* NotificationPromptView.swift */,
 				227899F4FD42D79762A8C910 /* OnboardingFlowView.swift */,
 				717D9496DDA4A712617E7A0D /* OnboardingStepContent.swift */,
+				5529A7A27064189C8E1CB332 /* WelcomeSanctuaryView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -566,12 +590,14 @@
 				40396A706773731887A29949 /* BibleBookCatalogTests.swift in Sources */,
 				C70F4B08D44D911EEE912D5F /* CompanionAvailabilityTests.swift in Sources */,
 				02DC7278B0BB729F01AEBCEB /* CrisisKeywordMatcherTests.swift in Sources */,
+				A43CC8440A0D9DEEBB78721A /* JourneyPresentationTests.swift in Sources */,
 				B7916A97ED06FB935CC6B3CE /* OnboardingCopyTests.swift in Sources */,
 				F807A0912F729D8843E08171 /* OnboardingFlowMappingTests.swift in Sources */,
 				7A62507644F77BAAE577FB52 /* PaywallExitOfferTests.swift in Sources */,
 				1B15A57765AB0C29F327C777 /* PaywallGateTests.swift in Sources */,
 				8F4D785D59E6E7AA6F55E989 /* PaywallHeadlineTests.swift in Sources */,
 				3E18CFE9493457293951F51C /* StreakLogicTests.swift in Sources */,
+				01E15A503EA571A8F6612388 /* WelcomeMomentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,7 +618,10 @@
 				DB40EA05D994EEA552828602 /* DemoSeedData.swift in Sources */,
 				7F671D3F3204F78FE7BAECFC /* JournalEncryptionService.swift in Sources */,
 				A2CDBD7C8BAB3F8B36F19F0B /* JournalEntryDetailView.swift in Sources */,
+				EDE610EC79CD100CDC662BB6 /* JourneyJournalSection.swift in Sources */,
+				352D7D9746B9D430E197C118 /* JourneyPresentation.swift in Sources */,
 				CD359B304F0C5F238A430425 /* JourneyView.swift in Sources */,
+				2F2DB07AD58CE72C9D3956E2 /* JourneyWeekPathView.swift in Sources */,
 				6EE7C033BBDF679B8684D5F4 /* MainTab.swift in Sources */,
 				CDE378533D282B306F433CA5 /* MainTabView.swift in Sources */,
 				870651D1BC992451B8786048 /* ModelContainerFactory.swift in Sources */,
@@ -613,6 +642,7 @@
 				50C03AF86BA789CE52662DB5 /* SelahColors.swift in Sources */,
 				F4E4AC8C7C5765B6A613EE41 /* SelahComponents.swift in Sources */,
 				D3365CDFAD55789D860E1511 /* SelahFont.swift in Sources */,
+				8A6E932A8062360B1476FAA4 /* SelahHero.swift in Sources */,
 				0FCADE14CFC4CBB761493CDD /* SelahModels.swift in Sources */,
 				BE6C6F929F27C07987EA8F39 /* SelahScreenLayout.swift in Sources */,
 				027AA8ED1A34F27AF78AB304 /* SelahTabScreen.swift in Sources */,
@@ -623,6 +653,7 @@
 				684646858720070AA00CD5FC /* TalkView.swift in Sources */,
 				A2636125B449881C86C47897 /* TodayView.swift in Sources */,
 				6A3FF1BAEB36681142910F44 /* VerseOfTheDayService.swift in Sources */,
+				87F83E1B1541C7F3F5EBC7FE /* WelcomeSanctuaryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -633,6 +664,7 @@
 				9615D212FAC27A54A552441B /* AppFlowScreenshotTests.swift in Sources */,
 				0181F867CD3465F5F3DEE089 /* DemoTabScreenshotTests.swift in Sources */,
 				033FC2B3409A5E510B122043 /* NativeChromeUITests.swift in Sources */,
+				C05BF120331161DB32352D0C /* V4MomentUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,7 +715,9 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Selah;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -791,7 +825,9 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Selah;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
