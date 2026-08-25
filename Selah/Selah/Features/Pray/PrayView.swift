@@ -188,7 +188,9 @@ struct PrayView: View {
             mood: env.pendingPrayMood
         )
         if force {
-            _ = await engine.anotherPrayer() ?? engine.draft(context)
+            if await engine.anotherPrayer() == nil {
+                _ = await engine.draft(context)
+            }
         } else {
             _ = await engine.draft(context)
         }
