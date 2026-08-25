@@ -4,6 +4,7 @@ import UIKit
 enum SelahAppearance {
     static let canvasUIColor = UIColor(red: 250 / 255, green: 247 / 255, blue: 242 / 255, alpha: 1)
 
+    @MainActor
     static func apply() {
         UIWindow.appearance().backgroundColor = canvasUIColor
         UITableView.appearance().backgroundColor = canvasUIColor
