@@ -76,6 +76,8 @@ final class TalkSessionEngine {
 
         let user = TalkLine(role: .user, text: text)
         let history = lines
+        let mode = self.mode
+        let companion = self.companion
         lines.append(user)
         isSending = true
         let turn = await companion.talkReply(to: text, mode: mode, history: history)

@@ -1,6 +1,6 @@
 import Foundation
 
-protocol CompanionGenerating: AnyObject {
+protocol CompanionGenerating: AnyObject, Sendable {
     var isAvailable: Bool { get }
     func talkReply(to userMessage: String, mode: TalkMode, history: [TalkLine]) async -> CompanionTurn
     func prayerDraft(context: PrayerDraftContext) async -> CompanionTurn

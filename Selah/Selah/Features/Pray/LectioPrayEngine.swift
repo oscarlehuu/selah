@@ -22,6 +22,7 @@ final class LectioPrayEngine {
             return unavailable
         }
         isGenerating = true
+        let companion = self.companion
         let result = await companion.prayerDraft(context: context)
         turn = result
         isGenerating = false
