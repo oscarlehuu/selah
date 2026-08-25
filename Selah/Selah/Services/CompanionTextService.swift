@@ -72,9 +72,9 @@ enum CompanionTextService {
         #if canImport(FoundationModels)
         if #available(iOS 26.0, *) {
             switch await generate(instructions: instructions, prompt: prompt) {
-            case .success(let raw):
+            case .text(let raw):
                 return parse(raw, .onDevice)
-            case .failure(let detail):
+            case .failed(let detail):
                 return .failed(failedMessage, detail: detail)
             }
         }
@@ -84,16 +84,21 @@ enum CompanionTextService {
 
     #if canImport(FoundationModels)
     @available(iOS 26.0, *)
-    private static func generate(instructions: String, prompt: String) async -> Result<String, String> {
+    private static func generate(instructions: String, prompt: String) async -> GeneratedText {
         do {
             let session = LanguageModelSession()
             let response = try await session.respond(to: "\(instructions)\n\n\(prompt)")
             let content = response.content.trimmingCharacters(in: .whitespacesAndNewlines)
-            if content.isEmpty { return .failure("empty response") }
-            return .success(content)
+            if content.isEmpty { return .failed("empty response") }
+            return .text(content)
         } catch {
-            return .failure(String(describing: error))
+            return .failed(String(describing: error))
         }
+    }
+
+    private enum GeneratedText {
+        case text(String)
+        case failed(String)
     }
     #endif
 }
