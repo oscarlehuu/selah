@@ -39,7 +39,7 @@ final class CompanionAvailabilityTests: XCTestCase {
         XCTAssertEqual(
             turn.source,
             .onDevice,
-            CompanionTextService.lastGenerationError ?? turn.reply
+            turn.generationDetail ?? turn.reply
         )
         XCTAssertFalse(turn.reply.isEmpty)
         XCTAssertNotEqual(turn.reply, CompanionTextService.unavailableMessage)
@@ -57,7 +57,7 @@ final class CompanionAvailabilityTests: XCTestCase {
         XCTAssertEqual(
             turn.source,
             .onDevice,
-            CompanionTextService.lastGenerationError ?? turn.reply
+            turn.generationDetail ?? turn.reply
         )
         XCTAssertFalse(turn.reply.isEmpty)
         XCTAssertNotEqual(turn.reply, CompanionTextService.unavailableMessage)

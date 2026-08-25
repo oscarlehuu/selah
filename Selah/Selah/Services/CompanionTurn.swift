@@ -12,13 +12,14 @@ struct CompanionTurn: Equatable, Sendable {
     var scriptureReference: String?
     var scriptureText: String?
     var followUps: [String]
+    var generationDetail: String? = nil
 
     static func unavailable(_ message: String) -> CompanionTurn {
         CompanionTurn(source: .unavailable, reply: message, scriptureReference: nil, scriptureText: nil, followUps: [])
     }
 
-    static func failed(_ message: String) -> CompanionTurn {
-        CompanionTurn(source: .failed, reply: message, scriptureReference: nil, scriptureText: nil, followUps: [])
+    static func failed(_ message: String, detail: String? = nil) -> CompanionTurn {
+        CompanionTurn(source: .failed, reply: message, scriptureReference: nil, scriptureText: nil, followUps: [], generationDetail: detail)
     }
 
     var persistedText: String {

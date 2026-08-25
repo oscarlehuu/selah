@@ -30,26 +30,16 @@ enum CompanionTextService {
 
     static let failedMessage = "Selah could not generate a response right now. You are still heard by God."
 
-    /// Last Foundation Models error, for tests. Never shown as a fake prayer.
-    static var lastGenerationError: String?
-
     static func talkReply(
         to userMessage: String,
         mode: TalkMode,
         history: [TalkLine] = []
     ) async -> CompanionTurn {
-        guard isOnDeviceCompanionAvailable else { return .unavailable(unavailableMessage) }
-        #if canImport(FoundationModels)
-        if #available(iOS 26.0, *) {
-            let raw = await generate(
-                instructions: CompanionPrompts.talkInstructions(mode: mode),
-                prompt: CompanionPrompts.talkUserPrompt(message: userMessage, history: history)
-            )
-            guard let raw else { return .failed(failedMessage) }
-            return CompanionTurnParser.parseTalk(raw, source: .onDevice)
-        }
-        #endif
-        return .unavailable(unavailableMessage)
+        await generatedTurn(
+            instructions: CompanionPrompts.talkInstructions(mode: mode),
+            prompt: CompanionPrompts.talkUserPrompt(message: userMessage, history: history),
+            parse: CompanionTurnParser.parseTalk
+        )
     }
 
     static func reflection(for mood: String) async -> String {
@@ -58,30 +48,35 @@ enum CompanionTextService {
     }
 
     static func reflectionTurn(for mood: String) async -> CompanionTurn {
-        guard isOnDeviceCompanionAvailable else { return .unavailable(unavailableMessage) }
-        #if canImport(FoundationModels)
-        if #available(iOS 26.0, *) {
-            let raw = await generate(
-                instructions: CompanionPrompts.reflectionInstructions(),
-                prompt: CompanionPrompts.reflectionUserPrompt(mood: mood)
-            )
-            guard let raw else { return .failed(failedMessage) }
-            return CompanionTurnParser.parseTalk(raw, source: .onDevice)
-        }
-        #endif
-        return .unavailable(unavailableMessage)
+        await generatedTurn(
+            instructions: CompanionPrompts.reflectionInstructions(),
+            prompt: CompanionPrompts.reflectionUserPrompt(mood: mood),
+            parse: CompanionTurnParser.parseTalk
+        )
     }
 
     static func prayerDraft(context: PrayerDraftContext) async -> CompanionTurn {
+        await generatedTurn(
+            instructions: CompanionPrompts.prayerInstructions(),
+            prompt: CompanionPrompts.prayerUserPrompt(context: context),
+            parse: CompanionTurnParser.parsePrayer
+        )
+    }
+
+    private static func generatedTurn(
+        instructions: String,
+        prompt: String,
+        parse: (String, CompanionTurn.Source) -> CompanionTurn
+    ) async -> CompanionTurn {
         guard isOnDeviceCompanionAvailable else { return .unavailable(unavailableMessage) }
         #if canImport(FoundationModels)
         if #available(iOS 26.0, *) {
-            let raw = await generate(
-                instructions: CompanionPrompts.prayerInstructions(),
-                prompt: CompanionPrompts.prayerUserPrompt(context: context)
-            )
-            guard let raw else { return .failed(failedMessage) }
-            return CompanionTurnParser.parsePrayer(raw, source: .onDevice)
+            switch await generate(instructions: instructions, prompt: prompt) {
+            case .success(let raw):
+                return parse(raw, .onDevice)
+            case .failure(let detail):
+                return .failed(failedMessage, detail: detail)
+            }
         }
         #endif
         return .unavailable(unavailableMessage)
@@ -89,16 +84,15 @@ enum CompanionTextService {
 
     #if canImport(FoundationModels)
     @available(iOS 26.0, *)
-    private static func generate(instructions: String, prompt: String) async -> String? {
-        lastGenerationError = nil
+    private static func generate(instructions: String, prompt: String) async -> Result<String, String> {
         do {
             let session = LanguageModelSession()
             let response = try await session.respond(to: "\(instructions)\n\n\(prompt)")
             let content = response.content.trimmingCharacters(in: .whitespacesAndNewlines)
-            return content.isEmpty ? nil : content
+            if content.isEmpty { return .failure("empty response") }
+            return .success(content)
         } catch {
-            lastGenerationError = String(describing: error)
-            return nil
+            return .failure(String(describing: error))
         }
     }
     #endif
