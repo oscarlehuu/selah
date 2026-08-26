@@ -1,162 +1,204 @@
 import SwiftUI
 
+/// Mock v4 screen 16 — hard paywall (`paywall_view`, CSS `.pw-*` / `.tier`).
 struct PaywallView: View {
     @Environment(AppEnvironment.self) private var env
-    @Binding var showExitMonthly: Bool
     var onRestore: () -> Void
 
     @State private var selectedTier: SubscriptionTier = .yearly
     @State private var isPurchasing = false
     @State private var errorMessage: String?
 
+    private let tiers: [SubscriptionTier] = [.weekly, .yearly, .monthly]
+
     var body: some View {
-        let emphasizeWeekly = PaywallExitPolicy.shouldEmphasizeWeekly(
-            paywallPresentationCount: env.subscription.paywallPresentationCount
-        )
-        NavigationStack {
-            List {
-                Section {
-                    Text(OnboardingCopy.paywallHeadline(distance: env.quizDistance, desire: env.quizDesire))
-                        .font(SelahFont.display(.title2))
-                    Text("5 minutes a day. Private. On your phone.")
-                        .foregroundStyle(.secondary)
-                    if emphasizeWeekly {
-                        Text("Most people start weekly — then keep going.")
-                            .foregroundStyle(SelahColors.accent)
+        ZStack {
+            SelahColors.background.ignoresSafeArea()
+            // Full-bleed layout: hero starts at absolute top (mock `.pw-hero` sits
+            // under the status bar), footer flows after the tiers and anchors to
+            // the bottom when content is short — never overlays the cards.
+            GeometryReader { proxy in
+                ScrollView {
+                    VStack(spacing: 0) {
+                        // `.pw-hero` — window photo + veil from y = 0
+                        OnboardingHero(style: .photoWindow, height: 118 + proxy.safeAreaInsets.top) { EmptyView() }
+                        content
+                        Spacer(minLength: 8)
+                        footer
+                            .padding(.bottom, proxy.safeAreaInsets.bottom > 0 ? 14 : 0)
                     }
+                    .frame(minHeight: proxy.size.height + proxy.safeAreaInsets.top + proxy.safeAreaInsets.bottom)
                 }
-                Section("Included") {
-                    Label {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("Private by design")
-                            Text("Talk, reflect, confess. On-device only.")
-                                .font(SelahFont.ui(.footnote))
-                                .foregroundStyle(.secondary)
-                        }
-                    } icon: {
-                        Image(systemName: "lock.fill")
-                    }
-                    Label {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("5 minutes a day")
-                            Text("Your \(planThemeLabel) plan, offline Bible, gentle streak.")
-                                .font(SelahFont.ui(.footnote))
-                                .foregroundStyle(.secondary)
-                        }
-                    } icon: {
-                        Image(systemName: "book.fill")
-                    }
-                    Label {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("Guided prayer")
-                            Text("Lectio Divina and prayers for the mood you’re actually in.")
-                                .font(SelahFont.ui(.footnote))
-                                .foregroundStyle(.secondary)
-                        }
-                    } icon: {
-                        Image(systemName: "hands.sparkles.fill")
-                    }
-                }
-                Section {
-                    ForEach(orderedTiers(emphasizeWeekly: emphasizeWeekly), id: \.self) { tier in
-                        Button {
-                            selectedTier = tier
-                        } label: {
-                            HStack {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    HStack {
-                                        Text(tier.title)
-                                        if tier == .yearly {
-                                            Text("Best value")
-                                                .font(SelahFont.ui(.caption2, weight: .semibold))
-                                                .foregroundStyle(SelahColors.accent)
-                                        }
-                                        if emphasizeWeekly && tier == .weekly {
-                                            Text("Popular")
-                                                .font(SelahFont.ui(.caption2, weight: .semibold))
-                                                .foregroundStyle(SelahColors.accent)
-                                        }
-                                    }
-                                    Text(tier.detailLabel)
-                                        .font(SelahFont.ui(.footnote))
-                                        .foregroundStyle(.secondary)
-                                }
-                                Spacer()
-                                Text(tier.shortPrice)
-                                    .font(SelahFont.ui(.body, weight: .semibold))
-                                if selectedTier == tier {
-                                    Image(systemName: "checkmark")
-                                        .foregroundStyle(SelahColors.primaryDeep)
-                                }
-                            }
-                        }
-                        .accessibilityIdentifier("paywall.tier.\(tier.rawValue)")
-                    }
-                } header: {
-                    Text("Choose a plan")
-                } footer: {
-                    Text("Auto-renews until cancelled. \(OnboardingCopy.companionDisclaimer) It does not replace a pastor, priest, counsellor, or sacramental confession.")
-                }
-                if let errorMessage {
-                    Section {
-                        Text(errorMessage).foregroundStyle(.red)
-                    }
-                }
-            }
-            .listStyle(.insetGrouped)
-            .selahCanvas()
-            .navigationTitle("Selah Premium")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Restore purchase", action: onRestore)
-                        .accessibilityIdentifier("paywall.restore")
-                }
-            }
-            .safeAreaInset(edge: .bottom) {
-                SelahFooterBar {
-                    SelahPrimaryButton(
-                        title: isPurchasing ? "Working…" : "Start Selah · \(selectedTier.ctaPrice)",
-                        style: .gold,
-                        isLoading: isPurchasing,
-                        action: { Task { await purchase() } }
-                    )
-                    .disabled(isPurchasing)
-                    .accessibilityIdentifier("paywall.subscribe")
-                    Button("See monthly plan") {
-                        selectedTier = .monthly
-                        showExitMonthly = true
-                    }
-                    .font(SelahFont.ui(.subheadline, weight: .semibold))
-                    HStack(spacing: 16) {
-                        if let url = URL(string: AppConfiguration.privacyPolicyURL) {
-                            Link("Privacy", destination: url)
-                        }
-                        if let url = URL(string: AppConfiguration.termsURL) {
-                            Link("Terms", destination: url)
-                        }
-                    }
-                    .font(SelahFont.ui(.footnote))
-                }
+                .scrollIndicators(.hidden)
+                .accessibilityIdentifier("gate.paywall")
+                .ignoresSafeArea()
             }
         }
         .tint(SelahColors.primaryDeep)
         .selahRootChrome()
         .interactiveDismissDisabled()
-        .onAppear {
-            selectedTier = PaywallExitPolicy.defaultTierIsYearly(
-                paywallPresentationCount: env.subscription.paywallPresentationCount
-            ) ? .yearly : .weekly
+    }
+
+    private var content: some View {
+        VStack(spacing: 0) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text(OnboardingCopy.paywallHeadline(distance: env.quizDistance, desire: env.quizDesire))
+                            .font(SelahFont.display(.title2))
+                            .foregroundStyle(SelahColors.text)
+                            .multilineTextAlignment(.center)
+                            .frame(maxWidth: .infinity)
+                        // `.pw-bullets`
+                        VStack(alignment: .leading, spacing: 10) {
+                            bullet(icon: "lock.fill", title: "Private by design",
+                                   sub: "Talk, reflect, confess. On-device only.")
+                            bullet(icon: "book.fill", title: "5 minutes a day",
+                                   sub: "Your \(planThemeLabel) plan, offline Bible, gentle streak.")
+                            bullet(icon: "hands.sparkles.fill", title: "Guided prayer",
+                                   sub: "Lectio Divina and prayers for the mood you’re actually in.")
+                        }
+                        .padding(.top, 15)
+                        .padding(.bottom, 16)
+                        // `.tiers` radiogroup
+                        VStack(spacing: 9) {
+                            ForEach(tiers, id: \.self) { tier in
+                                tierCard(tier)
+                            }
+                        }
+                        if let errorMessage {
+                            Text(errorMessage)
+                                .font(SelahFont.ui(.footnote))
+                                .foregroundStyle(.red)
+                                .multilineTextAlignment(.center)
+                                .frame(maxWidth: .infinity)
+                                .padding(.top, 12)
+                        }
+                    }
+                    .padding(.horizontal, 22)
+                    .padding(.top, 16)
+                    .padding(.bottom, 8)
         }
-        .accessibilityIdentifier("gate.paywall")
+    }
+
+    // MARK: `.pw-bullets li`
+
+    private func bullet(icon: String, title: String, sub: String) -> some View {
+        HStack(alignment: .top, spacing: 12) {
+            SelahIconTile(systemImage: icon, size: 34)
+            VStack(alignment: .leading, spacing: 1) {
+                Text(title)
+                    .font(SelahFont.ui(.subheadline, weight: .semibold))
+                    .foregroundStyle(SelahColors.text)
+                Text(sub)
+                    .font(SelahFont.ui(.footnote))
+                    .foregroundStyle(SelahColors.textMuted)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    // MARK: `.tier`
+
+    private func tierCard(_ tier: SubscriptionTier) -> some View {
+        let selected = selectedTier == tier
+        return Button {
+            selectedTier = tier
+        } label: {
+            HStack(alignment: .center, spacing: 12) {
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(tier.title)
+                        .font(SelahFont.ui(.body, weight: .bold))
+                        .foregroundStyle(selected ? SelahColors.accentDeep : SelahColors.text)
+                    Text(tier.detailLabel)
+                        .font(SelahFont.ui(.caption))
+                        .foregroundStyle(SelahColors.textSoft)
+                }
+                Spacer()
+                // `.tier .price`
+                VStack(alignment: .trailing, spacing: 0) {
+                    Text(tier.shortPrice)
+                        .font(SelahFont.ui(.body, weight: .bold))
+                        .foregroundStyle(selected ? SelahColors.accentDeep : SelahColors.text)
+                    Text(unitLabel(tier))
+                        .font(SelahFont.ui(.caption2))
+                        .foregroundStyle(SelahColors.textSoft)
+                }
+            }
+            .padding(.horizontal, 15)
+            .padding(.vertical, 12)
+            .background(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .fill(selected ? SelahColors.accentSoft : SelahColors.surface)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .stroke(selected ? SelahColors.accent : SelahColors.border, lineWidth: 1.5)
+            )
+            .shadow(color: selected ? Color(hex: 0xC48A28).opacity(0.16) : .clear, radius: 7, y: 4)
+            // `.tier .badge` — floating "BEST VALUE" capsule
+            .overlay(alignment: .topLeading) {
+                if tier == .yearly {
+                    Text("Best value")
+                        .font(SelahFont.ui(.caption2, weight: .bold))
+                        .textCase(.uppercase)
+                        .kerning(0.4)
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 9)
+                        .padding(.vertical, 2)
+                        .background(Capsule().fill(SelahColors.goldGradient))
+                        .shadow(color: Color(hex: 0xB98A28).opacity(0.3), radius: 3, y: 2)
+                        .offset(x: 14, y: -9)
+                }
+            }
+        }
+        .buttonStyle(.plain)
+        .accessibilityAddTraits(selected ? [.isSelected] : [])
+        .accessibilityIdentifier("paywall.tier.\(tier.rawValue)")
+    }
+
+    // MARK: `.ob-foot`
+
+    private var footer: some View {
+        SelahFooterBar {
+            SelahPrimaryButton(
+                title: isPurchasing ? "Working…" : "Start Selah · \(selectedTier.ctaPrice)",
+                style: .gold,
+                isLoading: isPurchasing,
+                action: { Task { await purchase() } }
+            )
+            .disabled(isPurchasing)
+            .accessibilityIdentifier("paywall.subscribe")
+            Text("Auto-renews until cancelled. \(OnboardingCopy.companionDisclaimer) It does not replace a pastor, priest, counsellor, or sacramental confession.")
+                .font(SelahFont.ui(.caption2))
+                .foregroundStyle(SelahColors.textSoft)
+                .multilineTextAlignment(.center)
+            // `.pw-legal`
+            HStack(spacing: 14) {
+                Button("Restore purchase", action: onRestore)
+                    .accessibilityIdentifier("paywall.restore")
+                if let url = URL(string: AppConfiguration.termsURL) {
+                    Link("Terms", destination: url)
+                }
+                if let url = URL(string: AppConfiguration.privacyPolicyURL) {
+                    Link("Privacy", destination: url)
+                }
+            }
+            .font(SelahFont.ui(.caption2))
+            .foregroundStyle(SelahColors.textSoft)
+            .underline()
+        }
+    }
+
+    private func unitLabel(_ tier: SubscriptionTier) -> String {
+        switch tier {
+        case .weekly: "per week"
+        case .monthly: "per month"
+        case .yearly: "per year"
+        }
     }
 
     private var planThemeLabel: String {
         env.quizDesire?.planLabel.lowercased() ?? env.currentPlanTheme?.label.lowercased() ?? "peace"
-    }
-
-    private func orderedTiers(emphasizeWeekly: Bool) -> [SubscriptionTier] {
-        emphasizeWeekly ? [.weekly, .yearly, .monthly] : [.weekly, .yearly, .monthly]
     }
 
     private func purchase() async {
@@ -167,38 +209,7 @@ struct PaywallView: View {
         if ok {
             AnalyticsService.track("subscribe", properties: ["tier": selectedTier.rawValue])
         } else {
-            if PaywallExitPolicy.shouldShowMonthlyExitOffer(
-                paymentSheetCancelled: true,
-                seeMonthlyPlanTapped: false
-            ) {
-                showExitMonthly = true
-            }
             errorMessage = env.subscription.lastError ?? "Purchase didn’t finish. Try again or restore."
         }
-    }
-}
-
-struct ExitMonthlyOfferView: View {
-    var onDismiss: () -> Void
-
-    var body: some View {
-        NavigationStack {
-            ContentUnavailableView(
-                "Start with monthly",
-                systemImage: "calendar",
-                description: Text("$14.99 / month. Same private space. Cancel anytime.")
-            )
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Keep looking", action: onDismiss)
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Use monthly", action: onDismiss)
-                }
-            }
-            .navigationTitle("Monthly plan")
-            .navigationBarTitleDisplayMode(.inline)
-        }
-        .presentationDetents([.medium])
     }
 }

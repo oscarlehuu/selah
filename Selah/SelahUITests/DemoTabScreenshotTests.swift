@@ -23,7 +23,7 @@ final class DemoTabScreenshotTests: XCTestCase {
         let settings = app.buttons["selah.settings.open"]
         if settings.waitForExistence(timeout: 3) {
             settings.tap()
-            XCTAssertTrue(app.navigationBars["Settings"].waitForExistence(timeout: 5))
+            XCTAssertTrue(app.staticTexts["Settings"].waitForExistence(timeout: 5))
             attachScreenshot(app, name: "sheet-settings")
             app.buttons["Done"].tap()
         }

@@ -13,7 +13,8 @@ final class TalkPrayCompanionUITests: XCTestCase {
 
         XCTAssertTrue(app.tabBars.firstMatch.waitForExistence(timeout: 15))
         app.tabBars.buttons["Talk"].tap()
-        XCTAssertTrue(app.segmentedControls.firstMatch.waitForExistence(timeout: 8))
+        // Mock v4 `.mode-seg` — custom pills, not a native segmented control.
+        XCTAssertTrue(app.buttons["Heart"].waitForExistence(timeout: 8), "Talk mode pills missing")
         XCTAssertFalse(app.staticTexts["God is typing"].waitForExistence(timeout: 1))
 
         let exhausted = app.buttons["I’m exhausted"]
@@ -26,14 +27,16 @@ final class TalkPrayCompanionUITests: XCTestCase {
         ).firstMatch
         let unavailable = app.staticTexts["talk.unavailable"]
         let scripture = app.staticTexts["talk.scripture"]
+        let talkResolved = failed.waitForExistence(timeout: 45)
+            || unavailable.waitForExistence(timeout: 2)
+            || scripture.waitForExistence(timeout: 2)
+            || app.staticTexts["talk.message.assistant"].waitForExistence(timeout: 2)
+        saveProof(app, name: "02-talk-heart-after-send")
         XCTAssertTrue(
-            failed.waitForExistence(timeout: 45)
-                || unavailable.waitForExistence(timeout: 2)
-                || scripture.waitForExistence(timeout: 2),
+            talkResolved,
             "Talk should show a generated reply, honest failure, or unavailable copy"
         )
         XCTAssertFalse(app.staticTexts["God is typing"].exists)
-        saveProof(app, name: "02-talk-heart-after-send")
 
         app.tabBars.buttons["Pray"].tap()
         let continueButton = app.buttons["pray.continue"]

@@ -28,6 +28,32 @@ final class CompanionTurnParserTests: XCTestCase {
         XCTAssertTrue(turn.followUps.isEmpty)
     }
 
+    func testPlaceholderAngleBracketsAreStrippedFromModelOutput() {
+        let raw = """
+        REPLY: <God hears your tiredness. What if you whispered, 'I'm worn out'?>
+        SCRIPTURE: <Proverbs 3:5>
+        SCRIPTURE_TEXT: <Trust in the LORD with all thine heart.>
+        FOLLOWUPS: <Tap "Share what weighs you down" | Tap "Pause and breathe">
+        """
+        let turn = CompanionTurnParser.parseTalk(raw, source: .onDevice)
+        XCTAssertFalse(turn.reply.contains("<"))
+        XCTAssertFalse(turn.reply.contains(">"))
+        XCTAssertEqual(turn.scriptureReference, "Proverbs 3:5")
+        XCTAssertEqual(turn.scriptureText, "Trust in the LORD with all thine heart.")
+        XCTAssertEqual(turn.followUps, [
+            "Tap \"Share what weighs you down\"",
+            "Tap \"Pause and breathe\""
+        ])
+    }
+
+    func testAngleBracketsInsideRealSentencesAreKept() {
+        let turn = CompanionTurnParser.parseTalk(
+            "REPLY: Try 3 < 5 when comparing counts.",
+            source: .onDevice
+        )
+        XCTAssertTrue(turn.reply.contains("3 < 5"))
+    }
+
     func testParsesPrayerBlock() {
         let raw = """
         PRAYER:

@@ -21,6 +21,7 @@
 		2264C8EC1A7C77474E6AC87D /* OnboardingStepContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717D9496DDA4A712617E7A0D /* OnboardingStepContent.swift */; };
 		279345D8DDA151DC6D214C03 /* DemoMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F975CE9F93FD0F62D026028 /* DemoMode.swift */; };
 		27B70415A5C5C20FA2BECA71 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E94463E0E94A0D0A5B9DBF6 /* AppEnvironment.swift */; };
+		2A4E655F0ACF9BC1402905FD /* OnboardingAuditTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950894A2445C5F164D2C0893 /* OnboardingAuditTests.swift */; };
 		2ED3926C2C16EDC353EB5A3A /* QualifyingForegroundTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BBAE851CA3254BA1F5B368 /* QualifyingForegroundTracker.swift */; };
 		3E18CFE9493457293951F51C /* StreakLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC178B3A51CD70F806C175C /* StreakLogicTests.swift */; };
 		40396A706773731887A29949 /* BibleBookCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168B564307C7764979643B5D /* BibleBookCatalogTests.swift */; };
@@ -48,6 +49,7 @@
 		844B082CA336B4DFEC16F88F /* OnboardingFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227899F4FD42D79762A8C910 /* OnboardingFlowView.swift */; };
 		870651D1BC992451B8786048 /* ModelContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE93D1C35FEB0ED1EC7A2A /* ModelContainerFactory.swift */; };
 		875672E2C8D192D2C536F9DB /* PaywallExitPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39678197E53F7644146F42A /* PaywallExitPolicy.swift */; };
+		8E0672A617FDED70DBCA6C74 /* OnboardingHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA50F69154949E0584E31D0 /* OnboardingHero.swift */; };
 		8F200674ADA7E74B3C2057E5 /* LectioStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F8FD64B78AFB7B69938FDF /* LectioStep.swift */; };
 		8F4D785D59E6E7AA6F55E989 /* PaywallHeadlineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8FB9F35A1BD281B95513B2 /* PaywallHeadlineTests.swift */; };
 		9615D212FAC27A54A552441B /* AppFlowScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919FD51E804FD9A324724C10 /* AppFlowScreenshotTests.swift */; };
@@ -140,9 +142,11 @@
 		90241127433F4A24D54DE733 /* SelahTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SelahTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		919FD51E804FD9A324724C10 /* AppFlowScreenshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowScreenshotTests.swift; sourceTree = "<group>"; };
 		92A9F85775DEB8CD543D9D78 /* PrayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayView.swift; sourceTree = "<group>"; };
+		950894A2445C5F164D2C0893 /* OnboardingAuditTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAuditTests.swift; sourceTree = "<group>"; };
 		95FD874C4771DD0D51C25B34 /* DemoTabScreenshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTabScreenshotTests.swift; sourceTree = "<group>"; };
 		9699E4315B6E2D4D22377638 /* SelahApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelahApp.swift; sourceTree = "<group>"; };
 		9B68C79929C4F5EE6742002E /* ReadingPlanRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingPlanRepository.swift; sourceTree = "<group>"; };
+		9BA50F69154949E0584E31D0 /* OnboardingHero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingHero.swift; sourceTree = "<group>"; };
 		9E94463E0E94A0D0A5B9DBF6 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		9EE6B445BB7ADD39AE13EB5B /* JournalEntryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryDetailView.swift; sourceTree = "<group>"; };
 		9F6153B7E9D2D446BA605FB4 /* TalkPrayCompanionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkPrayCompanionUITests.swift; sourceTree = "<group>"; };
@@ -353,6 +357,7 @@
 				919FD51E804FD9A324724C10 /* AppFlowScreenshotTests.swift */,
 				95FD874C4771DD0D51C25B34 /* DemoTabScreenshotTests.swift */,
 				5E96E2ACC4A1BE64C1A4E890 /* NativeChromeUITests.swift */,
+				950894A2445C5F164D2C0893 /* OnboardingAuditTests.swift */,
 				9F6153B7E9D2D446BA605FB4 /* TalkPrayCompanionUITests.swift */,
 			);
 			path = SelahUITests;
@@ -406,6 +411,7 @@
 			children = (
 				CC6FD5D08A4207E03214E4E0 /* NotificationPromptView.swift */,
 				227899F4FD42D79762A8C910 /* OnboardingFlowView.swift */,
+				9BA50F69154949E0584E31D0 /* OnboardingHero.swift */,
 				717D9496DDA4A712617E7A0D /* OnboardingStepContent.swift */,
 			);
 			path = Onboarding;
@@ -525,7 +531,13 @@
 						ProvisioningStyle = Automatic;
 					};
 					8110D5DB3290E05ED5696EFB = {
+						DevelopmentTeam = R8GJL3N9WX;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 6D50635218EC24F1FB3BF605;
+					};
+					EAB6837029060148BA6C63D4 = {
+						DevelopmentTeam = R8GJL3N9WX;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -640,6 +652,7 @@
 				0FC6C32E749679EAFAEDEF6E /* NotificationPromptView.swift in Sources */,
 				A7EF23175EF9DBAC3841846C /* OnboardingCopy.swift in Sources */,
 				844B082CA336B4DFEC16F88F /* OnboardingFlowView.swift in Sources */,
+				8E0672A617FDED70DBCA6C74 /* OnboardingHero.swift in Sources */,
 				5BBEEB33B689827734462371 /* OnboardingOptions.swift in Sources */,
 				B82B6D8524362DE4DCDE7E79 /* OnboardingStep.swift in Sources */,
 				2264C8EC1A7C77474E6AC87D /* OnboardingStepContent.swift in Sources */,
@@ -676,6 +689,7 @@
 				9615D212FAC27A54A552441B /* AppFlowScreenshotTests.swift in Sources */,
 				0181F867CD3465F5F3DEE089 /* DemoTabScreenshotTests.swift in Sources */,
 				033FC2B3409A5E510B122043 /* NativeChromeUITests.swift in Sources */,
+				2A4E655F0ACF9BC1402905FD /* OnboardingAuditTests.swift in Sources */,
 				57F955361B265EEA304F7661 /* TalkPrayCompanionUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -700,6 +714,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = R8GJL3N9WX;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -745,6 +762,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = R8GJL3N9WX;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -913,6 +933,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = R8GJL3N9WX;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -930,6 +953,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = R8GJL3N9WX;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

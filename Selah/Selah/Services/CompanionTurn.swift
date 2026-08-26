@@ -78,28 +78,29 @@ enum CompanionTurnParser {
 
     static func parseTalk(_ raw: String, source: CompanionTurn.Source) -> CompanionTurn {
         let fields = labeledFields(in: raw)
-        let reply = fields["REPLY"] ?? strippingLabels(from: raw)
-        let followUps = fields["FOLLOWUPS"]?
+        let reply = unwrapPlaceholder(fields["REPLY"] ?? strippingLabels(from: raw))
+        // The model may wrap the whole list in one <…> pair, so unwrap before splitting.
+        let followUps = (fields["FOLLOWUPS"].map(unwrapPlaceholder) ?? "")
             .split(separator: "|")
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-            .filter { !$0.isEmpty } ?? []
+            .filter { !$0.isEmpty }
         return CompanionTurn(
             source: source,
             reply: reply.trimmingCharacters(in: .whitespacesAndNewlines),
-            scriptureReference: emptyToNil(fields["SCRIPTURE"]),
-            scriptureText: emptyToNil(fields["SCRIPTURE_TEXT"]),
+            scriptureReference: emptyToNil(fields["SCRIPTURE"].map(unwrapPlaceholder)),
+            scriptureText: emptyToNil(fields["SCRIPTURE_TEXT"].map(unwrapPlaceholder)),
             followUps: followUps
         )
     }
 
     static func parsePrayer(_ raw: String, source: CompanionTurn.Source) -> CompanionTurn {
         let fields = labeledFields(in: raw)
-        let reply = fields["PRAYER"] ?? strippingLabels(from: raw)
+        let reply = unwrapPlaceholder(fields["PRAYER"] ?? strippingLabels(from: raw))
         return CompanionTurn(
             source: source,
             reply: reply.trimmingCharacters(in: .whitespacesAndNewlines),
-            scriptureReference: emptyToNil(fields["SCRIPTURE"]),
-            scriptureText: emptyToNil(fields["SCRIPTURE_TEXT"]),
+            scriptureReference: emptyToNil(fields["SCRIPTURE"].map(unwrapPlaceholder)),
+            scriptureText: emptyToNil(fields["SCRIPTURE_TEXT"].map(unwrapPlaceholder)),
             followUps: []
         )
     }
@@ -143,5 +144,20 @@ enum CompanionTurnParser {
     private static func emptyToNil(_ value: String?) -> String? {
         guard let value, !value.isEmpty else { return nil }
         return value
+    }
+
+    /// The prompt shows `<…>` placeholders and small models sometimes echo them back.
+    /// Drop a single matching pair wrapping the whole value (e.g. `<Psalm 62:8>` → `Psalm 62:8`).
+    static func unwrapPlaceholder(_ raw: String) -> String {
+        var text = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard text.hasPrefix("<"), text.hasSuffix(">"), text.count > 2 else { return text }
+        text = String(text.dropFirst().dropLast())
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        // A leftover inner pair means real content was wrapped twice — keep going.
+        while text.hasPrefix("<"), text.hasSuffix(">"), text.count > 2,
+              !text.dropFirst().dropLast().contains("<") {
+            text = String(text.dropFirst().dropLast()).trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        return text
     }
 }

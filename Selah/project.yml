@@ -85,6 +85,9 @@ targets:
         GENERATE_INFOPLIST_FILE: YES
         TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Selah.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Selah"
         BUNDLE_LOADER: "$(TEST_HOST)"
+        DEVELOPMENT_TEAM: R8GJL3N9WX
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_IDENTITY: iPhone Developer
 
   SelahUITests:
     type: bundle.ui-testing
@@ -97,6 +100,9 @@ targets:
       base:
         GENERATE_INFOPLIST_FILE: YES
         TEST_TARGET_NAME: Selah
+        DEVELOPMENT_TEAM: R8GJL3N9WX
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_IDENTITY: iPhone Developer
 
 schemes:
   Selah:
@@ -109,10 +115,8 @@ schemes:
       storeKitConfiguration: Configuration/Selah.storekit
     test:
       targets:
-        SelahTests:
-          parallelizable: false
-        SelahUITests:
-          parallelizable: false
+        - SelahTests
+        - SelahUITests
   Selah Demo:
     build:
       targets:

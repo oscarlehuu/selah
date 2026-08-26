@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Selah app icon, sanctuary window">
+  <defs>
+    <linearGradient id="winSky" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#9fd0ee"/>
+      <stop offset="55%" stop-color="#d7ecf8"/>
+      <stop offset="100%" stop-color="#f3e4d0"/>
+    </linearGradient>
+    <linearGradient id="winWall" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#f7f1e8"/>
+      <stop offset="100%" stop-color="#efe4d4"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#c5e6f8"/>
+      <stop offset="100%" stop-color="#8ec5e8"/>
+    </linearGradient>
+    <radialGradient id="sunCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff7d2"/>
+      <stop offset="45%" stop-color="#f0d36a"/>
+      <stop offset="100%" stop-color="#d4a853"/>
+    </radialGradient>
+    <linearGradient id="ray" x1="0.5" y1="1" x2="0.5" y2="0">
+      <stop offset="0%" stop-color="#f0d36a" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#e8c86a" stop-opacity="0.95"/>
+    </linearGradient>
+    <clipPath id="glassClip">
+      <path d="M338 392 C338 214 410 128 512 128 C614 128 686 214 686 392 L686 612 L338 612 Z"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#winSky)"/>
+
+  <!-- Interior wall -->
+  <path d="M0 0 H1024 V1024 H0 Z" fill="url(#winWall)" opacity="0.22"/>
+  <rect x="248" y="96" width="528" height="928" rx="264" fill="#f7f2ea"/>
+
+  <!-- Window outer frame -->
+  <path d="M308 980 L308 400 C308 196 392 108 512 108 C632 108 716 196 716 400 L716 980 Z" fill="#fbf7f1" stroke="#ead9c4" stroke-width="8"/>
+  <path d="M338 960 L338 392 C338 214 410 128 512 128 C614 128 686 214 686 392 L686 960 Z" fill="url(#glass)"/>
+
+  <!-- Mullions + panes -->
+  <g clip-path="url(#glassClip)" fill="none" stroke="#f7f2ea" stroke-width="10">
+    <line x1="454" y1="128" x2="454" y2="612"/>
+    <line x1="570" y1="128" x2="570" y2="612"/>
+    <line x1="338" y1="236" x2="686" y2="236"/>
+    <line x1="338" y1="344" x2="686" y2="344"/>
+    <line x1="338" y1="452" x2="686" y2="452"/>
+    <line x1="338" y1="548" x2="686" y2="548"/>
+  </g>
+
+  <!-- Sunburst -->
+  <g transform="translate(512 360)">
+    <g fill="url(#ray)">
+      <rect x="-9" y="-268" width="18" height="236" rx="9"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(15)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(30)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(45)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(60)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(75)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(90)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(105)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(120)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(135)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(150)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(165)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(180)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(195)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(210)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(225)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(240)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(255)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(270)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(285)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(300)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(315)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(330)"/>
+      <rect x="-9" y="-268" width="18" height="236" rx="9" transform="rotate(345)"/>
+    </g>
+    <circle r="78" fill="url(#sunCore)"/>
+    <circle r="42" fill="#fff7d2" opacity="0.55"/>
+  </g>
+
+  <!-- Lower wall — keep quiet so it does not read as a letter at 60px -->
+  <rect x="308" y="612" width="408" height="412" fill="#f4eee4"/>
+  <line x1="308" y1="612" x2="716" y2="612" stroke="#ead9c4" stroke-width="8"/>
+  <rect x="360" y="680" width="304" height="220" rx="28" fill="none" stroke="#e4d3be" stroke-width="8"/>
+</svg>

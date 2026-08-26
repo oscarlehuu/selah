@@ -126,6 +126,16 @@ enum OnboardingHabit: String, CaseIterable, Identifiable {
         case .daily: "I want to keep it"
         }
     }
+
+    /// Mock v4 quiz 06 icons — sparkle / calendar / bookmark / flame.
+    var symbol: String {
+        switch self {
+        case .never: "sparkles"
+        case .sometimes: "calendar"
+        case .often: "bookmark"
+        case .daily: "flame"
+        }
+    }
 }
 
 enum OnboardingMood: String, CaseIterable, Identifiable {

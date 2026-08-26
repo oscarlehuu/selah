@@ -10,7 +10,8 @@ final class AppFlowScreenshotTests: XCTestCase {
         app.launchArguments = ["-UITestFreshStart"]
         app.launch()
 
-        XCTAssertTrue(app.navigationBars.firstMatch.waitForExistence(timeout: 20), "Onboarding navigation bar missing")
+        // Custom ob-top chrome (progress + Skip), no UINavigationBar — mock v4 layout.
+        XCTAssertTrue(app.buttons["onboarding.skip"].waitForExistence(timeout: 20), "Onboarding top bar missing")
         attachScreenshot(app, name: "flow-onboarding-01")
 
         let skip = app.buttons["onboarding.skip"]
@@ -25,7 +26,7 @@ final class AppFlowScreenshotTests: XCTestCase {
             paywall.waitForExistence(timeout: 8) || startSelah.waitForExistence(timeout: 2),
             "Skip should reach native paywall"
         )
-        XCTAssertTrue(app.navigationBars.firstMatch.exists, "Paywall needs a navigation bar")
+        XCTAssertTrue(app.buttons["paywall.restore"].exists, "Paywall footer legal row missing")
         attachScreenshot(app, name: "flow-paywall")
     }
 

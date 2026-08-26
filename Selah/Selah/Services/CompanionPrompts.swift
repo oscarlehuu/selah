@@ -29,11 +29,11 @@ enum CompanionPrompts {
         }
         parts.append("User just said: \"\(sanitized(message))\"")
         parts.append("""
-        Reply in this exact shape:
-        REPLY: <2-4 sentences helping them talk to God. One thought. Not a sermon.>
-        SCRIPTURE: <one reference only, e.g. Psalm 62:8>
-        SCRIPTURE_TEXT: <one short KJV-style line>
-        FOLLOWUPS: <two first-person suggestions the user could tap, separated by | >
+        Reply in this exact shape (no angle brackets anywhere, write plain text):
+        REPLY: 2-4 sentences helping them talk to God. One thought. Not a sermon.
+        SCRIPTURE: one reference only, e.g. Psalm 62:8
+        SCRIPTURE_TEXT: one short KJV-style line
+        FOLLOWUPS: two first-person suggestions the user could tap, separated by |
         """)
         return parts.joined(separator: "\n")
     }
@@ -53,8 +53,8 @@ enum CompanionPrompts {
         First person. The user will pray these words to God.
         Shape:
         PRAYER:
-        <4-6 short lines>
-        SCRIPTURE: <one optional reference>
+        4-6 short lines
+        SCRIPTURE: one optional reference
         """
     }
 
@@ -68,8 +68,8 @@ enum CompanionPrompts {
     static func reflectionUserPrompt(mood: String) -> String {
         """
         The user feels \(sanitized(mood)). Write 3-4 sentences they can sit with, plus one KJV-style reference.
-        REPLY: <reflection>
-        SCRIPTURE: <one reference>
+        REPLY: a short reflection
+        SCRIPTURE: one reference
         """
     }
 

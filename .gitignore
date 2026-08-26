@@ -6,3 +6,7 @@ DerivedData/
 xcuserdata/
 *.xcworkspace/xcuserdata/
 Build/
+.DS_Store
+axe-video-*.mp4
+plans/reports/
+.cursor/hooks/

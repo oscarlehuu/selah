@@ -2,7 +2,6 @@ import SwiftUI
 
 struct RootView: View {
     @Environment(AppEnvironment.self) private var env
-    @State private var showExitMonthly = false
     @State private var showRestoreAlert = false
     @State private var restoreMessage = ""
 
@@ -11,21 +10,11 @@ struct RootView: View {
             if !env.onboardingComplete {
                 OnboardingFlowView()
             } else if env.shouldShowPaywall() {
-                PaywallView(
-                    showExitMonthly: $showExitMonthly,
-                    onRestore: handleRestore
-                )
-                .onAppear {
-                    env.incrementPaywallPresentation()
-                    AnalyticsService.track("paywall_view")
-                    if env.subscription.paywallPresentationCount >= 2 {
-                        AnalyticsService.track("paywall_relaunch_weekly_emphasis")
+                PaywallView(onRestore: handleRestore)
+                    .onAppear {
+                        env.incrementPaywallPresentation()
+                        AnalyticsService.track("paywall_view")
                     }
-                }
-                .sheet(isPresented: $showExitMonthly) {
-                    ExitMonthlyOfferView(onDismiss: { showExitMonthly = false })
-                        .onAppear { AnalyticsService.track("paywall_exit_offer_view") }
-                }
             } else if env.settings?.sawNotificationPrompt != true {
                 NotificationPromptView()
             } else {

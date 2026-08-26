@@ -13,6 +13,19 @@ enum SelahColors {
     static let text = Color(hex: 0x2C2825)
     static let textMuted = Color(hex: 0x6B6560)
     static let textSoft = Color(hex: 0x9A938C)
+    // Mock v4 gold gradient stops (`--gold-hi / --gold / --gold-deep`).
+    static let goldHi = Color(hex: 0xEDBE55)
+    static let gold = Color(hex: 0xD9A63F)
+    static let goldDeep = Color(hex: 0xB98A28)
+    // `--border` / `--border-strong`
+    static let border = Color(hex: 0x2C2825, alpha: 0.08)
+    static let borderStrong = Color(hex: 0x2C2825, alpha: 0.14)
+
+    static let goldGradient = LinearGradient(
+        colors: [goldHi, gold, goldDeep],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
 }
 
 extension Color {
