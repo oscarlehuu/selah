@@ -19,7 +19,7 @@
   </header>
   <main>
     <article class="card">
-      <p class="meta">Effective August 24, 2026 · App: Selah (com.lilgroup.selah)</p>
+      <p class="meta">Effective September 09, 2026 · App: Selah (com.lilgroup.selah)</p>
 
       <h2>Summary</h2>
       <p>Selah is a private devotional app. Your spiritual conversations, prayers, and journal entries are processed on your device. We designed Selah so sensitive content does not need to leave your phone.</p>
@@ -34,12 +34,12 @@
         <li>Bible reading progress, streaks, and journal entries stored locally</li>
         <li>Confession or “heart-to-heart” sessions — optional auto-delete after each session</li>
       </ul>
-      <p>We do not upload this spiritual content to our servers for processing in v1.</p>
+      <p>Selah uses Apple’s Foundation Models framework with the on-device system language model. Conversation text, prayers, journal entries, and generated responses are not sent to a third-party AI service. There is no cloud AI fallback. Generated responses require iOS 26 or later, a compatible iPhone, and Apple Intelligence enabled with the model downloaded. If unavailable, the app displays an availability message. Selah does not sync this content through CloudKit; device backups are controlled separately by your iOS settings.</p>
 
       <h2>What we may collect</h2>
       <ul>
-        <li><strong>Analytics (PostHog):</strong> onboarding funnel events (e.g. screen views, paywall views) to improve the product. We do not send prayer or confession text to analytics.</li>
-        <li><strong>Subscriptions (RevenueCat / Apple):</strong> purchase and entitlement status so we can unlock the app after you subscribe. Apple processes payment; we receive subscription state, not your full card details.</li>
+        <li><strong>Analytics (PostHog):</strong> limited onboarding screen, paywall, subscription, restore, and notification-permission events, their timestamps, a random app identifier, and a validated subscription tier where applicable. We use these to measure the conversion funnel. We exclude quiz answers, mood values, reading-plan choices, conversation mode, crisis signals, prayer text, confession text, and journal content. Session replay, automatic screen and interaction capture, person profiles, and location enrichment are disabled. Network providers necessarily receive connection information such as an IP address to deliver requests.</li>
+        <li><strong>Subscriptions (RevenueCat / Apple):</strong> purchase history, transaction and entitlement status, and an anonymous app user identifier so we can validate purchases and unlock subscriptions. Apple processes payment; we do not receive your full card details. We do not supply RevenueCat with your prayer content or contact identity.</li>
         <li><strong>Crash and performance data:</strong> if enabled via Apple’s standard diagnostics, to fix bugs.</li>
       </ul>
 
@@ -50,6 +50,10 @@
         <li>Share spiritual content with advertisers</li>
       </ul>
 
+      <h2>Service providers and protection</h2>
+      <p>PostHog and RevenueCat process the limited data described above for analytics and subscription management, not companion AI. We require providers handling data on our behalf to protect it consistently with this policy and applicable data-protection obligations. See <a href="https://posthog.com/privacy">PostHog’s privacy policy</a>, <a href="https://www.revenuecat.com/privacy">RevenueCat’s privacy policy</a>, and <a href="https://www.apple.com/legal/privacy/">Apple’s privacy policy</a>. Their processing can occur outside your country. We do not link analytics identifiers to names, email addresses, or advertising identifiers, and do not use them for cross-app advertising tracking.</p>
+      <h2>Retention</h2>
+      <p>Local app content remains until you delete it or remove the app; optional session auto-delete removes Talk sessions when you leave them. Encryption keys may remain in the device Keychain. Service-provider records are retained as needed for analytics, subscription support, and applicable legal obligations; contact us to request deletion of records we can identify.</p>
       <h2>Children</h2>
       <p>Selah is not directed at children under 13. We do not knowingly collect personal information from children.</p>
 
@@ -57,7 +61,7 @@
       <ul>
         <li>Delete the app to remove locally stored data on your device</li>
         <li>Manage or cancel subscriptions in iOS Settings → Apple ID → Subscriptions</li>
-        <li>Disable analytics where iOS or in-app controls allow</li>
+        <li>Contact us with privacy or deletion requests. We may need a transaction reference to locate subscription records because Selah has no account login. Do not send private prayer or journal content in support requests.</li>
       </ul>
 
       <h2>International users</h2>

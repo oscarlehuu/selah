@@ -96,7 +96,7 @@ enum CompanionTextService {
     @available(iOS 26.0, *)
     private static func generate(instructions: String, prompt: String) async -> GeneratedText {
         do {
-            let session = LanguageModelSession()
+            let session = LanguageModelSession(model: SystemLanguageModel.default)
             let response = try await session.respond(to: "\(instructions)\n\n\(prompt)")
             let content = response.content.trimmingCharacters(in: .whitespacesAndNewlines)
             if content.isEmpty { return .failed("empty response") }

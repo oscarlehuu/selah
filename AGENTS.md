@@ -38,7 +38,7 @@ When product decisions change, update **`docs/project-playbook.md`** and the **L
 | Field | Value |
 |---|---|
 | Brand name | **Selah** |
-| Title (30 chars) | `Selah: Daily Prayer & Bible` |
+| Title (30 chars) | `Selah: Private Bible & Prayer` |
 | Subtitle (30 chars) | `Private Christian Devotional` |
 | Keywords (100 chars) | `scripture,verse,study,faith,worship,meditation,quiet,kjv,holy,spiritual,reading,habit,streak,psalm,amen,guide,reflection` |
 
@@ -64,7 +64,7 @@ Do not repeat words across title, subtitle, and keywords field. Validate with As
 | Bundle ID | `com.lilgroup.selah` |
 | Bundle ID resource ID | `VVCJFJW56Y` (IN_APP_PURCHASE enabled) |
 | ASC App ID | `6804629231` |
-| ASC record name | `Selah - selah` (auto-suffixed; ASC title/subtitle set separately at ship) |
+| ASC record name | `Selah: Private Bible & Prayer` (confirmed in ASC 2026-09-09) |
 | ASC SKU | `selah-ios` |
 | App Store URL | https://apps.apple.com/us/app/id6804629231 |
 | RevenueCat project | `proj75404991` (Selah) |

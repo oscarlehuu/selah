@@ -46,6 +46,7 @@ struct ReadView: View {
                         else { highlighted.insert(verse.number) }
                     },
                     onReflect: {
+                        AnalyticsService.track("verse_reflect_tap")
                         env.openTalkReflect(reference: "\(bookTitle):\(verse.number)")
                     },
                     onSave: {
@@ -84,6 +85,7 @@ struct ReadView: View {
 
             Button {
                 showBookPicker = true
+                AnalyticsService.track("read_open_chapter_picker")
             } label: {
                 HStack(spacing: 5) {
                     Text(bookTitle)
@@ -191,6 +193,7 @@ struct ReadView: View {
                 ) {
                     env.markPlanDayComplete(globalDay: env.planGlobalDay)
                     markedRead = true
+                    AnalyticsService.track("plan_read_complete")
                     AnalyticsService.track("plan_day_complete")
                 }
                 .disabled(markedRead)

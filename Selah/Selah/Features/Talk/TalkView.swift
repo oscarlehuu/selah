@@ -80,6 +80,7 @@ struct TalkView: View {
             ForEach(TalkMode.allCases) { item in
                 Button {
                     modeBinding.wrappedValue = item
+                    trackModeSelected(item)
                 } label: {
                     Text(item.title)
                         .font(SelahFont.ui(.footnote, weight: .semibold))
@@ -290,6 +291,16 @@ struct TalkView: View {
             env.selectedTalkMode = .reflect
             env.pendingTalkVerse = nil
         }
+    }
+
+    private func trackModeSelected(_ mode: TalkMode) {
+        let event: String
+        switch mode {
+        case .heart: event = "mode_heart"
+        case .reflect: event = "mode_reflect"
+        case .release: event = "mode_release"
+        }
+        AnalyticsService.track(event)
     }
 
     private func send() {

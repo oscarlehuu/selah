@@ -172,7 +172,7 @@ final class AppEnvironment {
         guard let streakModel, !streakModel.graceUsedThisWeek else { return }
         streakModel.graceUsedThisWeek = true
         try? modelContext.save()
-        AnalyticsService.track("grace_day_used")
+        AnalyticsService.track("grace_day_applied")
     }
 
     func incrementPaywallPresentation() {

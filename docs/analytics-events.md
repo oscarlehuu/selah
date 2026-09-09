@@ -1,3 +1,7 @@
+# Release 1.0 (4) privacy boundary
+
+Only onboarding screen events, paywall events, purchase success/restore, and notification permission choices are sent to PostHog. Only a validated subscription tier is attached. No global quiz or plan properties, mood values, Talk/Pray events, crisis signals, session replay, automatic screen capture, or location enrichment. All other events in the historical catalog below are local no-ops.
+
 # PostHog analytics events (locked catalog)
 
 > Project `573828`. Filter `is_demo=true` or exclude demo scheme sessions.
@@ -32,8 +36,8 @@
 | `onboarding_15_social` | Social proof |
 | `paywall_view` | Paywall #16 |
 | `paywall_payment_sheet_cancelled` | StoreKit sheet dismissed |
-| `paywall_exit_offer_view` | Exit #1 monthly sheet |
-| `paywall_exit_subscribe` | Exit purchase success |
+| `paywall_exit_offer_view` | Exit #1 monthly sheet — **deferred v1** (`ui-parity-audit-v4.md`) |
+| `paywall_exit_subscribe` | Exit purchase success — **deferred v1** |
 | `paywall_relaunch_weekly_emphasis` | 2nd+ paywall presentation |
 | `subscribe` | Success + `tier` + `surface` (`primary` / `exit_monthly` / `exit_weekly`) |
 | `onboarding_17_notifications` | Notification prompt |

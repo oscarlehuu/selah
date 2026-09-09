@@ -120,7 +120,7 @@ final class SubscriptionService {
             isSubscribed = result.customerInfo.entitlements["premium"]?.isActive == true
             if isSubscribed {
                 AnalyticsService.track("subscribe", properties: [
-                    "tier": package.storeProduct.productIdentifier,
+                    "tier": tierLabel(for: package.storeProduct.productIdentifier),
                     "surface": surface
                 ])
             }
@@ -144,5 +144,9 @@ final class SubscriptionService {
             lastError = error.localizedDescription
             return false
         }
+    }
+
+    private func tierLabel(for productId: String) -> String {
+        SubscriptionTier.allCases.first { $0.productId == productId }?.rawValue ?? productId
     }
 }

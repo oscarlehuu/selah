@@ -5,11 +5,16 @@ struct PaywallView: View {
     @Environment(AppEnvironment.self) private var env
     var onRestore: () -> Void
 
-    @State private var selectedTier: SubscriptionTier = .yearly
+    @State private var selectedTier: SubscriptionTier
     @State private var isPurchasing = false
     @State private var errorMessage: String?
 
     private let tiers: [SubscriptionTier] = [.weekly, .yearly, .monthly]
+
+    init(onRestore: @escaping () -> Void) {
+        self.onRestore = onRestore
+        _selectedTier = State(initialValue: .yearly)
+    }
 
     var body: some View {
         ZStack {
@@ -37,6 +42,17 @@ struct PaywallView: View {
         .tint(SelahColors.primaryDeep)
         .selahRootChrome()
         .interactiveDismissDisabled()
+        .onAppear(perform: applyPaywallPresentationPolicy)
+    }
+
+    private func applyPaywallPresentationPolicy() {
+        let count = env.subscription.paywallPresentationCount
+        if PaywallExitPolicy.shouldEmphasizeWeekly(paywallPresentationCount: count) {
+            selectedTier = .weekly
+            AnalyticsService.track("paywall_relaunch_weekly_emphasis", properties: ["presentation": count])
+        } else if PaywallExitPolicy.defaultTierIsYearly(paywallPresentationCount: count) {
+            selectedTier = .yearly
+        }
     }
 
     private var content: some View {
@@ -206,9 +222,7 @@ struct PaywallView: View {
         errorMessage = nil
         defer { isPurchasing = false }
         let ok = await env.subscription.purchase(selectedTier, surface: "onboarding_paywall")
-        if ok {
-            AnalyticsService.track("subscribe", properties: ["tier": selectedTier.rawValue])
-        } else {
+        if !ok {
             errorMessage = env.subscription.lastError ?? "Purchase didn’t finish. Try again or restore."
         }
     }

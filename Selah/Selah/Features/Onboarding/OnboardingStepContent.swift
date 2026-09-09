@@ -354,7 +354,7 @@ struct OnboardingStepContent: View {
                 .padding(.horizontal, 22)
 
                 VStack(alignment: .leading, spacing: 12) {
-                    privacyRow("icloud.slash", bold: "Nothing is uploaded.", rest: " The companion runs on your device’s own AI.")
+                    privacyRow("icloud.slash", bold: "On-device Apple Intelligence.", rest: " Your conversation text is never sent to a cloud AI service.")
                     privacyRow("lock.shield", bold: "Journal is encrypted", rest: " in the iOS keychain, locked with Face ID.")
                     privacyRow("trash", bold: "Auto-delete", rest: " a session the moment you close it, if you prefer.")
                 }

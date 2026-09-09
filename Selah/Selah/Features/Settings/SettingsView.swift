@@ -16,7 +16,7 @@ struct SettingsView: View {
                     subscriptionCard
                     settingsGroup("Privacy") {
                         SettingsRow(icon: "icloud.slash", label: "On-device AI") {
-                            Text("Always on")
+                            Text(CompanionTextService.isOnDeviceCompanionAvailable ? "Available" : "Unavailable")
                                 .font(SelahFont.ui(.footnote))
                                 .foregroundStyle(SelahColors.textMuted)
                         }
@@ -210,6 +210,7 @@ struct SettingsView: View {
                 env.settings?.notificationMinute = minute
                 env.persist()
                 NotificationScheduler.scheduleDaily(hour: hour, minute: minute)
+                AnalyticsService.track("notification_time_changed", properties: ["hour": hour, "minute": minute])
             }
         )
     }
@@ -220,6 +221,7 @@ struct SettingsView: View {
             set: { value in
                 env.settings?.autoDeleteTalkSessions = value
                 env.persist()
+                AnalyticsService.track("auto_delete_toggle", properties: ["enabled": value])
             }
         )
     }

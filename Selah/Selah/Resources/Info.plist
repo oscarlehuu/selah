@@ -17,7 +17,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
-	<true/>
+	<false/>
 	<key>NSUserNotificationsUsageDescription</key>
 	<string>Selah sends a gentle morning reminder for your daily time with God.</string>
 	<key>UIUserInterfaceStyle</key>

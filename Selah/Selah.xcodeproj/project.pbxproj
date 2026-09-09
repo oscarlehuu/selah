@@ -34,6 +34,7 @@
 		57F955361B265EEA304F7661 /* TalkPrayCompanionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6153B7E9D2D446BA605FB4 /* TalkPrayCompanionUITests.swift */; };
 		5807F5BF35658DD567B0E50C /* Figtree.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D462C69E6485F2BB7987BC53 /* Figtree.ttf */; };
 		5BBEEB33B689827734462371 /* OnboardingOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0D31C25F934961BBB20FA /* OnboardingOptions.swift */; };
+		5F931686A186DC9435793523 /* AnalyticsPrivacyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87A0F779D0361A1C539901F /* AnalyticsPrivacyTests.swift */; };
 		684646858720070AA00CD5FC /* TalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC43C88A0A8F3A40F5BDE09 /* TalkView.swift */; };
 		6A3FF1BAEB36681142910F44 /* VerseOfTheDayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E2FB3B0D2ABC6203B9C0CA /* VerseOfTheDayService.swift */; };
 		6E348907E6CEC3BB9A3D5570 /* PrayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A9F85775DEB8CD543D9D78 /* PrayView.swift */; };
@@ -167,6 +168,7 @@
 		D00921A4F7CB459F848F87E1 /* TalkSessionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkSessionEngine.swift; sourceTree = "<group>"; };
 		D383D57B0C7DE0C19A816B99 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		D462C69E6485F2BB7987BC53 /* Figtree.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Figtree.ttf; sourceTree = "<group>"; };
+		D87A0F779D0361A1C539901F /* AnalyticsPrivacyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPrivacyTests.swift; sourceTree = "<group>"; };
 		D9B89EF7DD2D030D78E4375F /* ReadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadView.swift; sourceTree = "<group>"; };
 		DE331C6DCDEA12D94E52464E /* Selah.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Selah.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3F0E021F29AC5BC9F90856C /* JournalEncryptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEncryptionService.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 		59DAF522CB67B6F6B96D112C /* SelahTests */ = {
 			isa = PBXGroup;
 			children = (
+				D87A0F779D0361A1C539901F /* AnalyticsPrivacyTests.swift */,
 				168B564307C7764979643B5D /* BibleBookCatalogTests.swift */,
 				FE87C8F83EE4A440FC3570B7 /* CompanionAvailabilityTests.swift */,
 				E7C862F0C563A49F4B9E403C /* CompanionPromptTests.swift */,
@@ -608,6 +611,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F931686A186DC9435793523 /* AnalyticsPrivacyTests.swift in Sources */,
 				40396A706773731887A29949 /* BibleBookCatalogTests.swift in Sources */,
 				C70F4B08D44D911EEE912D5F /* CompanionAvailabilityTests.swift in Sources */,
 				734A7D1BF8D429DE58D5B010 /* CompanionPromptTests.swift in Sources */,
@@ -812,7 +816,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -831,7 +835,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -905,7 +909,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -918,7 +922,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

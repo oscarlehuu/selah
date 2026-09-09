@@ -189,11 +189,15 @@ No dark theme as identity. Optional system appearance later only if it stays sof
 | Field | Value |
 |---|---|
 | **Brand** | Selah |
-| **Title** | `Selah: Daily Prayer & Bible` |
+| **Title** | `Selah: Private Bible & Prayer` |
 | **Subtitle** | `Private Christian Devotional` |
 | **Keywords** | `scripture,verse,study,faith,worship,meditation,quiet,kjv,holy,spiritual,reading,habit,streak,psalm,amen,guide,reflection` |
 
-Rules: no word repeat across title / subtitle / keywords. Astro validate pre-ship. ASA bid competitors (YouVersion, Hallow, Glorify, PrayerLock, Abide).
+Release 1.0 (4): Apple rejected the availability of `Selah: Daily Prayer & Bible` and `Selah: Bible & Prayer` because both names were taken. The user approved `Selah: Private Bible & Prayer`, which ASC accepted on 2026-09-09. Subtitle remains `Private Christian Devotional` as approved, including the repeated word Private. China mainland is excluded from distribution.
+
+Analytics now permits only onboarding/paywall/subscription funnel events and notification permission choices, with a random app identifier and an allowlisted subscription tier. Quiz, mood, plan, conversation and crisis context are blocked before capture and before send. See `docs/analytics-events.md` and the current privacy policy.
+
+Prefer no word repeats across title / subtitle / keywords for future experiments. Astro validate pre-ship. ASA bid competitors (YouVersion, Hallow, Glorify, PrayerLock, Abide).
 
 **Promo text:** Your private space with God. Daily Bible, prayer, and reflection — only on your phone.
 

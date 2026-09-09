@@ -35,7 +35,11 @@ struct PrivacyInfoView: View {
         NavigationStack {
             List {
                 Section("How privacy works") {
-                    Text("Talk, journal, and prayer stay on this iPhone. The companion uses Apple Intelligence on-device when available. Nothing is uploaded to Selah.")
+                    Text("Your conversation text, prayers, journal entries, and companion responses are processed on this iPhone using Apple Intelligence. Selah does not send this content to any third-party AI service and has no cloud AI fallback.")
+                    Text("Generated replies require iOS 26 or later on a compatible iPhone with Apple Intelligence enabled and its model downloaded. When unavailable, Selah shows an availability message.")
+                }
+                Section("Analytics and subscriptions") {
+                    Text("PostHog receives limited onboarding and purchase funnel events with a random app identifier. Mood, quiz answers, prayer text, journal entries, and crisis signals are excluded. RevenueCat and Apple handle subscription status and purchases. These services do not provide the companion AI.")
                 }
                 Section {
                     Text(OnboardingCopy.companionDisclaimer)
